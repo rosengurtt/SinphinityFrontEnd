@@ -1,0 +1,19 @@
+html {
+     height: 100%;
+}
+
+body {
+    margin: 0; 
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+ 
+}
+.content{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content auto min-content;
+    height: 100%;
+}
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

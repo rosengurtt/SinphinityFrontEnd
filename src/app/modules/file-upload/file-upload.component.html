@@ -1,0 +1,57 @@
+<div class="container">
+    <h1>Upload song</h1>
+    <form novalidate class="songUploadForm" [formGroup]="songUploadForm">
+        <div class="dropDownsArea">
+            <div>
+                <label for="stylesList">Style</label>
+                <mat-selection-list #stylesList formControlName="StylesList" [multiple]="false" class="styleSelection">
+                    <mat-list-option *ngFor="let style of styles" [value]="style.id"  (click)="selectStyle(style)">
+                        {{style.name}}
+                    </mat-list-option>
+                </mat-selection-list>
+            </div>
+
+            <div>
+                <label for="bandsList">Band</label>
+                <mat-selection-list #stylesList formControlName="BandsList" [multiple]="false" class="styleSelection">
+                    <mat-list-option *ngFor="let band of bands" [value]="band.id" (click)="selectBand(band)" >
+                        {{band.name}} 
+                    </mat-list-option>
+                </mat-selection-list>
+            </div>
+            <div class="textboxesArea">
+                <div >
+                    <mat-form-field appearance="fill">
+                        <mat-label>Song Name</mat-label>
+                        <input matInput formControlName="songName">
+                        <mat-error *ngIf="songName.invalid && songName.touched">
+                            {{getErrorsongName()}}
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="fileUploadArea">
+                    <mat-form-field appearance="fill">
+                        <mat-label>{{songFile?.name}}</mat-label>
+                        <input matInput readonly>
+                    </mat-form-field>
+                    <div class="form-group">
+                        <input #songInputTag type="file" hidden="true" formControlName="SongFileControl" required
+                            (change)="setSongFile($event)">
+                        <button mat-flat-button color="primary" (click)="songInputTag.click()">
+                            Select Song
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="submitArea">
+            <button mat-flat-button  type="submit" color="primary" (click)="submitFiles()"
+                [disabled]="!songUploadForm.valid || !songUploadForm.dirty">
+                Submit </button>
+        </div>
+      
+
+    </form>
+    <h3 class="text-danger">{{uploadProgress}}</h3><img *ngIf="showHourGlassIcon()" src="assets/img/hourglass.gif">
+</div>

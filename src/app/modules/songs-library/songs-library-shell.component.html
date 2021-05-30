@@ -1,0 +1,37 @@
+<dc-songs-library
+
+    [stylesDataSource] = "stylesDatasource$ | async" 
+    [bandsDataSource] = "bandsDatasource$ | async" 
+    [songsDataSource] = "songsDatasource$ | async" 
+
+    [stylesPageNo] = "stylesPageNo$ | async"
+    [bandsPageNo] = "bandsPageNo$ | async"
+    [songsPageNo] = "songsPageNo$ | async"
+    
+    [totalStyles] = "totalStyles$ | async"
+    [totalBands] = "totalBands$ | async"
+    [totalSongs] = "totalSongs$ | async"
+
+    [stylesPageSize] = "stylesPageSize"
+    [bandsPageSize] = "bandsPageSize"
+    [songsPageSize] = "songsPageSize"
+
+    [styleSelected] = "styleSelected$ | async"
+    [bandSelected] = "bandSelected$ | async"
+    [songSelected] = "songSelected$ | async"
+
+    (stylesPageChanged) = "stylesPageChanged($any($event))"
+    (bandsPageChanged) = "bandsPageChanged($any($event))"
+    (songsPageChanged) = "songsPageChanged($any($event))"
+
+    (stylesTermChanged) = "stylesTermChanged($any($event))"
+    (bandsTermChanged) = "bandsTermChanged($any($event))"
+    (songsTermChanged) = "songsTermChanged($any($event))"
+
+    (styleSelectedChanged) ="styleSelectedChange($any($event))"
+    (bandSelectedChanged) ="bandSelectedChange($any($event))"
+    (songSelectedChanged) ="songSelectedChange($any($event))"
+
+    (analyzeSong) = "analizeSong($any($event))"
+>
+</dc-songs-library>

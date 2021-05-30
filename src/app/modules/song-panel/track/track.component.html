@@ -1,0 +1,21 @@
+<div class="box">
+  <div class="trackInfo">
+     {{instrument | splitCamelCase}}
+  </div>
+  <div class="controls">
+    <button mat-mini-fab color="primary" aria-label="Mute/Unmute track" (click)="changeMuteStatus()">
+      <mat-icon>{{muteIcon}}</mat-icon>
+    </button>
+  </div>
+  
+    <svg [ngClass]="{'canvasDark': viewType===songViewType.pianoRoll, 
+                    'canvasLight': viewType===songViewType.rythmMusicNotation}" 
+      preserveAspectRatio="none"
+      [attr.width]="svgBoxWidth" [attr.height]="svgBoxHeight" 
+      id="{{svgBoxIdPrefix}}_{{trackId}}"
+      xmlns="http://www.w3.org/2000/svg" [attr.viewBox]="viewBox" xmlns:xlink="http://www.w3.org/1999/xlink"
+      (mousedown)="dragStarted($event)" (mouseup)="dragFinished()" (mouseleave)="dragFinished()" (mousemove)="drag($event)"
+      >
+
+    </svg>
+  </div>

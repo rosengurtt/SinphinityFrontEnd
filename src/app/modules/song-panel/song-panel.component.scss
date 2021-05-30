@@ -1,0 +1,42 @@
+.sliderHoriz{
+    width: 1200px;
+    grid-area: horizSlider;
+}
+
+.sliderVert{
+    height: 400px;
+    grid-area: vertSlider;
+}
+.canvas{
+    grid-area: canvas;
+}
+
+.panelControl{
+    grid-area: panelControl;
+    display: grid;
+    grid-template-columns: 80px 80px 80px 80px 80px 80px 80px 80px 80px;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 150px auto;
+}
+.header {
+    display: grid;
+    grid-template-columns: auto 50px;
+    padding: 17px;
+}
+span {
+    font-size: 1.8em;
+}
+.colored{
+    font-size: 1.8em;
+    color: rgb(182, 127, 127)
+}
+.simplificationsSelector{
+    padding: 10px;
+}
+.tempoBox{
+    width: 60px;
+    padding-left: 10px;;
+}

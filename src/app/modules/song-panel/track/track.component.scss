@@ -1,0 +1,41 @@
+.sliderHoriz {
+    width: 1200px;
+    grid-area: horizSlider;
+}
+
+.sliderVert {
+    height: 120px;
+}
+.canvasDark {
+    grid-area: canvas;
+    border:1px solid rgb(192, 194, 112);
+    background-color: black;
+}
+.canvasLight {
+    grid-area: canvas;
+    border:1px solid rgb(78, 78, 47);
+    background-color: white;
+}
+
+.trackInfo {
+    grid-area: trackInfo;
+    
+}
+
+
+.box {
+    display: grid;
+    grid-template-columns: 100px 50px auto;
+    row-gap: 4px;
+    grid-template-areas: 
+    "trackInfo controls canvas"
+}
+.controls {
+    display: grid;
+    grid-area: controls;
+}
+
+.trackInfo {
+    padding: 4px;
+    font-size: 0.8em;
+}
