@@ -8,6 +8,8 @@ import { GetBandsResponse } from './responses-format/get-bands-response';
 import { GetSongsResponse } from './responses-format/get-songs-response';
 import { GetSongResponse } from './responses-format/get-song-response';
 import { PaginationData } from '../../models/pagination-data';
+import { MusicStyle } from '../../models/music-style';
+import { Band } from '../../models/band';
 
 @Injectable({
     providedIn: 'root'
@@ -24,14 +26,15 @@ export class SongsRepositoryService {
     constructor(private http: HttpClient) {
     }
 
-    public postUploadFile(styleId: string, bandId: string, songName: string, file1: any) {
-        console.log(styleId)
-        console.log(bandId)
-        console.log(songName)
-
+    public postUploadFile(style: MusicStyle, band: Band, songName: string, file1: any) {
         const formData: FormData = new FormData();
-        formData.append("FusionRequests", file1, "FusionRequests")
-        return this.http.post(this.songLibraryUrl + 'song', formData)
+        formData.append("Midi", file1, "Midi")
+        formData.append("styleId", style.id)
+        formData.append("styleName", style.name)
+        formData.append("bandId", band.id)
+        formData.append("bandName", band.name)
+        formData.append("songName", songName)
+        return this.http.post(this.songLibraryUrl + 'songs', formData)
     }
 
     getStyles(paginationData: PaginationData, contains: string): Observable<GetStylesResponse> {
