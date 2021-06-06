@@ -72,11 +72,11 @@
 
 
 	<div>
-		<div class="songStatsTitle" *ngIf="songSelected">
+		<div class="midiStatsTitle" *ngIf="songSelected">
 			<h2>Song stats</h2>
 			<div><button mat-raised-button color="primary" (click)="analyzeSongClicked(songSelected)">Analyze</button></div>
 		</div>
-		<div *ngIf="songSelected" class="songStatsTable">
+		<div *ngIf="songSelected" class="midiStatsTable">
 			<div>Style</div>
 			<div>{{songSelected.style.name}}</div>
 			<div>Band</div>
@@ -84,59 +84,47 @@
 			<div>Song name</div>
 			<div>{{songSelected.name | fileNameToSongName}}</div>
 			<div>Duration</div>
-			<div>{{songSelected.songStats.durationInSeconds | timeDuration}}</div>
-			<div>Highest pitch</div>
-			<div>{{songSelected.songStats.highestPitch | number}}</div>
-			<div>Lowest pitch</div>
-			<div>{{songSelected.songStats.lowestPitch | number}}</div>
+			<div>{{songSelected.midiStats.durationInSeconds | timeDuration}}</div>
 			<div>Number of bars</div>
-			<div>{{songSelected.songStats.numberBars | number}}</div>
+			<div>{{songSelected.bars.length | number}}</div>
+			<div>Average tempo</div>
+			<div>{{songSelected.tempoChanges.averageTempoInBeatsPerMinute | number}}</div>
+			<div>Tempo changes</div>
+			<div>{{songSelected.tempoChanges.length | number}}</div>
 			<div>Number of ticks</div>
-			<div>{{songSelected.songStats.numberOfTicks | number}}</div>
-			<div>Tempo in microseconds per beat</div>
-			<div>{{songSelected.songStats.tempoInMicrosecondsPerBeat | number}}</div>
-			<div>Tempo in bpm</div>
-			<div>{{songSelected.songStats.tempoInBeatsPerMinute | number}}</div>
-			<div>Time Signature</div>
-			<div>{{songSelected.songStats.timeSignature | timeSignature}}</div>
-			<div>Total different pitches</div>
-			<div>{{songSelected.songStats.totalDifferentPitches | number}}</div>
-			<div>Total unique pitches</div>
-			<div>{{songSelected.songStats.totalUniquePitches}}</div>
+			<div>{{songSelected.midiStats.durationInTicks | number}}</div>
 			<div>Total tracks</div>
-			<div>{{songSelected.songStats.totalTracks | number}}</div>
+			<div>{{songSelected.midiStats.totalTracks | number}}</div>
 			<div>Total bass tracks</div>
-			<div>{{songSelected.songStats.totalBassTracks | number}}</div>
+			<div>{{songSelected.midiStats.totalBassTracks | number}}</div>
 			<div>Total chord tracks</div>
-			<div>{{songSelected.songStats.totalChordTracks | number}}</div>
+			<div>{{songSelected.midiStats.totalChordTracks | number}}</div>
 			<div>Total melodic tracks</div>
-			<div>{{songSelected.songStats.totalMelodicTracks | number}}</div>
+			<div>{{songSelected.midiStats.totalMelodicTracks | number}}</div>
 			<div>Total percussion tracks</div>
-			<div>{{songSelected.songStats.totalPercussionTracks | number}}</div>
+			<div>{{songSelected.midiStats.totalPercussionTracks | number}}</div>
 			<div>Total instruments</div>
-			<div>{{songSelected.songStats.totalInstruments | number}}</div>
-			<div>Instruments</div>
-			<div>{{songSelected.songStats.instrumentsAsString | instrumentCodeToName}}</div>
+			<div>{{songSelected.midiStats.totalInstruments | number}}</div>
 			<div>Total percussion instruments</div>
-			<div>{{songSelected.songStats.totalPercussionInstruments | number}}</div>
+			<div>{{songSelected.midiStats.totalPercussionInstruments | number}}</div>
 			<div>Total channels</div>
-			<div>{{songSelected.songStats.totalChannels | number}}</div>
+			<div>{{songSelected.midiStats.totalChannels | number}}</div>
 			<div>Total tempo changes</div>
-			<div>{{songSelected.songStats.totalTempoChanges | number}}</div>
+			<div>{{songSelected.midiStats.totalTempoChanges | number}}</div>
 			<div>Total events</div>
-			<div>{{songSelected.songStats.totalEvents | number}}</div>
+			<div>{{songSelected.midiStats.totalEvents | number}}</div>
 			<div>Total note events</div>
-			<div>{{songSelected.songStats.totalNoteEvents | number}}</div>
+			<div>{{songSelected.midiStats.totalNoteEvents | number}}</div>
 			<div>Total pitch bend events</div>
-			<div>{{songSelected.songStats.totalPitchBendEvents | number}}</div>
+			<div>{{songSelected.midiStats.totalPitchBendEvents | number}}</div>
 			<div>Total program change events</div>
-			<div>{{songSelected.songStats.totalProgramChangeEvents | number}}</div>
+			<div>{{songSelected.midiStats.totalProgramChangeEvents | number}}</div>
 			<div>Total control change events</div>
-			<div>{{songSelected.songStats.totalControlChangeEvents | number}}</div>
+			<div>{{songSelected.midiStats.totalControlChangeEvents | number}}</div>
 			<div>Total sustain pedal events</div>
-			<div>{{songSelected.songStats.totalSustainPedalEvents | number}}</div>
+			<div>{{songSelected.midiStats.totalSustainPedalEvents | number}}</div>
 			<div>Total chanel independent events</div>
-			<div>{{songSelected.songStats.totalChannelIndependentEvents | number}}</div>
+			<div>{{songSelected.midiStats.totalChannelIndependentEvents | number}}</div>
 		</div>
 	</div>
 </div>

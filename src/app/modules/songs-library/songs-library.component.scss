@@ -20,13 +20,13 @@
 table {
   width: 100%;
 }
-.songStatsTable {
+.midiStatsTable {
   display:grid;
   grid-template-columns: 220px auto;
   padding: 4px;
 
 }
-.songStatsTable div:nth-child(4n+1), .songStatsTable div:nth-child(4n+2) {
+.midiStatsTable div:nth-child(4n+1), .miditatsTable div:nth-child(4n+2) {
 background: $secondary
 }
 input{
@@ -35,11 +35,11 @@ input{
 .searchBox {
   padding: 3px;
 }
-.songStatsTable div{
+.midiStatsTable div{
   padding: 3px;
 }
 
-.songStatsTitle {
+.midiStatsTitle {
   display:grid;
   padding: 8px;
   align-items: center;

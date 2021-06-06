@@ -80,7 +80,7 @@ export class SongPanelComponent implements OnInit, OnChanges, OnDestroy, AfterVi
     this.tempoBox.setValue(tempoInBeatsPerMinute)
   }
   ngAfterViewInit(): void {
-    this.slider.max = this.song.songStats.durationInSeconds
+    this.slider.max = this.song.durationInSeconds
     this.cdr.detectChanges();
   }
   ngOnDestroy(): void {
@@ -133,7 +133,7 @@ export class SongPanelComponent implements OnInit, OnChanges, OnDestroy, AfterVi
     }
     else {
       let mutedTracksParam = this.mutedTracks.length > 0 ? `&mutedTracks=${this.mutedTracks.join(",")}` : ""
-      const midiUrl = `https://localhost:9001/api/song/${this.song.id}/midi?simplificationVersion=${this.songSimplificationVersion}&startInSeconds=${this.slider.value}${mutedTracksParam}&tempoInBeatsPerMinute=${this.tempoBox.value}`
+      const midiUrl = `https://localhost:8003/api/songs/${this.song.id}/midi?simplificationVersion=${this.songSimplificationVersion}&startInSeconds=${this.slider.value}${mutedTracksParam}&tempoInBeatsPerMinute=${this.tempoBox.value}`
       MIDIjs.play(midiUrl)
       MIDIjs.message_callback = this.getPlayingStatus.bind(this)
     }
@@ -159,7 +159,7 @@ export class SongPanelComponent implements OnInit, OnChanges, OnDestroy, AfterVi
   // This is called by midijs when the song starts to play
   getPlayingStatus(mes) {
     if (mes.includes('Playing')) {
-      let playingSong = new PlayingSong(this.songId, this.slider.value, this.song.songStats.durationInSeconds, this.tempoBox.value / this.getSongTempoInBeatsPerMinute(this.song))
+      let playingSong = new PlayingSong(this.songId, this.slider.value, this.song.durationInSeconds, this.tempoBox.value / this.getSongTempoInBeatsPerMinute(this.song))
       this.songStartedPlaying.emit(playingSong)
     }
   };

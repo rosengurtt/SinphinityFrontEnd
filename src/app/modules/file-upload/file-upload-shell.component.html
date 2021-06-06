@@ -1,7 +1,27 @@
 <app-file-upload 
-    [styles]= "styles$ | async"
-    [bands]= "bands$ | async"
-    [stylesLoaded] = "stylesLoaded$ | async"
+    [stylesDataSource] = "stylesDatasource$ | async" 
+    [bandsDataSource] = "bandsDatasource$ | async"  
+
+    [stylesPageNo] = "stylesPageNo$ | async"
+    [bandsPageNo] = "bandsPageNo$ | async"
+    
+    [totalStyles] = "totalStyles$ | async"
+    [totalBands] = "totalBands$ | async"
+
+    [stylesPageSize] = "stylesPageSize"
+    [bandsPageSize] = "bandsPageSize"
+
+    [styleSelected] = "styleSelected$ | async"
+    [bandSelected] = "bandSelected$ | async"
+
+    (stylesPageChanged) = "stylesPageChanged($any($event))"
+    (bandsPageChanged) = "bandsPageChanged($any($event))"
+
+    (stylesTermChanged) = "stylesTermChanged($any($event))"
+    (bandsTermChanged) = "bandsTermChanged($any($event))"
+
+    (styleSelectedChanged) ="styleSelectedChange($any($event))"
+    (bandSelectedChanged) ="bandSelectedChange($any($event))"
     
     (styleSelectedChanged) ="styleSelectedChange($any($event))">
 </app-file-upload>

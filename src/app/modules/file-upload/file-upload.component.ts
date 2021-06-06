@@ -1,8 +1,12 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { PageEvent } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { Band } from 'src/app/core/models/band';
 import { MusicStyle } from 'src/app/core/models/music-style';
+import { PaginationData } from 'src/app/core/models/pagination-data';
 import { SongsRepositoryService } from '../../core/services/songs-repository/songs-repository.service'
 
 @Component({
@@ -10,38 +14,70 @@ import { SongsRepositoryService } from '../../core/services/songs-repository/son
     templateUrl: './file-upload.component.html',
     styleUrls: ['./file-upload.component.scss']
 })
-export class FileUploadComponent implements OnInit, OnChanges {
-    @Input() styles: MusicStyle[]
-    @Input() bands: Band[]
-    @Input() stylesLoaded: boolean
+export class FileUploadComponent implements OnInit {
+    @Input() stylesDataSource: MatTableDataSource<MusicStyle>
+    @Input() bandsDataSource: MatTableDataSource<Band>
+    @Input() styleSelected: MusicStyle
+    @Input() bandSelected: Band
+    @Input() stylesPageNo: number
+    @Input() bandsPageNo: number
+    @Input() stylesPageSize: number
+    @Input() bandsPageSize: number
+    @Input() totalStyles: number | null
+    @Input() totalBands: number | null
     @Output() styleSelectedChanged = new EventEmitter<MusicStyle>()
-    selectedStyle: MusicStyle
-    selectedBand: Band
+    @Output() bandSelectedChanged = new EventEmitter<Band>()
+    @Output() stylesPageChanged = new EventEmitter<PaginationData>()
+    @Output() bandsPageChanged = new EventEmitter<PaginationData>()
+    @Output() stylesTermChanged = new EventEmitter<string>()
+    @Output() bandsTermChanged = new EventEmitter<string>()
+    @Output() songsTermChanged = new EventEmitter<string>()
+    subscriptionSearchTerms: Subscription[] = []
+    styleTerm = new FormControl()
+    bandTerm = new FormControl()
     songUploadForm: FormGroup
     songFile: any
     uploadProgress: string
+    displayedColumns: string[] = ['name']
 
     constructor(private storeService: SongsRepositoryService, fb: FormBuilder, private router: Router) {
         this.songUploadForm = fb.group({
             SongFileControl: [],
-            StylesList: [],
-            BandsList: [],
+            StylesList: ['', [Validators.required]],
+            BandsList: ['', [Validators.required]],
             songName: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(200)]],
         });
     }
-    ngOnChanges(changes: SimpleChanges): void {
-        for (const propName in changes) {
-            if (propName == "stylesLoaded" && this.stylesLoaded == true) {
-                this.selectedStyle = this.styles[0]
-                this.styleSelectedChanged.emit(this.styles[0])
-                console.log(this.songUploadForm.controls['StylesList'])
-            }
-        }
-    }
 
     ngOnInit() {
+        this.subscriptionSearchTerms.push(this.styleTerm.valueChanges.subscribe(value => this.stylesTermChanged.emit(value)))
+        this.subscriptionSearchTerms.push(this.bandTerm.valueChanges.subscribe(value => this.bandsTermChanged.emit(value)))
     }
 
+    public getStylesPage(event?: PageEvent) {
+        if (event) this.stylesPageChanged.emit({ pageNo: event.pageIndex, pageSize: event.pageSize })
+        return event
+    }
+
+    public getBandsPage(event?: PageEvent) {
+        if (event) this.bandsPageChanged.emit({ pageNo: event.pageIndex, pageSize: event.pageSize })
+        return event
+    }
+
+    selectStyle(style: MusicStyle) {
+        this.songUploadForm.controls['StylesList'].setValue(style)
+        this.styleSelectedChanged.emit(style)
+    }
+    selectBand(band: Band) {
+        this.songUploadForm.controls['BandsList'].setValue(band)
+        this.bandSelectedChanged.emit(band)
+    }
+    newStyleTerm(newTerm: string) {
+        this.stylesTermChanged.emit(newTerm)
+    }
+    newBandTerm(newTerm: string) {
+        this.bandsTermChanged.emit(newTerm)
+    }
 
     setSongFile(event) {
         this.songFile = event.target.files[0]
@@ -51,7 +87,7 @@ export class FileUploadComponent implements OnInit, OnChanges {
     submitFiles() {
         this.uploadProgress = ""
         let that = this
-        this.storeService.postUploadFile(this.selectedStyle, this.selectedBand, this.songName.value, this.songFile).subscribe({
+        this.storeService.postUploadFile(this.styleSelected, this.bandSelected, this.songName.value, this.songFile).subscribe({
             error(err) {
                 that.uploadProgress = `There was an error importing the data. ${err.error?.message}`
             },
@@ -65,12 +101,7 @@ export class FileUploadComponent implements OnInit, OnChanges {
     }
 
 
-    isStyleSelected(style: string) {
-        return this.selectedStyle.name === style
-    }
-    isBandSelected(band: string) {
-        return this.selectedBand.name === band
-    }
+ 
     get songName() {
         return this.songUploadForm.get('songName')
     }
@@ -79,11 +110,5 @@ export class FileUploadComponent implements OnInit, OnChanges {
         return this.songName.hasError('minlength') ? 'Minimum lenght is 4' :
             this.songName.hasError('maxlength') ? 'Maximum lenght is 200' : ''
     }
-    selectStyle(style: MusicStyle) {
-        this.selectedStyle = style
-        this.styleSelectedChanged.emit(style)
-    }
-    selectBand(band: Band) {
-        this.selectedBand = band
-    }
+
 }

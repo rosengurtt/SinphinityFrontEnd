@@ -55,7 +55,7 @@ export class DrawingCalculations {
         for (let i = 0; i < voiceNotes.length; i++) {
             let n = voiceNotes[i]
             let currentBar = GenericStaffDrawingUtilities.getBarOfTick(bars, endOfLastComputedNote)
-            let endOfCurrentBar = currentBar < bars.length ? bars[currentBar].ticksFromBeginningOfSong : song.songStats.numberOfTicks
+            let endOfCurrentBar = currentBar < bars.length ? bars[currentBar].ticksFromBeginningOfSong : song.durationInTicks
 
             // Get the bar in which the note is
             const noteBar = GenericStaffDrawingUtilities.getBarOfTick(bars, n.startSinceBeginningOfSongInTicks)
@@ -67,7 +67,7 @@ export class DrawingCalculations {
                 soundEvents.push(event)
                 endOfLastComputedNote = endOfCurrentBar
                 currentBar++
-                endOfCurrentBar = currentBar < bars.length ? bars[currentBar].ticksFromBeginningOfSong : song.songStats.numberOfTicks
+                endOfCurrentBar = currentBar < bars.length ? bars[currentBar].ticksFromBeginningOfSong : song.durationInTicks
             }
 
             // if there is a number of ticks greater than tolerance between the end of the previous note and this one
@@ -104,7 +104,7 @@ export class DrawingCalculations {
         for (let i = 0; i < voiceNotes.length; i++) {
             let n = voiceNotes[i]
             let currentBar = GenericStaffDrawingUtilities.getBarOfTick(bars, endOfLastComputedNote)
-            let endOfCurrentBar = currentBar < bars.length ? bars[currentBar].ticksFromBeginningOfSong : song.songStats.numberOfTicks
+            let endOfCurrentBar = currentBar < bars.length ? bars[currentBar].ticksFromBeginningOfSong : song.durationInTicks
 
             // Get the bar in which the note is
             const noteBar = GenericStaffDrawingUtilities.getBarOfTick(bars, n.startSinceBeginningOfSongInTicks)
@@ -116,7 +116,7 @@ export class DrawingCalculations {
                 soundEvents.push(event)
                 endOfLastComputedNote = endOfCurrentBar
                 currentBar++
-                endOfCurrentBar = currentBar < bars.length ? bars[currentBar].ticksFromBeginningOfSong : song.songStats.numberOfTicks
+                endOfCurrentBar = currentBar < bars.length ? bars[currentBar].ticksFromBeginningOfSong : song.durationInTicks
             }
             // if there is a number of ticks greater than tolerance between the end of the previous note and this one
             // and we are not at the start of the beat, add a rest

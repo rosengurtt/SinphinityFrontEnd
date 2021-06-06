@@ -136,14 +136,14 @@ export class TrackComponent implements OnChanges, AfterViewInit {
     if (!svgBox) return
     switch (this.viewType) {
       case SongViewType.pianoRoll:
-        minX = (this.songSliderPosition / this.song.songStats.durationInSeconds) * (this.scale * this.song.songStats.numberOfTicks)
+        minX = (this.songSliderPosition / this.song.durationInSeconds) * (this.scale * this.song.durationInTicks)
         if (this.displacement.y >= 0 && this.displacement.y <= 128 - this.scale * 128)
           minY = this.displacement.y
         else if (this.displacement.y < 0)
           minY = 0
         else
           minY = 128 - this.scale * 128
-        width = this.scale * this.song.songStats.numberOfTicks
+        width = this.scale * this.song.durationInTicks
         height = this.scale * 128
 
         break;
@@ -151,7 +151,7 @@ export class TrackComponent implements OnChanges, AfterViewInit {
         if (this.playingSong && this.displacement)
           minX = this.displacement.x
         else
-          minX = this.songSliderPosition / this.song.songStats.durationInSeconds * this.totalWidthOfRythmDrawing
+          minX = this.songSliderPosition / this.song.durationInSeconds * this.totalWidthOfRythmDrawing
         minY = -30 + this.averageYofNotes / 2
         width = width == null ? 1200 * this.scale * 2.2 : width
         height = height == null ? 128 * this.scale * 2.2 : height
@@ -195,11 +195,10 @@ export class TrackComponent implements OnChanges, AfterViewInit {
   }
 
   moveProgressBar(secondsElapsed: number): void {
-    console.log(`estoy en track comp y me llego este valor de secondsElapsed: ${secondsElapsed}`)
     let numberOfTicks: number
     let adjustment = 0
     if (secondsElapsed)
-      numberOfTicks = ((secondsElapsed - adjustment) * this.song.songStats.numberOfTicks) / this.song.songStats.durationInSeconds
+      numberOfTicks = ((secondsElapsed - adjustment) * this.song.durationInTicks) / this.song.durationInSeconds
     else
       numberOfTicks = null
 
