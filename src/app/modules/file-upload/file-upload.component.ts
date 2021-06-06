@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Band } from 'src/app/core/models/band';
@@ -10,9 +10,10 @@ import { SongsRepositoryService } from '../../core/services/songs-repository/son
     templateUrl: './file-upload.component.html',
     styleUrls: ['./file-upload.component.scss']
 })
-export class FileUploadComponent implements OnInit {
+export class FileUploadComponent implements OnInit, OnChanges {
     @Input() styles: MusicStyle[]
     @Input() bands: Band[]
+    @Input() stylesLoaded: boolean
     @Output() styleSelectedChanged = new EventEmitter<MusicStyle>()
     selectedStyle: MusicStyle
     selectedBand: Band
@@ -27,6 +28,15 @@ export class FileUploadComponent implements OnInit {
             BandsList: [],
             songName: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(200)]],
         });
+    }
+    ngOnChanges(changes: SimpleChanges): void {
+        for (const propName in changes) {
+            if (propName == "stylesLoaded" && this.stylesLoaded == true) {
+                this.selectedStyle = this.styles[0]
+                this.styleSelectedChanged.emit(this.styles[0])
+                console.log(this.songUploadForm.controls['StylesList'])
+            }
+        }
     }
 
     ngOnInit() {
@@ -51,7 +61,7 @@ export class FileUploadComponent implements OnInit {
         })
     }
     showHourGlassIcon() {
-        return (this.uploadProgress != null && this.uploadProgress != "Finished importing data." && !this.uploadProgress.includes("There was an error") )
+        return (this.uploadProgress != null && this.uploadProgress != "Finished importing data." && !this.uploadProgress.includes("There was an error"))
     }
 
 

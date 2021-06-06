@@ -26,9 +26,7 @@ button{
     margin: 7px;
     
 }
-.styleSelection{
-    background-color: #444;
-}
+
 .controlitem {
     padding-left: 20px;
     padding-top: 2px;
@@ -36,6 +34,7 @@ button{
     padding-right: 10px;
 }
 .mat-selection-list {
+    background-color: #444;
     max-height: 350px;
     max-width: 250px;
     overflow: auto;

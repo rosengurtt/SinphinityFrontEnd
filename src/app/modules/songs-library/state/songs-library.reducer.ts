@@ -95,6 +95,8 @@ export const songsLibraryReducer = createReducer<SongsLibraryState>(
             let newState = cloneDeep(state)
             newState.errorStyles = null
             newState.musicStylesPaginated = action.musicStylesPaginated
+            newState.bandSelected = null
+            newState.songSelected = null
             return newState
         }),
     on(
@@ -103,6 +105,8 @@ export const songsLibraryReducer = createReducer<SongsLibraryState>(
         (state, action): SongsLibraryState => {
             let newState = cloneDeep(state)
             newState.bandsPaginated = action.bandsPaginated
+            newState.bandSelected = null
+            newState.songSelected = null
             newState.errorBands = null
             return newState
         }),
@@ -121,6 +125,9 @@ export const songsLibraryReducer = createReducer<SongsLibraryState>(
         SongsLibraryApiActions.filterStyleTermChangeFailure,
         (state, action): SongsLibraryState => {
             let newState = cloneDeep(state)
+            newState.styleSelected = null
+            newState.bandSelected = null
+            newState.songSelected = null
             newState.musicStylesPaginated = {
                 pageNo: 0,
                 pageSize: 10,
@@ -136,6 +143,8 @@ export const songsLibraryReducer = createReducer<SongsLibraryState>(
         SongsLibraryApiActions.filterBandTermChangeFailure,
         (state, action): SongsLibraryState => {
             let newState = cloneDeep(state)
+            newState.bandSelected = null
+            newState.songSelected = null
             newState.bandsPaginated = {
                 pageNo: 0,
                 pageSize: 10,
@@ -151,6 +160,7 @@ export const songsLibraryReducer = createReducer<SongsLibraryState>(
         SongsLibraryApiActions.filterSongTermChangeFailure,
         (state, action): SongsLibraryState => {
             let newState = cloneDeep(state)
+            newState.songSelected = null
             newState.songsPaginated = {
                 pageNo: 0,
                 pageSize: 10,
@@ -168,10 +178,14 @@ export const songsLibraryReducer = createReducer<SongsLibraryState>(
         let newState = cloneDeep(state)
         newState.bandsPaginated = action.bandsPaginated
         newState.songsPaginated = action.songsPaginated
+        newState.bandSelected = null
+        newState.songSelected = null
         return newState
     }),
     on(SongsLibraryApiActions.styleSelectedFailure, (state, action): SongsLibraryState => {
         let newState = cloneDeep(state)
+        newState.bandSelected = null
+        newState.songSelected = null
         newState.songsPaginated = {
             pageNo: 0,
             pageSize: 10,
@@ -193,10 +207,12 @@ export const songsLibraryReducer = createReducer<SongsLibraryState>(
     on(SongsLibraryApiActions.bandSelectedSuccess, (state, action): SongsLibraryState => {
         let newState = cloneDeep(state)
         newState.songsPaginated = action.songsPaginated
+        newState.songSelected = null
         return newState
     }),
     on(SongsLibraryApiActions.bandSelectedFailure, (state, action): SongsLibraryState => {
         let newState = cloneDeep(state)
+        newState.songSelected = null
         newState.songsPaginated = {
             pageNo: 0,
             pageSize: 10,

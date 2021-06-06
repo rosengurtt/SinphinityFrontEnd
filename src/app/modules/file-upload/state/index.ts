@@ -5,6 +5,7 @@ import { Band } from '../../../core/models/band'
 export interface FileUploadState {
     styles: MusicStyle[]
     bands: Band[]
+    stylesLoaded: boolean
     error: string
 }
 
@@ -20,6 +21,11 @@ export const getStyles = createSelector(
     getfileUploadFeatureState,
     state => state.styles
 )
+export const getStylesLoaded = createSelector(
+    getfileUploadFeatureState,
+    state => state.stylesLoaded
+)
+
 export const getBands = createSelector(
     getfileUploadFeatureState,
     state => state.bands

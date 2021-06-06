@@ -4,7 +4,7 @@
         <div class="dropDownsArea">
             <div>
                 <label for="stylesList">Style</label>
-                <mat-selection-list #stylesList formControlName="StylesList" [multiple]="false" class="styleSelection">
+                <mat-selection-list #stylesList formControlName="StylesList" [multiple]="false" class="styleSelection" [value]="selectedStyle">
                     <mat-list-option *ngFor="let style of styles" [value]="style.id"  (click)="selectStyle(style)">
                         {{style.name}}
                     </mat-list-option>
@@ -13,7 +13,7 @@
 
             <div>
                 <label for="bandsList">Band</label>
-                <mat-selection-list #stylesList formControlName="BandsList" [multiple]="false" class="styleSelection">
+                <mat-selection-list #stylesList formControlName="BandsList" [multiple]="false" class="styleSelection.id">
                     <mat-list-option *ngFor="let band of bands" [value]="band.id" (click)="selectBand(band)" >
                         {{band.name}} 
                     </mat-list-option>

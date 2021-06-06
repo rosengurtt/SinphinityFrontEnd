@@ -7,6 +7,7 @@ import { FileUploadApiActions, FileUploadPageActions } from './actions'
 const initialState: FileUploadState = {
     styles: [],
     bands: [],
+    stylesLoaded: false,
     error: ''
 }
 
@@ -15,9 +16,15 @@ export const fileUploadReducer = createReducer<FileUploadState>(
     initialState,
 
 
+    on(FileUploadPageActions.loadStyles, (state, action): FileUploadState => {
+        let newState = cloneDeep(state)
+        newState.stylesLoaded = false
+        return newState
+    }),
     on(FileUploadApiActions.loadStylesSuccess, (state, action): FileUploadState => {
         let newState = cloneDeep(state)
         newState.styles = action.styles
+        newState.stylesLoaded = true
         return newState
     }),
     on(FileUploadApiActions.loadStylesFailure, (state, action): FileUploadState => {

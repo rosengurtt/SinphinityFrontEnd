@@ -1,6 +1,7 @@
 <app-file-upload 
     [styles]= "styles$ | async"
     [bands]= "bands$ | async"
+    [stylesLoaded] = "stylesLoaded$ | async"
     
     (styleSelectedChanged) ="styleSelectedChange($any($event))">
 </app-file-upload>
