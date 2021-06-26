@@ -85,7 +85,8 @@ export class TrackComponent implements OnChanges, AfterViewInit {
     this.drawingPianoRollService.drawPianoRollGraphic(this.trackId, this.svgBoxId, this.song, this.simplification);
     this.updateSvgBox()
     this.resetEventSubscritpion = this.resetEvent.subscribe(x => this.reset(x))
-    this.moveProgressBarEventSubscritpion = this.moveProgressBarEvent.subscribe(x => this.moveProgressBar(x))
+    if (this.song.midiStats.totalNoteEvents < 1000)
+      this.moveProgressBarEventSubscritpion = this.moveProgressBarEvent.subscribe(x => this.moveProgressBar(x))
   }
 
 
@@ -137,7 +138,7 @@ export class TrackComponent implements OnChanges, AfterViewInit {
     switch (this.viewType) {
       case SongViewType.pianoRoll:
         minX = (this.songSliderPosition / this.song.durationInSeconds) * (this.scale * this.song.durationInTicks)
-        if (this.displacement.y >= 0 && this.displacement.y <= 128 - this.scale * 128)
+        if (this.displacement?.y >= 0 && this.displacement?.y <= 128 - this.scale * 128)
           minY = this.displacement.y
         else if (this.displacement.y < 0)
           minY = 0
@@ -214,7 +215,7 @@ export class TrackComponent implements OnChanges, AfterViewInit {
       // "one page", so the viewer starts looking again in the left
       // that is why we use tolerance. The value of 2000 was obtained experimenting
       let tolerance = 2000
-      if (displacement && displacement > this.displacement.x + tolerance) {
+      if (displacement && displacement > this.displacement?.x + tolerance) {
         let coor = new Coordenadas(-(displacement - this.displacement.x - tolerance / 2) / 50, 0)
         this.displaceChange.emit(coor)
       }

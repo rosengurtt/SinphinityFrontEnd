@@ -13,14 +13,7 @@ const initialState: SongPanelState = {
     playingSong: null,
     error: ''
 }
-export class reduxSacamela {
-    addItemToMap(mapito: string, key, value) {
-        let mapon = new Map()
-        if (mapito) mapon = JSON.parse(mapito)
-        mapon.set(key, value)
-        return JSON.stringify(mapon)
-    }
-}
+
 
 
 export const songPanelReducer = createReducer<SongPanelState>(
@@ -38,7 +31,9 @@ export const songPanelReducer = createReducer<SongPanelState>(
 
     on(SongPanelPageActions.displacementChange, (state, action): SongPanelState => {
         let newState = cloneDeep(state)
-        newState.songsUnderAnalysis.filter(s => s.song.id == action.songId)[0].displacement = action.displacement
+        const songUnderAnalysis = newState.songsUnderAnalysis.filter(s => s.song.id == action.songId)[0]
+        if (songUnderAnalysis)
+            songUnderAnalysis.displacement = action.displacement
         return newState
     }),
 
@@ -93,7 +88,9 @@ export const songPanelReducer = createReducer<SongPanelState>(
     }),
     on(SongPanelPageActions.unmuteAllTracks, (state, action): SongPanelState => {
         let newState = cloneDeep(state)
-        newState.songsUnderAnalysis.filter(s => s.song.id == action.songId)[0].tracksMuted = []
+        let songUnderAnalysis = newState.songsUnderAnalysis.filter(s => s.song.id == action.songId)[0]
+        if (songUnderAnalysis)
+            songUnderAnalysis.tracksMuted = []
         return newState
     }),
     on(SongPanelPageActions.changeViewType, (state, action): SongPanelState => {
@@ -103,17 +100,23 @@ export const songPanelReducer = createReducer<SongPanelState>(
     }),
     on(SongPanelPageActions.selectSongSimplification, (state, action): SongPanelState => {
         let newState = cloneDeep(state)
-        newState.songsUnderAnalysis.filter(s => s.song.id == action.songId)[0].simplificationVersionSelected = action.songSimplificationVersion
+        let songUnderAnalysis = newState.songsUnderAnalysis.filter(s => s.song.id == action.songId)[0]
+        if (songUnderAnalysis)
+            songUnderAnalysis.simplificationVersionSelected = action.songSimplificationVersion
         return newState
     }),
     on(SongPanelPageActions.songSliderPositionChange, (state, action): SongPanelState => {
         let newState = cloneDeep(state)
-        newState.songsUnderAnalysis.filter(s => s.song.id == action.songId)[0].songSliderPosition = action.songSliderPosition
+        let songUnderAnalysis = newState.songsUnderAnalysis.filter(s => s.song.id == action.songId)[0]
+        if (songUnderAnalysis)
+            songUnderAnalysis.songSliderPosition = action.songSliderPosition
         return newState
     }),
     on(SongPanelPageActions.songTempoChange, (state, action): SongPanelState => {
         let newState = cloneDeep(state)
-        newState.songsUnderAnalysis.filter(s => s.song.id == action.songId)[0].tempoInBeatsPerMinute = action.tempo
+        let songUnderAnalysis = newState.songsUnderAnalysis.filter(s => s.song.id == action.songId)[0]
+        if (songUnderAnalysis)
+            songUnderAnalysis.tempoInBeatsPerMinute = action.tempo
         return newState
     }),
 );

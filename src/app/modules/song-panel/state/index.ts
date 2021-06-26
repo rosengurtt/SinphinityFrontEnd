@@ -27,8 +27,8 @@ export const getSongUnderAnalysisById = createSelector(
     getSongPanelFeatureState,
     (state, props) => {
         if (props) {
-            const songita = state.songsUnderAnalysis.filter(s => s.song.id == props.id)
-            if (songita.length > 0) return songita[0].song
+            const songita = state.songsUnderAnalysis.filter(s => s.song?.id == props.id)
+             return songita[0]?.song
         }
         return null
     }
@@ -37,18 +37,15 @@ export const getSongUnderAnalysisById = createSelector(
 export const getDisplacementBySongId = createSelector(
     getSongPanelFeatureState,
     (state, props) => {
-        const songita = state.songsUnderAnalysis.filter(s => s.song.id == props.songId)
-        if (songita.length > 0)
-            return songita[0].displacement
+        const songita = state.songsUnderAnalysis.filter(s => s.song?.id == props.songId)
+        return songita[0]?.displacement
     }
 )
 export const getScaleBySongId = createSelector(
     getSongPanelFeatureState,
     (state, props) => {
-        const songita = state.songsUnderAnalysis.filter(s => s.song.id == props.songId)
-        if (songita.length > 0)
-            return songita[0].scale
-        return null
+        const songita = state.songsUnderAnalysis.filter(s => s.song?.id == props.songId)
+        return songita[0]?.scale
     }
 )
 
@@ -60,39 +57,31 @@ export const getPlayingSong = createSelector(
 export const getMutedTracks = createSelector(
     getSongPanelFeatureState,
     (state, props) => {
-        const songita = state.songsUnderAnalysis.filter(s => s.song.id == props.songId)
-        if (songita.length > 0)
-            return songita[0].tracksMuted
-        return null
+        const songita = state.songsUnderAnalysis.filter(s => s.song?.id == props.songId)
+        return songita[0]?.tracksMuted
     }
 )
 
 export const getSongViewType = createSelector(
     getSongPanelFeatureState,
     (state, props) => {
-        const songita = state.songsUnderAnalysis.filter(s => s.song.id == props.songId)
-        if (songita.length > 0)
-            return songita[0].viewType
-        return null
+        const songita = state.songsUnderAnalysis.filter(s => s.song?.id == props.songId)
+        return songita[0]?.viewType
     }
 )
 
 export const getSongSimplificationSelected = createSelector(
     getSongPanelFeatureState,
     (state, props) => {
-        const songita = state.songsUnderAnalysis.filter(s => s.song.id == props.songId)
-        if (songita.length > 0)
-            return songita[0].simplificationVersionSelected
-        return null
+        const songita = state.songsUnderAnalysis.filter(s => s.song?.id == props.songId)
+        return songita[0]?.simplificationVersionSelected
     }
 )
 
 export const getSongSliderPositionForSongId = createSelector(
     getSongPanelFeatureState,
     (state, props) => {
-        const songita = state.songsUnderAnalysis.filter(s => s.song.id == props.songId)
-        if (songita.length > 0)
-            return songita[0].songSliderPosition
-        return null
+        const songita = state.songsUnderAnalysis.filter(s => s.song?.id == props.songId)
+        return songita[0]?.songSliderPosition
     }
 )

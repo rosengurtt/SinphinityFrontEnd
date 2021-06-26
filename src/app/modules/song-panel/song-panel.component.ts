@@ -97,7 +97,6 @@ export class SongPanelComponent implements OnInit, OnChanges, OnDestroy, AfterVi
       if (propName == "playingSong" && this.slider) {
         this.slider.value = this.playingSong ? this.playingSong.elapsedMilliSeconds / 1000 : null
         this.moveProgressBarSubject.next(this.playingSong?.elapsedMilliSeconds / 1000)
-     //   this.songSliderPositionChangeSubject.next(this.slider.value)
       }
     }
   }
