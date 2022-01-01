@@ -69,115 +69,66 @@
 			</div>
 		</div>
 	</div>
-
-
-	<div class="selectedSongBox" *ngIf="songSelected">
-		<div class="midiStatsTitle" *ngIf="songSelected">
-			<h2>Song stats</h2>
-			<div><button mat-raised-button color="primary" (click)="analyzeSongClicked(songSelected)">Analyze</button></div>
+	<div class="patterns">
+		<div class="panel panel-info">
+			<h2>Patterns</h2>
+			<mat-form-field>
+				<mat-icon matPrefix>search</mat-icon>
+				<input class="searchBox" matInput type="search" placeholder="Enter Search keyword"
+				[formControl]="patternTerm"   />
+			</mat-form-field>
+			<div class="mat-elevation-z8">
+				<table mat-table [dataSource]="patternsDataSource" class="mat-elevation-z8" matSort>
+					<ng-container matColumnDef="name">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>Pattern</th>
+						<td mat-cell *matCellDef="let pattern" [class.selected]="patternSelected && song.id==patternSelected.id"><span
+								(click)="selectPattern(song)">{{pattern.asString}}</span>
+						</td>
+					</ng-container>
+					<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+				</table>
+				<mat-paginator #patternsPaginator [length]="totalPatterns"
+					[pageIndex]="patternsPageNo" [pageSize]="patternsPageSize"
+					[hidePageSize]="true" (page)="getSongsPage($event)" showFirstLastButtons></mat-paginator>
+			</div>
 		</div>
-		<div class="midiStatsTable">
-			<table class="midiStatsTable">				
+	</div>
+
+	<div class="selectedPatternBox" *ngIf="patternSelected">
+		<div class="patternStatsTitle" *ngIf="songSelected">
+			<h2>Pattern info</h2>
+			<div><button mat-raised-button color="primary" (click)="analyzePatternClicked(patternSelected)">Analyze</button></div>
+		</div>
+		<div class="patternStatsTable">
+			<table class="patternStatsTable">				
 				<colgroup>
-					<col style="width:40%">
-					<col style="width:60%">
+					<col style="width:50%">
+					<col style="width:50%">
 				</colgroup> 
 				<tr>
-					<td>Style</td>
-					<td>{{songSelected.style.name}}</td>
+					<td>As string</td>
+					<td>{{patternSelected.asString}}</td>
 				</tr>
 				<tr>
-					<td>Band</td>
-					<td>{{songSelected.band.name}}</td>
+					<td>Duration in ticks</td>
+					<td>{{patternSelected.durationInTicks | number}}</td>
 				</tr>
 				<tr>
-					<td>Song name</td>
-					<td>{{songSelected.name | fileNameToSongName}}</td>
+					<td>Number of notes</td>
+					<td>{{patternSelected.numberOfNotes | number}}</td>
 				</tr>
 				<tr>
-					<td>Duration</td>
-					<td>{{songSelected.midiStats.durationInSeconds | timeDuration}}</td>
+					<td>Range</td>
+					<td>{{patternSelected.range | number}}</td>
 				</tr>
 				<tr>
-					<td>Number of bars</td>
-					<td>{{songSelected.bars.length | number}}</td>
+					<td>Is Monotone</td>
+					<td>{{patternSelected.isMonotone}}</td>
 				</tr>
 				<tr>
-					<td>Average tempo</td>
-					<td>{{songSelected.tempoChanges.averageTempoInBeatsPerMinute | number}}</td>
-				</tr>
-				<tr>
-					<td>Tempo changes</td>
-					<td>{{songSelected.tempoChanges.length | number}}</td>
-				</tr>
-				<tr>
-					<td>Number of ticks</td>
-					<td>{{songSelected.midiStats.durationInTicks | number}}</td>
-				</tr>
-				<tr>
-					<td>Total tracks</td>
-					<td>{{songSelected.midiStats.totalTracks | number}}</td>
-				</tr>
-				<tr>
-					<td>Total bass tracks</td>
-					<td>{{songSelected.midiStats.totalBassTracks | number}}</td>
-				</tr>
-				<tr>
-					<td>Total chord tracks</td>
-					<td>{{songSelected.midiStats.totalChordTracks | number}}</td>
-				</tr>
-				<tr>
-					<td>Total melodic tracks</td>
-					<td>{{songSelected.midiStats.totalMelodicTracks | number}}</td>
-				</tr>
-				<tr>
-					<td>Total percussion tracks</td>
-					<td>{{songSelected.midiStats.totalPercussionTracks | number}}</td>
-				</tr>
-				<tr>
-					<td>Total instruments</td>
-					<td>{{songSelected.midiStats.totalInstruments | number}}</td>
-				</tr>
-				<tr>
-					<td>Total percussion instruments</td>
-					<td>{{songSelected.midiStats.totalPercussionInstruments | number}}</td>
-				</tr>
-				<tr>
-					<td>Total channels</td>
-					<td>{{songSelected.midiStats.totalChannels | number}}</td>
-				</tr>
-				<tr>
-					<td>Total tempo changes</td>
-					<td>{{songSelected.midiStats.totalTempoChanges | number}}</td>
-				</tr>
-				<tr>
-					<td>Total events</td>
-					<td>{{songSelected.midiStats.totalEvents | number}}</td>
-				</tr>
-				<tr>
-					<td>Total note events</td>
-					<td>{{songSelected.midiStats.totalNoteEvents | number}}</td>
-				</tr>
-				<tr>
-					<td>Total pitch bend events</td>
-					<td>{{songSelected.midiStats.totalPitchBendEvents | number}}</td>
-				</tr>
-				<tr>
-					<td>Total program change events</td>
-					<td>{{songSelected.midiStats.totalProgramChangeEvents | number}}</td>
-				</tr>
-				<tr>
-					<td>Total control change events</td>
-					<td>{{songSelected.midiStats.totalControlChangeEvents | number}}</td>
-				</tr>
-				<tr>
-					<td>Total sustain pedal events</td>
-					<td>{{songSelected.midiStats.totalSustainPedalEvents | number}}</td>
-				</tr>
-				<tr>
-					<td>Total chanel independent events</td>
-					<td>{{songSelected.midiStats.totalChannelIndependentEvents | number}}</td>
-				</tr>
+					<td>Step</td>
+					<td>{{patternSelected.step}}</td>
+				</tr>				
 			</table>
 		</div>
 	</div>

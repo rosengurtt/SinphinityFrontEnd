@@ -61,6 +61,16 @@ export class SongsRepositoryService {
         return this.http.get<GetSongsResponse>(url);
     }
 
+    getPatterns(styleId: string, bandId: string, songInfoId:string, paginationData: PaginationData, contains: string): Observable<any> {
+        let url = this.songLibraryUrl + 'patterns'
+        url = this.addParameterToUrl(url, 'contains', contains)
+        url = this.addParameterToUrl(url, 'styleId', styleId)
+        url = this.addParameterToUrl(url, 'bandId', bandId)
+        url = this.addParameterToUrl(url, 'songInfoId', songInfoId)
+        url = this.addPaginationParameters(url, paginationData)
+        return this.http.get<GetSongsResponse>(url);
+    }
+
     getSongInfoById(id: string): Observable<GetSongResponse> {
         return this.http.get<GetSongResponse>(this.songLibraryUrl + 'song/' + id + '/info');
     }

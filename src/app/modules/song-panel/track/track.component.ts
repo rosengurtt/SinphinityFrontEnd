@@ -137,14 +137,14 @@ export class TrackComponent implements OnChanges, AfterViewInit {
     if (!svgBox) return
     switch (this.viewType) {
       case SongViewType.pianoRoll:
-        minX = (this.songSliderPosition / this.song.durationInSeconds) * (this.scale * this.song.durationInTicks)
+        minX = (this.songSliderPosition / this.song.midiStats.durationInSeconds) * (this.scale * this.song.midiStats.durationInTicks)
         if (this.displacement?.y >= 0 && this.displacement?.y <= 128 - this.scale * 128)
           minY = this.displacement.y
         else if (this.displacement.y < 0)
           minY = 0
         else
           minY = 128 - this.scale * 128
-        width = this.scale * this.song.durationInTicks
+        width = this.scale * this.song.midiStats.durationInTicks
         height = this.scale * 128
 
         break;
@@ -152,7 +152,7 @@ export class TrackComponent implements OnChanges, AfterViewInit {
         if (this.playingSong && this.displacement)
           minX = this.displacement.x
         else
-          minX = this.songSliderPosition / this.song.durationInSeconds * this.totalWidthOfRythmDrawing
+          minX = this.songSliderPosition / this.song.midiStats.durationInSeconds * this.totalWidthOfRythmDrawing
         minY = -30 + this.averageYofNotes / 2
         width = width == null ? 1200 * this.scale * 2.2 : width
         height = height == null ? 128 * this.scale * 2.2 : height
@@ -199,7 +199,7 @@ export class TrackComponent implements OnChanges, AfterViewInit {
     let numberOfTicks: number
     let adjustment = 0
     if (secondsElapsed)
-      numberOfTicks = ((secondsElapsed - adjustment) * this.song.durationInTicks) / this.song.durationInSeconds
+      numberOfTicks = ((secondsElapsed - adjustment) * this.song.midiStats.durationInTicks) / this.song.midiStats.durationInSeconds
     else
       numberOfTicks = null
 

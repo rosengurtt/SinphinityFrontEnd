@@ -21,7 +21,7 @@ table {
   width: 100%;
 }
 
-.midiStatsTable {
+.patternStatsTable {
 width: 100%
 }
 input{
@@ -31,7 +31,7 @@ input{
   padding: 3px;
 }
 
-.midiStatsTitle {
+.patternStatsTitle {
   display:grid;
   padding: 8px;
   align-items: center;
@@ -39,7 +39,7 @@ input{
 }
 
 
-.selectedSongBox{
+.selectedPatternBox{
   padding: 20px;
   width: 80%;
 }

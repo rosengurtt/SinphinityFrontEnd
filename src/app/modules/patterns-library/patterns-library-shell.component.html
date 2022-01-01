@@ -1,0 +1,45 @@
+<dc-patterns-library
+
+    [stylesDataSource] = "stylesDatasource$ | async" 
+    [bandsDataSource] = "bandsDatasource$ | async" 
+    [songsDataSource] = "songsDatasource$ | async" 
+    [patternsDataSource] = "patternsDatasource$ | async" 
+
+    [stylesPageNo] = "stylesPageNo$ | async"
+    [bandsPageNo] = "bandsPageNo$ | async"
+    [songsPageNo] = "songsPageNo$ | async"
+    [patternsPageNo] = "patternsPageNo$ | async"
+    
+    [totalStyles] = "totalStyles$ | async"
+    [totalBands] = "totalBands$ | async"
+    [totalSongs] = "totalSongs$ | async"
+    [totalPatterns] = "totalSongs$ | async"
+
+    [stylesPageSize] = "stylesPageSize"
+    [bandsPageSize] = "bandsPageSize"
+    [songsPageSize] = "songsPageSize"
+    [patternsPageSize] = "songsPageSize"
+
+    [styleSelected] = "styleSelected$ | async"
+    [bandSelected] = "bandSelected$ | async"
+    [songSelected] = "songSelected$ | async"
+    [patternSelected] = "patternSelected$ | async"
+
+    (stylesPageChanged) = "stylesPageChanged($any($event))"
+    (bandsPageChanged) = "bandsPageChanged($any($event))"
+    (songsPageChanged) = "songsPageChanged($any($event))"
+    (patternsPageChanged) = "patternsPageChanged($any($event))"
+
+    (stylesTermChanged) = "stylesTermChanged($any($event))"
+    (bandsTermChanged) = "bandsTermChanged($any($event))"
+    (songsTermChanged) = "songsTermChanged($any($event))"
+    (patternsTermChanged) = "songsTermChanged($any($event))"
+
+    (styleSelectedChanged) ="styleSelectedChange($any($event))"
+    (bandSelectedChanged) ="bandSelectedChange($any($event))"
+    (songSelectedChanged) ="songSelectedChange($any($event))"
+    (patternSelectedChanged) ="songSelectedChange($any($event))"
+
+    (analyzePattern) = "analyzePattern($any($event))"
+>
+</dc-patterns-library>

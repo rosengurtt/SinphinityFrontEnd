@@ -207,7 +207,7 @@ export class DrawingPianoRollService {
 
     private createHorizontalLinesAtCnotes() {
         const lineStart = 0
-        const totalLength = this.song.durationInTicks
+        const totalLength = this.song.midiStats.durationInTicks
         const width = 1
         const dotSize = 1
         for (let i = 0; i < 128; i += 12)

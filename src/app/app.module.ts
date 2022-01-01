@@ -11,6 +11,7 @@ import { HeaderShellComponent } from './core/header/header-shell.component'
 import { MaterialModule } from './core/material.module'
 import { HomeComponent } from './modules/home/home.component'
 import { SongsLibraryModule } from './modules/songs-library/songs-library.module'
+import { PatternsLibraryModule } from './modules/patterns-library/patterns-library.module'
 import { SongPanelModule } from './modules/song-panel/song-panel.module'
 import { HttpClientModule } from '@angular/common/http'
 import { SongsRepositoryService } from './core/services/songs-repository/songs-repository.service'
@@ -43,6 +44,7 @@ export function init_app(appLoadService: AppInitService) {
     ReactiveFormsModule,
     MaterialModule,
     SongsLibraryModule,
+    PatternsLibraryModule,
     SongPanelModule,
     FileUploadModule,
     HttpClientModule,

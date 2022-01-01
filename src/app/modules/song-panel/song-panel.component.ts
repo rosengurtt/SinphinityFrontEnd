@@ -80,7 +80,7 @@ export class SongPanelComponent implements OnInit, OnChanges, OnDestroy, AfterVi
     this.tempoBox.setValue(tempoInBeatsPerMinute)
   }
   ngAfterViewInit(): void {
-    this.slider.max = this.song.durationInSeconds
+    this.slider.max = this.song.midiStats.durationInSeconds
     this.cdr.detectChanges();
   }
   ngOnDestroy(): void {
@@ -157,8 +157,8 @@ export class SongPanelComponent implements OnInit, OnChanges, OnDestroy, AfterVi
   }
   // This is called by midijs when the song starts to play
   getPlayingStatus(mes) {
-    if (mes.includes('Playing')) {
-      let playingSong = new PlayingSong(this.songId, this.slider.value, this.song.durationInSeconds, this.tempoBox.value / this.getSongTempoInBeatsPerMinute(this.song))
+    if (mes.includes('playing')) {
+      let playingSong = new PlayingSong(this.songId, this.slider.value, this.song.midiStats.durationInSeconds, this.tempoBox.value / this.getSongTempoInBeatsPerMinute(this.song))
       this.songStartedPlaying.emit(playingSong)
     }
   };

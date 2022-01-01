@@ -6,5 +6,4 @@ export class SongsPaginated {
     totalItems: number
     totalPages: number
     items: Song[]
-
 }
