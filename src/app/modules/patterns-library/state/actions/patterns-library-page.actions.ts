@@ -1,55 +1,55 @@
 import { createAction, props } from '@ngrx/store'
 import { MusicStyle } from '../../../../core/models/music-style'
-import {Band}from '../../../../core/models/band'
-import {Song}from '../../../../core/models/song'
+import { Band } from '../../../../core/models/band'
+import { Song } from '../../../../core/models/song'
 import { PaginationData } from '../../../../core/models/pagination-data'
 import { Pattern } from '../../../../core/models/pattern'
 
 export const filterStyleTermChange = createAction(
-  '[Songs-Library Page] Filter Style',
+  '[Patterns-Library-Page] Filter Style',
   props<{ styleTerm: string }>()
 )
 export const filterBandTermChange = createAction(
-  '[Songs-Library Page] Filter Band',
+  '[Patterns-Library-Page] Filter Band',
   props<{ bandTerm: string }>()
 )
 export const filterSongTermChange = createAction(
-  '[Songs-Library Page] Filter Song',
+  '[Patterns-Library-Page] Filter Song',
   props<{ songTerm: string }>()
 )
 export const filterPatternTermChange = createAction(
-  '[Songs-Library Page] Filter Pattern',
+  '[Patterns-Library-Page] Filter Pattern',
   props<{ patternTerm: string }>()
 )
 export const stylesPaginationChange = createAction(
-  '[Songs-Library Page] Page Style',
+  '[Patterns-Library-Page] Page Style',
   props<{ paginationData: PaginationData }>()
 )
 export const bandsPaginationChange = createAction(
-  '[Songs-Library Page] Page Band',
+  '[Patterns-Library-Page] Page Band',
   props<{ paginationData: PaginationData }>()
 )
 export const songsPaginationChange = createAction(
-  '[Songs-Library Page] Page Song',
+  '[Patterns-Library-Page] Page Song',
   props<{ paginationData: PaginationData }>()
 )
 export const patternsPaginationChange = createAction(
-  '[Songs-Library Page] Page Pattern',
+  '[Patterns-Library-Page] Page Pattern',
   props<{ paginationData: PaginationData }>()
 )
 export const styleSelectedChange = createAction(
-  '[Songs-Library Page] Style Selected Change',
+  '[Patterns-Library-Page] Style Selected Change',
   props<{ selectedStyle: MusicStyle }>()
 )
 export const bandSelectedChange = createAction(
-  '[Songs-Library Page] Band Selected Change',
+  '[Patterns-Library-Page] Band Selected Change',
   props<{ selectedBand: Band }>()
 )
 export const songSelectedChange = createAction(
-  '[Songs-Library Page] Song Selected Change',
+  '[Patterns-Library-Page] Song Selected Change',
   props<{ selectedSong: Song }>()
 )
 export const patternSelectedChange = createAction(
-  '[Songs-Library Page] Pattern Selected Change',
+  '[Patterns-Library-Page] Pattern Selected Change',
   props<{ selectedPattern: Pattern }>()
 )

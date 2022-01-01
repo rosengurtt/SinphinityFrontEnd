@@ -52,7 +52,7 @@ export class SongsLibraryShellComponent implements OnInit {
 
     stylesPageSize = 10
     bandsPageSize = 10
-    songsPageSize = 11
+    songsPageSize = 10
 
     errorStylesMessage$: Observable<string>
     errorBandsMessage$: Observable<string>

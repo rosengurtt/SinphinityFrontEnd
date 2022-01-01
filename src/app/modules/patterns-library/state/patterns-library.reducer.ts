@@ -111,6 +111,11 @@ export const patternsLibraryReducer = createReducer<PatternsLibraryState>(
         return newState
     }),
 
+    on(PatternsLibraryPageActions.songSelectedChange, (state, action): PatternsLibraryState => {
+        let newState = cloneDeep(state)
+        newState.songSelected = action.selectedSong
+        return newState
+    }),
     on(
         PatternsLibraryApiActions.stylesPaginationChangeSuccess,
         PatternsLibraryApiActions.filterStyleTermChangeSuccess,
@@ -146,15 +151,15 @@ export const patternsLibraryReducer = createReducer<PatternsLibraryState>(
             newState.errorSongs = null
             return newState
         }),
-        on(
-            PatternsLibraryApiActions.patternsPaginationChangeSuccess,
-            PatternsLibraryApiActions.filterPatternTermChangeSuccess,
-            (state, action): PatternsLibraryState => {
-                let newState = cloneDeep(state)
-                newState.patternsPaginated = action.patternsPaginated
-                newState.errorPatterns = null
-                return newState
-            }),
+    on(
+        PatternsLibraryApiActions.patternsPaginationChangeSuccess,
+        PatternsLibraryApiActions.filterPatternTermChangeSuccess,
+        (state, action): PatternsLibraryState => {
+            let newState = cloneDeep(state)
+            newState.patternsPaginated = action.patternsPaginated
+            newState.errorPatterns = null
+            return newState
+        }),
 
     on(
         PatternsLibraryApiActions.stylesPaginationChangeFailure,
@@ -210,22 +215,22 @@ export const patternsLibraryReducer = createReducer<PatternsLibraryState>(
             newState.errorSongs = action.error
             return newState
         }),
-        on(
-            PatternsLibraryApiActions.patternsPaginationChangeFailure,
-            PatternsLibraryApiActions.filterPatternTermChangeFailure,
-            (state, action): PatternsLibraryState => {
-                let newState = cloneDeep(state)
-                newState.patternSelected = null
-                newState.patternsPaginated = {
-                    pageNo: 0,
-                    pageSize: 10,
-                    totalItems: 0,
-                    totalPages: 0,
-                    items: []
-                }
-                newState.errorPatterns = action.error
-                return newState
-            }),
+    on(
+        PatternsLibraryApiActions.patternsPaginationChangeFailure,
+        PatternsLibraryApiActions.filterPatternTermChangeFailure,
+        (state, action): PatternsLibraryState => {
+            let newState = cloneDeep(state)
+            newState.patternSelected = null
+            newState.patternsPaginated = {
+                pageNo: 0,
+                pageSize: 10,
+                totalItems: 0,
+                totalPages: 0,
+                items: []
+            }
+            newState.errorPatterns = action.error
+            return newState
+        }),
 
 
 
@@ -233,6 +238,7 @@ export const patternsLibraryReducer = createReducer<PatternsLibraryState>(
         let newState = cloneDeep(state)
         newState.bandsPaginated = action.bandsPaginated
         newState.songsPaginated = action.songsPaginated
+        newState.patternsPaginated = action.patternsPaginated
         newState.bandSelected = null
         newState.songSelected = null
         return newState
@@ -262,6 +268,7 @@ export const patternsLibraryReducer = createReducer<PatternsLibraryState>(
     on(PatternsLibraryApiActions.bandSelectedSuccess, (state, action): PatternsLibraryState => {
         let newState = cloneDeep(state)
         newState.songsPaginated = action.songsPaginated
+        newState.patternsPaginated = action.patternsPaginated
         newState.songSelected = null
         return newState
     }),
@@ -281,7 +288,7 @@ export const patternsLibraryReducer = createReducer<PatternsLibraryState>(
 
     on(PatternsLibraryApiActions.songSelectedSuccess, (state, action): PatternsLibraryState => {
         let newState = cloneDeep(state)
-        newState.songSelected = action.song
+        newState.patternsPaginated = action.patternsPaginated
         return newState
     }),
     on(PatternsLibraryApiActions.songSelectedFailure, (state, action): PatternsLibraryState => {

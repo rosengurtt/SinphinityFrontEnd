@@ -6,6 +6,7 @@ import { environment } from '../../../../environments/environment';
 import { GetStylesResponse } from './responses-format/get-styles-response';
 import { GetBandsResponse } from './responses-format/get-bands-response';
 import { GetSongsResponse } from './responses-format/get-songs-response';
+import { GetPatternsResponse } from './responses-format/get-patterns-response';
 import { GetSongResponse } from './responses-format/get-song-response';
 import { PaginationData } from '../../models/pagination-data';
 import { MusicStyle } from '../../models/music-style';
@@ -58,17 +59,17 @@ export class SongsRepositoryService {
         url = this.addParameterToUrl(url, 'styleId', styleId)
         url = this.addParameterToUrl(url, 'bandId', bandId)
         url = this.addPaginationParameters(url, paginationData)
-        return this.http.get<GetSongsResponse>(url);
+        return this.http.get<GetSongsResponse>(url)
     }
 
-    getPatterns(styleId: string, bandId: string, songInfoId:string, paginationData: PaginationData, contains: string): Observable<any> {
+    getPatterns(styleId: string, bandId: string, songId: string, paginationData: PaginationData, contains: string): Observable<any> {
         let url = this.songLibraryUrl + 'patterns'
         url = this.addParameterToUrl(url, 'contains', contains)
         url = this.addParameterToUrl(url, 'styleId', styleId)
         url = this.addParameterToUrl(url, 'bandId', bandId)
-        url = this.addParameterToUrl(url, 'songInfoId', songInfoId)
+        url = this.addParameterToUrl(url, 'songId', songId)
         url = this.addPaginationParameters(url, paginationData)
-        return this.http.get<GetSongsResponse>(url);
+        return this.http.get<GetPatternsResponse>(url);
     }
 
     getSongInfoById(id: string): Observable<GetSongResponse> {

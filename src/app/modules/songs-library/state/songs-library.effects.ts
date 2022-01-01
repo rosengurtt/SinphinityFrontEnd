@@ -65,12 +65,11 @@ export class SongsLibraryEffects {
         ofType(SongsLibraryPageActions.styleSelectedChange),
         withLatestFrom(this.store$.select(getSongsLibraryState)),
         mergeMap(([action, state]) =>
-          this.songsRepositoryService.getBands(action.selectedStyle.id, { pageNo: 0, pageSize: state.bandsPaginated.pageSize }, state.bandTerm)
+        this.songsRepositoryService.getSongs(action.selectedStyle.id, null, { pageNo: 0, pageSize: state.songsPaginated.pageSize }, state.songTerm)          
             .pipe(
-              withLatestFrom(this.songsRepositoryService.getSongs(action.selectedStyle.id, null, { pageNo: 0, pageSize: state.songsPaginated.pageSize }, state.songTerm)),
-              map(([bands, songs]) =>
-                SongsLibraryApiActions.styleSelectedSuccess({ bandsPaginated: bands.result, songsPaginated: songs.result }))
-                ,
+              withLatestFrom(this.songsRepositoryService.getBands(action.selectedStyle.id, { pageNo: 0, pageSize: state.bandsPaginated.pageSize }, state.bandTerm)),
+              map(([songs, bands]) =>
+                SongsLibraryApiActions.styleSelectedSuccess({ bandsPaginated: bands.result, songsPaginated: songs.result })),
               catchError(error => of(SongsLibraryApiActions.styleSelectedFailure({ error })))
             )
         )

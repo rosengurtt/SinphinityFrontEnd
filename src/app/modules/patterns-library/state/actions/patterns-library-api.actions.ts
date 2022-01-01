@@ -1,6 +1,5 @@
 import { createAction, props } from '@ngrx/store'
 import { Pattern } from '../../../../core/models/pattern'
-import { Song } from '../../../../core/models/song'
 import { BandsPaginated } from '../../../../core/services/songs-repository/responses-format/bands-paginated'
 import { MusicStylesPaginated } from '../../../../core/services/songs-repository/responses-format/music-styles-paginated'
 import { PatternsPaginated } from '../../../../core/services/songs-repository/responses-format/patterns-paginated'
@@ -48,7 +47,7 @@ export const patternsPaginationChangeFailure = createAction(
 )
 export const styleSelectedSuccess = createAction(
     '[PatternsLibrary API] Style Selected Success',
-    props<{ bandsPaginated: BandsPaginated, songsPaginated: SongsPaginated }>()
+    props<{ bandsPaginated: BandsPaginated, songsPaginated: SongsPaginated, patternsPaginated: PatternsPaginated }>()
 )
 
 export const styleSelectedFailure = createAction(
@@ -58,7 +57,7 @@ export const styleSelectedFailure = createAction(
 
 export const bandSelectedSuccess = createAction(
     '[PatternsLibrary API] Band Selected Success',
-    props<{ songsPaginated: SongsPaginated }>()
+    props<{ songsPaginated: SongsPaginated, patternsPaginated: PatternsPaginated }>()
 )
 
 export const bandSelectedFailure = createAction(
@@ -68,7 +67,7 @@ export const bandSelectedFailure = createAction(
 
 export const songSelectedSuccess = createAction(
     '[PatternsLibrary API] Song Selected Success',
-    props<{ song: Song }>()
+    props<{ patternsPaginated: PatternsPaginated }>()
 )
 
 export const songSelectedFailure = createAction(
