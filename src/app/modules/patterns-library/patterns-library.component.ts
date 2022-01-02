@@ -9,6 +9,7 @@ import { MusicStyle } from "../../core/models/music-style"
 import { Song } from "../../core/models/song"
 import { PaginationData } from '../../core/models/pagination-data'
 import { Pattern } from "../../core/models/pattern"
+import { PatternsFilter } from "src/app/core/models/patterns-filter"
 
 @Component({
     selector: 'dc-patterns-library',
@@ -44,7 +45,7 @@ export class PatternsLibraryComponent {
     @Output() stylesTermChanged = new EventEmitter<string>()
     @Output() bandsTermChanged = new EventEmitter<string>()
     @Output() songsTermChanged = new EventEmitter<string>()
-    @Output() patternsTermChanged = new EventEmitter<string>()
+    @Output() patternsFilterChanged = new EventEmitter<PatternsFilter>()
     @Output() styleSelectedChanged = new EventEmitter<MusicStyle>()
     @Output() bandSelectedChanged = new EventEmitter<Band>()
     @Output() songSelectedChanged = new EventEmitter<Song>()
@@ -56,6 +57,10 @@ export class PatternsLibraryComponent {
     bandTerm = new FormControl()
     songTerm = new FormControl()
     patternTerm = new FormControl()
+    patternNumberOfNotes = new FormControl()
+    patternRange = new FormControl()
+    patternStep = new FormControl()
+    patternDurationInTicks = new FormControl()
 
     constructor(private router: Router) {
     }
@@ -64,8 +69,12 @@ export class PatternsLibraryComponent {
         this.subscriptionSearchTerms.push(this.styleTerm.valueChanges.subscribe(value => this.stylesTermChanged.emit(value)))
         this.subscriptionSearchTerms.push(this.bandTerm.valueChanges.subscribe(value => this.bandsTermChanged.emit(value)))
         this.subscriptionSearchTerms.push(this.songTerm.valueChanges.subscribe(value => this.songsTermChanged.emit(value)))
-        this.subscriptionSearchTerms.push(this.patternTerm.valueChanges.subscribe(value => this.songsTermChanged.emit(value)))
 
+        this.subscriptionSearchTerms.push(this.patternNumberOfNotes.valueChanges.subscribe(value => this.patternsFilterChanged.emit({numberOfNotes: value})))
+        this.subscriptionSearchTerms.push(this.patternRange.valueChanges.subscribe(value => this.patternsFilterChanged.emit({range: value})))
+        this.subscriptionSearchTerms.push(this.patternStep.valueChanges.subscribe(value => this.patternsFilterChanged.emit({step: value})))
+        this.subscriptionSearchTerms.push(this.patternDurationInTicks.valueChanges.subscribe(value => this.patternsFilterChanged.emit({durationInTicks: value})))
+        this.subscriptionSearchTerms.push(this.patternTerm.valueChanges.subscribe(value => this.patternsFilterChanged.emit({contains: value})))
     }
 
     public getStylesPage(event?: PageEvent) {
@@ -97,21 +106,8 @@ export class PatternsLibraryComponent {
         this.songSelectedChanged.emit(song)
     }
 
-    selectPattern(pattern: Pattern) {
-        this.patternSelectedChanged.emit(pattern)
-    }
-    newStyleTerm(newTerm: string) {
-        this.stylesTermChanged.emit(newTerm)
-    }
-    newBandTerm(newTerm: string) {
-        this.bandsTermChanged.emit(newTerm)
-    }
-    newSongTerm(newTerm: string) {
-        this.songsTermChanged.emit(newTerm)
-    }
-    newPatternTerm(newTerm: string) {
-        this.patternsTermChanged.emit(newTerm)
-    }
+ 
+
     analyzePatternClicked(pattern: Pattern) {
         this.analyzePattern.emit(pattern)
         this.router.navigate(["song-panel", pattern.id])

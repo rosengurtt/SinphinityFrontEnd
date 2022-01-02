@@ -33,6 +33,7 @@ import { PatternsLibraryPageActions } from './state/actions'
 import { State } from '../../core/state/app.state'
 import { PaginationData } from '../../core/models/pagination-data'
 import { Pattern } from '../../core/models/pattern'
+import { PatternsFilter } from 'src/app/core/models/patterns-filter'
 
 @Component({
     templateUrl: './patterns-library-shell.component.html'
@@ -100,9 +101,9 @@ export class PatternsLibraryShellComponent implements OnInit {
         this.errorPatternsMessage$ = this.patternsLibStore.select(getErrorPatterns)
 
         this.patternsLibStore.dispatch(PatternsLibraryPageActions.stylesPaginationChange({ paginationData: { pageSize: this.stylesPageSize, pageNo: 0 } }))
-        this.patternsLibStore.dispatch(PatternsLibraryPageActions.bandsPaginationChange({  paginationData: { pageSize: this.bandsPageSize, pageNo: 0 } }))
-        this.patternsLibStore.dispatch(PatternsLibraryPageActions.songsPaginationChange({  paginationData: { pageSize: this.songsPageSize, pageNo: 0 } }))
-        this.patternsLibStore.dispatch(PatternsLibraryPageActions.patternsPaginationChange({  paginationData: { pageSize: this.patternsPageSize, pageNo: 0 } }))
+        this.patternsLibStore.dispatch(PatternsLibraryPageActions.bandsPaginationChange({ paginationData: { pageSize: this.bandsPageSize, pageNo: 0 } }))
+        this.patternsLibStore.dispatch(PatternsLibraryPageActions.songsPaginationChange({ paginationData: { pageSize: this.songsPageSize, pageNo: 0 } }))
+        this.patternsLibStore.dispatch(PatternsLibraryPageActions.patternsPaginationChange({ paginationData: { pageSize: this.patternsPageSize, pageNo: 0 } }))
     }
 
 
@@ -128,8 +129,8 @@ export class PatternsLibraryShellComponent implements OnInit {
     songsTermChanged(term: string): void {
         this.patternsLibStore.dispatch(PatternsLibraryPageActions.filterSongTermChange({ songTerm: term }))
     }
-    patternsTermChanged(term: string): void {
-        this.patternsLibStore.dispatch(PatternsLibraryPageActions.filterPatternTermChange({ patternTerm: term }))
+    patternsFilterChanged(filterData: PatternsFilter): void {
+        this.patternsLibStore.dispatch(PatternsLibraryPageActions.filterPatternChange({ patternFilter: filterData }))
     }
 
     styleSelectedChange(style: MusicStyle): void {

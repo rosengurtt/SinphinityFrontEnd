@@ -4,6 +4,7 @@ import { Band } from '../../../../core/models/band'
 import { Song } from '../../../../core/models/song'
 import { PaginationData } from '../../../../core/models/pagination-data'
 import { Pattern } from '../../../../core/models/pattern'
+import { PatternsFilter } from 'src/app/core/models/patterns-filter'
 
 export const filterStyleTermChange = createAction(
   '[Patterns-Library-Page] Filter Style',
@@ -17,9 +18,9 @@ export const filterSongTermChange = createAction(
   '[Patterns-Library-Page] Filter Song',
   props<{ songTerm: string }>()
 )
-export const filterPatternTermChange = createAction(
+export const filterPatternChange = createAction(
   '[Patterns-Library-Page] Filter Pattern',
-  props<{ patternTerm: string }>()
+  props<{ patternFilter: PatternsFilter }>()
 )
 export const stylesPaginationChange = createAction(
   '[Patterns-Library-Page] Page Style',

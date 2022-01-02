@@ -11,6 +11,7 @@ import { GetSongResponse } from './responses-format/get-song-response';
 import { PaginationData } from '../../models/pagination-data';
 import { MusicStyle } from '../../models/music-style';
 import { Band } from '../../models/band';
+import { PatternsFilter } from '../../models/patterns-filter';
 
 @Injectable({
     providedIn: 'root'
@@ -62,15 +63,16 @@ export class SongsRepositoryService {
         return this.http.get<GetSongsResponse>(url)
     }
 
-    getPatterns(styleId: string, bandId: string, songId: string, paginationData: PaginationData, contains: string): Observable<any> {
+    getPatterns(styleId: string, bandId: string, songId: string, paginationData: PaginationData, patternsFilter: PatternsFilter): Observable<any> {
         let url = this.songLibraryUrl + 'patterns'
-        url = this.addParameterToUrl(url, 'contains', contains)
         url = this.addParameterToUrl(url, 'styleId', styleId)
         url = this.addParameterToUrl(url, 'bandId', bandId)
         url = this.addParameterToUrl(url, 'songId', songId)
+        url = this.addPatternFilterParametersToUrl(url, patternsFilter)
         url = this.addPaginationParameters(url, paginationData)
         return this.http.get<GetPatternsResponse>(url);
     }
+
 
     getSongInfoById(id: string): Observable<GetSongResponse> {
         return this.http.get<GetSongResponse>(this.songLibraryUrl + 'song/' + id + '/info');
@@ -83,7 +85,7 @@ export class SongsRepositoryService {
         return this.http.get<GetSongResponse>(url);
     }
 
-    addPaginationParameters(url: string, paginationData?: PaginationData) {
+    addPaginationParameters(url: string, paginationData?: PaginationData): string {
         if (paginationData) {
             url += (url.includes('?')) ? '&pageNo=' + paginationData.pageNo : '?pageNo=' + paginationData.pageNo
             url += '&pageSize=' + paginationData.pageSize
@@ -91,10 +93,19 @@ export class SongsRepositoryService {
         return url
     }
 
-    addParameterToUrl(url: string, paramName: string, paramValue: any) {
-        if (paramValue) {
+    addParameterToUrl(url: string, paramName: string, paramValue: any): string {
+        if (paramValue != null) {
             url += (url.includes('?')) ? `&${paramName}=${paramValue}` : `?${paramName}=${paramValue}`
         }
+        return url
+    }
+    addPatternFilterParametersToUrl(url: string, filter: PatternsFilter): string {
+        url = this.addParameterToUrl(url, 'numberOfNotes', filter?.numberOfNotes)
+        url = this.addParameterToUrl(url, 'range', filter?.range)
+        url = this.addParameterToUrl(url, 'step', filter?.step)
+        url = this.addParameterToUrl(url, 'durationInTicks', filter?.durationInTicks)
+        url = this.addParameterToUrl(url, 'contains', filter?.contains)
+        url = this.addParameterToUrl(url, 'isMonotone', filter?.isMonotone)
         return url
     }
 

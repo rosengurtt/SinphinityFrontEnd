@@ -41,7 +41,7 @@ const initialState: PatternsLibraryState = {
     styleTerm: '',
     bandTerm: '',
     songTerm: '',
-    patternTerm: '',
+    patternsFilter: {},
     styleSelected: null,
     bandSelected: null,
     songSelected: null,
@@ -94,9 +94,21 @@ export const patternsLibraryReducer = createReducer<PatternsLibraryState>(
         return newState
     }),
 
-    on(PatternsLibraryPageActions.filterPatternTermChange, (state, action): PatternsLibraryState => {
+    on(PatternsLibraryPageActions.filterPatternChange, (state, action): PatternsLibraryState => {
         let newState = cloneDeep(state)
-        newState.patternTerm = action.patternTerm
+        if (action.patternFilter.contains != null)
+            newState.patternsFilter.contains = action.patternFilter.contains
+        if (action.patternFilter.durationInTicks != null)
+            newState.patternsFilter.durationInTicks = action.patternFilter.durationInTicks
+        if (action.patternFilter.isMonotone != null)
+            newState.patternsFilter.isMonotone = action.patternFilter.isMonotone
+        if (action.patternFilter.numberOfNotes != null)
+            newState.patternsFilter.numberOfNotes = action.patternFilter.numberOfNotes
+        if (action.patternFilter.range != null)
+            newState.patternsFilter.range = action.patternFilter.range
+        if (action.patternFilter.step != null)
+            newState.patternsFilter.step = action.patternFilter.step
+
         return newState
     }),
 

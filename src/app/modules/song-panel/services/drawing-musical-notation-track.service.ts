@@ -70,7 +70,6 @@ export class DrawingMusicalNotationTrackService {
         // normalize start time of notes
         //this.songNotes = aux.map(n => Normalization.normalizeNoteStart(this.bars, n))
 
-        console.log(`voice ${voice}`)
         this.voiceNotes = this.simplification.getNotesOfVoice(voice)
 
         if (this.isVoicePolyphonic(this.voiceNotes)) {

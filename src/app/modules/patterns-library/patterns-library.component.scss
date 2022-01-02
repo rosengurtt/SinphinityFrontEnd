@@ -5,17 +5,21 @@
     width: 100%;
   }
 .container{
-  display:grid;
-  width:100%;
+  display: grid;
+  width: 95%;
   height: 100%;
-  grid-template-columns: 200px 250px 400px auto;
-  align-items:  start;
-
+  grid-template-columns: 170px 200px 400px auto;
+  align-items: start;
+  padding: 20px;
 }
 .selected{
   color: $accent;
   background-color: white;
   font-weight: bold;
+}
+.pageTitle{
+  padding:20px;
+  font-weight: 500;
 }
 table {
   width: 100%;
@@ -47,4 +51,9 @@ tr:nth-child(even) {background: #666}
 tr:nth-child(odd) {background: #444}
 td {
   padding: 6px;
+}
+.patternFilter{
+  display: grid;
+  grid-template-columns: 150px 110px 90px 90px 110px;
+  column-gap: 8px
 }

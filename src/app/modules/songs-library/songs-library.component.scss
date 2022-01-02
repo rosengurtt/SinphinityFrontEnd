@@ -10,7 +10,11 @@
   height: 100%;
   grid-template-columns: 200px 250px 400px auto;
   align-items:  start;
-
+  padding:20px;
+}
+.pageTitle{
+  padding:20px;
+  font-weight: 500;
 }
 .selected{
   color: $accent;

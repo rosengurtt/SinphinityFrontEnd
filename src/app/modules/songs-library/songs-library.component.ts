@@ -82,15 +82,7 @@ export class SongsLibraryComponent {
         this.songSelectedChanged.emit(song)
     }
 
-    newStyleTerm(newTerm: string) {
-        this.stylesTermChanged.emit(newTerm)
-    }
-    newBandTerm(newTerm: string) {
-        this.bandsTermChanged.emit(newTerm)
-    }
-    newSongTerm(newTerm: string) {
-        this.songsTermChanged.emit(newTerm)
-    }
+ 
     analyzeSongClicked(song: Song) {
         this.analyzeSong.emit(song)
         this.router.navigate(["song-panel", song.id])

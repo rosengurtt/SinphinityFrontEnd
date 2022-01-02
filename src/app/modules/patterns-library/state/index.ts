@@ -7,6 +7,7 @@ import { BandsPaginated } from '../../../core/services/songs-repository/response
 import { SongsPaginated } from '../../../core/services/songs-repository/responses-format/songs-paginated'
 import { PatternsPaginated } from '../../../core/services/songs-repository/responses-format/patterns-paginated'
 import { Pattern } from '../../../core/models/pattern'
+import { PatternsFilter } from '../../../core/models/patterns-filter'
 
 export interface PatternsLibraryState {
     musicStylesPaginated: MusicStylesPaginated
@@ -16,7 +17,7 @@ export interface PatternsLibraryState {
     styleTerm: string
     bandTerm: string
     songTerm: string
-    patternTerm: string
+    patternsFilter: PatternsFilter
     stylesNewPage: number | null
     bandsNewPage: number | null
     songsNewPage: number | null
@@ -34,6 +35,7 @@ export interface PatternsLibraryState {
 export const patternsLibraryFeatureKey = 'patterns-library'
 
 const getPatternsLibraryFeatureState = createFeatureSelector<PatternsLibraryState>(patternsLibraryFeatureKey);
+
 
 export const getSongsLibraryState = createSelector(
     getPatternsLibraryFeatureState,
@@ -132,6 +134,7 @@ export const getErrorBands = createSelector(
     getPatternsLibraryFeatureState,
     state => state.errorBands
 )
+
 export const getErrorSongs = createSelector(
     getPatternsLibraryFeatureState,
     state => state.errorSongs
@@ -139,4 +142,9 @@ export const getErrorSongs = createSelector(
 export const getErrorPatterns = createSelector(
     getPatternsLibraryFeatureState,
     state => state.errorPatterns
+)
+
+export const getPatternsFilter = createSelector(
+    getPatternsLibraryFeatureState,
+    state => state.patternsFilter
 )

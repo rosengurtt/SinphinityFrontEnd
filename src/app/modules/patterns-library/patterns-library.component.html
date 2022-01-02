@@ -1,3 +1,4 @@
+<h1 class="pageTitle">Patterns Library</h1>
 <div class="container">
 	<div class="styles">
 		<h2>Music Styles</h2>
@@ -69,14 +70,33 @@
 			</div>
 		</div>
 	</div>
-	<div class="patterns">
+	<div>
 		<div class="panel panel-info">
 			<h2>Patterns</h2>
-			<mat-form-field>
+			<div class="patternFilter">				
+			<mat-form-field class="patternFilterBox">
 				<mat-icon matPrefix>search</mat-icon>
-				<input class="searchBox" matInput type="search" placeholder="Enter Search keyword"
+				<input class="searchBox" matInput type="search" placeholder="Search"
 				[formControl]="patternTerm"   />
 			</mat-form-field>
+							
+			<mat-form-field class="patternFilterBox">
+				<input class="searchBox" matInput type="search" placeholder="Number of notes"
+				[formControl]="patternNumberOfNotes"   />
+			</mat-form-field>
+			<mat-form-field class="patternFilterBox">
+				<input class="searchBox" matInput type="search" placeholder="Range"
+				[formControl]="patternRange"   />
+			</mat-form-field>
+			<mat-form-field class="patternFilterBox">
+				<input class="searchBox" matInput type="search" placeholder="Step"
+				[formControl]="patternStep"   />
+			</mat-form-field>
+			<mat-form-field class="patternFilterBox">
+				<input class="searchBox" matInput type="search" placeholder="Duration in ticks"
+				[formControl]="patternDurationInTicks"   />
+			</mat-form-field>
+			</div>
 			<div class="mat-elevation-z8">
 				<table mat-table [dataSource]="patternsDataSource" class="mat-elevation-z8" matSort>
 					<ng-container matColumnDef="name">
