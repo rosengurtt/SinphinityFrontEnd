@@ -1,6 +1,6 @@
 import { Coordenadas } from './coordenadas'
 import { Song } from './song'
-import { SongViewType } from './SongViewTypes.enum'
+import { SongViewType } from './enums/SongViewTypes.enum'
 
 export class SongUnderAnalysis {
     song: Song

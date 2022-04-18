@@ -46,6 +46,7 @@ const initialState: PatternsLibraryState = {
     bandSelected: null,
     songSelected: null,
     patternSelected: null,
+    phraseTypeSelected: null,
     errorStyles: '',
     errorBands: '',
     errorSongs: '',

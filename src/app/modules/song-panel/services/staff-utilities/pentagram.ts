@@ -4,8 +4,8 @@ import { Bar } from 'src/app/core/models/bar'
 import { Notes } from './notes'
 import { KeySignature } from 'src/app/core/models/key-signature'
 import { SoundEvent } from 'src/app/core/models/sound-event'
-import { SoundEventType } from 'src/app/core/models/sound-event-type.enum'
-import { Alteration } from 'src/app/core/models/alteration.enum'
+import { SoundEventType } from 'src/app/core/models/enums/sound-event-type.enum'
+import { Alteration } from 'src/app/core/models/enums/alteration.enum'
 
 export abstract class Pentagram {
     private static G6 = 91

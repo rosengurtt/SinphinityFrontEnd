@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store'
 import { Coordenadas } from 'src/app/core/models/coordenadas'
 import { PlayingSong } from 'src/app/core/models/playing-song'
-import { SongViewType } from 'src/app/core/models/SongViewTypes.enum'
+import { SongViewType } from 'src/app/core/models/enums/SongViewTypes.enum'
 import { Song } from '../../../../core/models/song'
 
 export const addSong = createAction(

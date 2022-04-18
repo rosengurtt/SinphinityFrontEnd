@@ -1,5 +1,5 @@
-import {KeySignatureEnum} from './key-signature.enum'
-import{ScaleType} from './scale-type.enum'
+import {KeySignatureEnum} from './enums/key-signature.enum'
+import{ScaleType} from './enums/scale-type.enum'
 
 export class KeySignature{
     key: KeySignatureEnum

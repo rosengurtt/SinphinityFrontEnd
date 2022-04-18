@@ -1,4 +1,4 @@
-<h1 class="pageTitle">Patterns Library</h1>
+<h1 class="pageTitle">Phrases Library</h1>
 <div class="container">
 	<div class="styles">
 		<h2>Music Styles</h2>
@@ -73,13 +73,19 @@
 	<div>
 		<div class="panel panel-info">
 			<h2>Patterns</h2>
-			<div class="patternFilter">				
-			<mat-form-field class="patternFilterBox">
-				<mat-icon matPrefix>search</mat-icon>
-				<input class="searchBox" matInput type="search" placeholder="Search"
-				[formControl]="patternTerm"   />
-			</mat-form-field>
-							
+			<div class="patternFilter">	
+			<mat-form-field appearance="fill">
+				<mat-label>Phrase Type</mat-label>
+				<mat-select matNativeControl required  value="1">
+				  <mat-option value="1">Metrics</mat-option>
+				  <mat-option value="1">Pitches</mat-option>
+				  <mat-option value="2">Metrics and Pitches</mat-option>
+				  <mat-option value="3">Embellished Metrics</mat-option>
+				  <mat-option value="4">Embellished Pitches</mat-option>
+				  <mat-option value="4">Embellished Metrics and Pitches</mat-option>
+				</mat-select>
+			  </mat-form-field>	
+
 			<mat-form-field class="patternFilterBox">
 				<input class="searchBox" matInput type="search" placeholder="Number of notes"
 				[formControl]="patternNumberOfNotes"   />
@@ -95,6 +101,11 @@
 			<mat-form-field class="patternFilterBox">
 				<input class="searchBox" matInput type="search" placeholder="Duration in ticks"
 				[formControl]="patternDurationInTicks"   />
+			</mat-form-field>			
+			<mat-form-field class="patternFilterBox">
+				<mat-icon matPrefix>search</mat-icon>
+				<input class="searchBox" matInput type="search" placeholder="Search"
+				[formControl]="patternTerm"   />
 			</mat-form-field>
 			</div>
 			<div class="mat-elevation-z8">

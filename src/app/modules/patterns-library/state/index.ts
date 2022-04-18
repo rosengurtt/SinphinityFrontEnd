@@ -8,6 +8,7 @@ import { SongsPaginated } from '../../../core/services/songs-repository/response
 import { PatternsPaginated } from '../../../core/services/songs-repository/responses-format/patterns-paginated'
 import { Pattern } from '../../../core/models/pattern'
 import { PatternsFilter } from '../../../core/models/patterns-filter'
+import { PhraseTypeEnum } from '../../../core/models/enums/phrase-type.enum'
 
 export interface PatternsLibraryState {
     musicStylesPaginated: MusicStylesPaginated
@@ -26,6 +27,7 @@ export interface PatternsLibraryState {
     bandSelected: Band
     songSelected: Song  
     patternSelected: Pattern   
+    phraseTypeSelected: PhraseTypeEnum
     errorStyles: string
     errorBands: string
     errorSongs: string
@@ -41,6 +43,7 @@ export const getSongsLibraryState = createSelector(
     getPatternsLibraryFeatureState,
     state => state
 )
+
 export const getStyles = createSelector(
     getPatternsLibraryFeatureState,
     state => state.musicStylesPaginated.items
@@ -147,4 +150,9 @@ export const getErrorPatterns = createSelector(
 export const getPatternsFilter = createSelector(
     getPatternsLibraryFeatureState,
     state => state.patternsFilter
+)
+
+export const getPhraseTypeSelected = createSelector(
+    getPatternsLibraryFeatureState,
+    state => state.phraseTypeSelected
 )

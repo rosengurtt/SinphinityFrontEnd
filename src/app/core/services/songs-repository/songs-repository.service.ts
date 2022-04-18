@@ -64,7 +64,7 @@ export class SongsRepositoryService {
     }
 
     getPatterns(styleId: string, bandId: string, songId: string, paginationData: PaginationData, patternsFilter: PatternsFilter): Observable<any> {
-        let url = this.songLibraryUrl + 'patterns'
+        let url = this.songLibraryUrl + 'phrases'
         url = this.addParameterToUrl(url, 'styleId', styleId)
         url = this.addParameterToUrl(url, 'bandId', bandId)
         url = this.addParameterToUrl(url, 'songId', songId)

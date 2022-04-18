@@ -1,7 +1,7 @@
 import { Song } from '../../../../core/models/song'
 import { NoteDuration } from '../../../../core/models/note-duration'
 import { SoundEvent } from '../../../../core/models/sound-event'
-import { SoundEventType } from '../../../../core/models/sound-event-type.enum'
+import { SoundEventType } from '../../../../core/models/enums/sound-event-type.enum'
 import { BeatGraphNeeds } from '../../../../core/models//beat-graph-needs'
 import { Note } from '../../../../core/models/note'
 import { SongSimplification } from '../../../../core/models/song-simplification'

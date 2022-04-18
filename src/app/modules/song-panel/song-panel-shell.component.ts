@@ -8,7 +8,7 @@ import { Observable, Subscription, timer } from 'rxjs'
 import { SongPanelPageActions } from './state/actions'
 import { Coordenadas } from 'src/app/core/models/coordenadas'
 import { PlayingSong } from 'src/app/core/models/playing-song'
-import { SongViewType } from 'src/app/core/models/SongViewTypes.enum'
+import { SongViewType } from 'src/app/core/models/enums/SongViewTypes.enum'
 
 @Component({
     templateUrl: './song-panel-shell.component.html'

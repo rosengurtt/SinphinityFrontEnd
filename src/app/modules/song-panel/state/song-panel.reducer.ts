@@ -4,7 +4,7 @@ import { SongPanelState } from './index'
 import { cloneDeep } from 'lodash-es'
 import { StringifiedMap } from 'src/app/core/utilities/stringified-map'
 import { Coordenadas } from 'src/app/core/models/coordenadas'
-import { SongViewType } from 'src/app/core/models/SongViewTypes.enum'
+import { SongViewType } from 'src/app/core/models/enums/SongViewTypes.enum'
 import { SongUnderAnalysis } from 'src/app/core/models/song-under-analysis'
 
 

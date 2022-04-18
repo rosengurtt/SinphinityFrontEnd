@@ -1,6 +1,6 @@
 import { NoteDuration } from './note-duration'
-import { SoundEventType } from './sound-event-type.enum'
-import { Alteration } from './alteration.enum'
+import { SoundEventType } from './enums/sound-event-type.enum'
+import { Alteration } from './enums/alteration.enum'
 
 // When analyzing the rythm of a voice in a song, we are interested in the sequence of notes and silences
 // A sound event can be a note or a silence. We are interested in when it starts and when it ends and if

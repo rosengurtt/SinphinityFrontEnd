@@ -1,8 +1,8 @@
 import { Bar } from "src/app/core/models/bar";
-import { Alteration } from 'src/app/core/models/alteration.enum'
+import { Alteration } from 'src/app/core/models/enums/alteration.enum'
 import { keys } from "lodash-es";
 import { SoundEvent } from "src/app/core/models/sound-event";
-import { SoundEventType } from "src/app/core/models/sound-event-type.enum";
+import { SoundEventType } from "src/app/core/models/enums/sound-event-type.enum";
 
 export abstract class GenericStaffDrawingUtilities {
     // Returns the bar number (first bar=1) in which a tick is located

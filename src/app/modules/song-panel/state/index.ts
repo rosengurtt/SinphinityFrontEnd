@@ -4,7 +4,7 @@ import { Song } from 'src/app/core/models/song'
 import { SongUnderAnalysis } from 'src/app/core/models/song-under-analysis'
 import { StringifiedMap } from 'src/app/core/utilities/stringified-map'
 import { PlayingSong } from 'src/app/core/models/playing-song'
-import { SongViewType } from 'src/app/core/models/SongViewTypes.enum'
+import { SongViewType } from 'src/app/core/models/enums/SongViewTypes.enum'
 
 // State for this feature (Product)
 export interface SongPanelState {
