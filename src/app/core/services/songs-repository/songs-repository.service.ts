@@ -100,7 +100,6 @@ export class SongsRepositoryService {
         return url
     }
     addPatternFilterParametersToUrl(url: string, filter: PhrasesFilter): string {
-        console.log(filter)
         url = this.addParameterToUrl(url, 'numberOfNotes', filter?.numberOfNotes)
         url = this.addParameterToUrl(url, 'range', filter?.range)
         url = this.addParameterToUrl(url, 'step', filter?.step)

@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store'
-import { Phrase } from '../../../../core/models/pattern'
+import { Phrase } from '../../../../core/models/phrase'
 import { BandsPaginated } from '../../../../core/services/songs-repository/responses-format/bands-paginated'
 import { MusicStylesPaginated } from '../../../../core/services/songs-repository/responses-format/music-styles-paginated'
 import { PhrasesPaginated } from '../../../../core/services/songs-repository/responses-format/phrases-paginated'

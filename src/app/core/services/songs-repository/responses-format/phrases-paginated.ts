@@ -1,4 +1,4 @@
-import { Phrase } from '../../../models/pattern'
+import { Phrase } from '../../../models/phrase'
 
 export class PhrasesPaginated {
     pageNo: number

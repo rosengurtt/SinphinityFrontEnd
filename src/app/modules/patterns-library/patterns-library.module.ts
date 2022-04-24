@@ -6,6 +6,7 @@ import { StoreModule } from '@ngrx/store'
 import { EffectsModule } from '@ngrx/effects'
 import { SongsRepositoryService } from '../../core/services/songs-repository/songs-repository.service'
 import { MaterialModule } from '../../core/material.module'
+import { PipesModule } from '../../core/pipes/pipes-module'
 import { PatternsLibraryShellComponent } from './patterns-library-shell.component'
 import { PatternsLibraryComponent } from './patterns-library.component'
 import { patternsLibraryFeatureKey } from './state'
@@ -22,6 +23,7 @@ import { PatternSearchService } from './services/pattern-search.service'
     BrowserModule,
     MaterialModule,
     ReactiveFormsModule,
+    PipesModule,
     RouterModule.forChild([
       { path: 'patterns-library', component: PatternsLibraryShellComponent },
     ]),

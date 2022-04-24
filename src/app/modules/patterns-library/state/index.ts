@@ -6,7 +6,7 @@ import { MusicStylesPaginated } from '../../../core/services/songs-repository/re
 import { BandsPaginated } from '../../../core/services/songs-repository/responses-format/bands-paginated'
 import { SongsPaginated } from '../../../core/services/songs-repository/responses-format/songs-paginated'
 import { PhrasesPaginated } from '../../../core/services/songs-repository/responses-format/phrases-paginated'
-import { Phrase } from '../../../core/models/pattern'
+import { Phrase } from '../../../core/models/phrase'
 import { PhrasesFilter } from '../../../core/models/phrases-filter'
 import { PhraseTypeEnum } from '../../../core/models/enums/phrase-type.enum'
 
@@ -14,7 +14,7 @@ export interface PatternsLibraryState {
     musicStylesPaginated: MusicStylesPaginated
     bandsPaginated: BandsPaginated
     songsPaginated: SongsPaginated   
-    patternsPaginated: PhrasesPaginated  
+    phrasesPaginated: PhrasesPaginated  
     styleTerm: string
     bandTerm: string
     songTerm: string
@@ -57,7 +57,7 @@ export const getSongs = createSelector(
 )
 export const getPatterns = createSelector(
     getPatternsLibraryFeatureState,
-    state => state.patternsPaginated.items
+    state => state.phrasesPaginated.items
 )
 
 export const getStylesCurrentPage = createSelector(
@@ -74,7 +74,7 @@ export const getSongsCurrentPage = createSelector(
 )
 export const getPatternsCurrentPage = createSelector(
     getPatternsLibraryFeatureState,
-    state => state.patternsPaginated.pageNo
+    state => state.phrasesPaginated.pageNo
 )
 
 export const getStylesNewPage = createSelector(
@@ -108,7 +108,7 @@ export const getTotalSongs = createSelector(
 )
 export const getTotalPatterns = createSelector(
     getPatternsLibraryFeatureState,
-    state => state.patternsPaginated.totalItems
+    state => state.phrasesPaginated.totalItems
 )
 
 export const getStyleSelected = createSelector(
@@ -123,7 +123,7 @@ export const getSongSelected = createSelector(
     getPatternsLibraryFeatureState,
     state => state.songSelected
 )
-export const getPatternSelected = createSelector(
+export const getPhraseSelected = createSelector(
     getPatternsLibraryFeatureState,
     state => state.phraseSelected
 )

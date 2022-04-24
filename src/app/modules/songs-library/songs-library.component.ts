@@ -81,7 +81,6 @@ export class SongsLibraryComponent {
     selectSong(song: Song) {
         this.songSelectedChanged.emit(song)
     }
-
  
     analyzeSongClicked(song: Song) {
         this.analyzeSong.emit(song)

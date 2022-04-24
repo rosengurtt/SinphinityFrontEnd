@@ -44,8 +44,8 @@ input{
 
 
 .selectedPatternBox{
-  padding: 20px;
-  width: 80%;
+  padding: 5px;
+  width: 250px;
 }
 tr:nth-child(even) {background: #666}
 tr:nth-child(odd) {background: #444}
@@ -55,5 +55,10 @@ td {
 .patternFilter{
   display: grid;
   grid-template-columns: 150px 100px 100px 100px 100px 100px;
-  column-gap: 8px
+  column-gap: 8px;
+  height:62px
+}
+.phraseSection{
+  display: grid;
+  grid-template-columns: 300px 300px  
 }

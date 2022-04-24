@@ -73,7 +73,7 @@
 	</div>
 	<div>
 		<div>
-			<h2>Patterns</h2>
+			<h2>Phrases</h2>
 			<div class="patternFilter">	
 				<mat-form-field appearance="fill" >
 					<mat-label>Phrase Type</mat-label>
@@ -109,60 +109,64 @@
 					[formControl]="patternTerm"   />
 				</mat-form-field>
 			</div>
-			<div class="mat-elevation-z8" >
+			<div  class="phraseSection">
+			<div class="mat-elevation-z8">
 				<table mat-table [dataSource]="patternsDataSource" class="mat-elevation-z8" matSort>
 					<ng-container matColumnDef="name">
 						<th mat-header-cell *matHeaderCellDef mat-sort-header>Pattern</th>
-						<td mat-cell *matCellDef="let pattern" [class.selected]="patternSelected && song.id==patternSelected.id"><span
-								(click)="selectPattern(song)">{{pattern.asString}}</span>
+						<td mat-cell *matCellDef="let pattern" [class.selected]="patternSelected && song.id==phraseSelected.id"><span
+								(click)="selectPhrase(pattern)">{{pattern.asString | cellWidthLimit: 30}}</span>
 						</td>
 					</ng-container>
 					<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 				</table>
 				<mat-paginator #patternsPaginator [length]="totalPatterns"
 					[pageIndex]="patternsPageNo" [pageSize]="patternsPageSize"
-					[hidePageSize]="true" (page)="getPatternsPage($event)" showFirstLastButtons></mat-paginator>
+					[hidePageSize]="true" (page)="getPatternsPage($event)" showFirstLastButtons>
+				</mat-paginator>
+			</div>
+			<div class="selectedPatternBox" *ngIf="phraseSelected" >
+				<div class="patternStatsTitle" *ngIf="phraseSelected">
+					<h2>Pattern info</h2>
+					<div><button mat-raised-button color="primary" (click)="playPhrase(phraseSelected)">Play</button></div>
+				</div>
+				<div class="patternStatsTable">
+					<table class="patternStatsTable">				
+						<colgroup>
+							<col style="width:50%">
+							<col style="width:50%">
+						</colgroup> 
+						<tr>
+							<td>As string</td>
+							<td>{{phraseSelected.asString | cellWidthLimit: 30}}</td>
+						</tr>
+						<tr>
+							<td>Duration in ticks</td>
+							<td>{{phraseSelected.durationInTicks | number}}</td>
+						</tr>
+						<tr>
+							<td>Number of notes</td>
+							<td>{{phraseSelected.numberOfNotes | number}}</td>
+						</tr>
+						<tr>
+							<td>Range</td>
+							<td>{{phraseSelected.range | number}}</td>
+						</tr>
+						<tr>
+							<td>Is Monotone</td>
+							<td>{{phraseSelected.isMonotone}}</td>
+						</tr>
+						<tr>
+							<td>Step</td>
+							<td>{{phraseSelected.step}}</td>
+						</tr>				
+					</table>
+				</div>
+			</div>
 			</div>
 		</div>
 	</div>
 
-	<div class="selectedPatternBox" *ngIf="patternSelected">
-		<div class="patternStatsTitle" *ngIf="songSelected">
-			<h2>Pattern info</h2>
-			<div><button mat-raised-button color="primary" (click)="analyzePatternClicked(patternSelected)">Analyze</button></div>
-		</div>
-		<div class="patternStatsTable">
-			<table class="patternStatsTable">				
-				<colgroup>
-					<col style="width:50%">
-					<col style="width:50%">
-				</colgroup> 
-				<tr>
-					<td>As string</td>
-					<td>{{patternSelected.asString}}</td>
-				</tr>
-				<tr>
-					<td>Duration in ticks</td>
-					<td>{{patternSelected.durationInTicks | number}}</td>
-				</tr>
-				<tr>
-					<td>Number of notes</td>
-					<td>{{patternSelected.numberOfNotes | number}}</td>
-				</tr>
-				<tr>
-					<td>Range</td>
-					<td>{{patternSelected.range | number}}</td>
-				</tr>
-				<tr>
-					<td>Is Monotone</td>
-					<td>{{patternSelected.isMonotone}}</td>
-				</tr>
-				<tr>
-					<td>Step</td>
-					<td>{{patternSelected.step}}</td>
-				</tr>				
-			</table>
-		</div>
-	</div>
+
 </div>
 </div>

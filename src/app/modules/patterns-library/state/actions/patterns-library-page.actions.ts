@@ -3,9 +3,8 @@ import { MusicStyle } from '../../../../core/models/music-style'
 import { Band } from '../../../../core/models/band'
 import { Song } from '../../../../core/models/song'
 import { PaginationData } from '../../../../core/models/pagination-data'
-import { Phrase } from '../../../../core/models/pattern'
+import { Phrase } from '../../../../core/models/phrase'
 import { PhrasesFilter } from 'src/app/core/models/phrases-filter'
-import { PhraseTypeEnum } from 'src/app/core/models/enums/phrase-type.enum'
 
 export const filterStyleTermChange = createAction(
   '[Patterns-Library-Page] Filter Style',

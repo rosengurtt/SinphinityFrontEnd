@@ -23,7 +23,7 @@
     [styleSelected] = "styleSelected$ | async"
     [bandSelected] = "bandSelected$ | async"
     [songSelected] = "songSelected$ | async"
-    [patternSelected] = "patternSelected$ | async"
+    [phraseSelected] = "phraseSelected$ | async"
 
     (stylesPageChanged) = "stylesPageChanged($any($event))"
     (bandsPageChanged) = "bandsPageChanged($any($event))"
@@ -38,7 +38,7 @@
     (styleSelectedChanged) ="styleSelectedChange($any($event))"
     (bandSelectedChanged) ="bandSelectedChange($any($event))"
     (songSelectedChanged) ="songSelectedChange($any($event))"
-    (patternSelectedChanged) ="songSelectedChange($any($event))"
+    (phraseSelectedChanged) ="phraseSelectedChange($any($event))"
 
     (analyzePattern) = "analyzePattern($any($event))"
 >

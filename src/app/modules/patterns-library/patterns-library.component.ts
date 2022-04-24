@@ -8,8 +8,9 @@ import { Band } from "../../core/models/band"
 import { MusicStyle } from "../../core/models/music-style"
 import { Song } from "../../core/models/song"
 import { PaginationData } from '../../core/models/pagination-data'
-import { Phrase } from "../../core/models/pattern"
+import { Phrase } from "../../core/models/phrase"
 import { PhrasesFilter } from "src/app/core/models/phrases-filter"
+declare var MIDIjs: any
 
 @Component({
     selector: 'dc-patterns-library',
@@ -25,7 +26,7 @@ export class PatternsLibraryComponent {
     @Input() styleSelected: MusicStyle
     @Input() bandSelected: Band
     @Input() songSelected: Song
-    @Input() patternSelected: Phrase
+    @Input() phraseSelected: Phrase
     @Input() stylesPageNo: number
     @Input() bandsPageNo: number
     @Input() songsPageNo: number
@@ -49,7 +50,7 @@ export class PatternsLibraryComponent {
     @Output() styleSelectedChanged = new EventEmitter<MusicStyle>()
     @Output() bandSelectedChanged = new EventEmitter<Band>()
     @Output() songSelectedChanged = new EventEmitter<Song>()
-    @Output() patternSelectedChanged = new EventEmitter<Phrase>()
+    @Output() phraseSelectedChanged = new EventEmitter<Phrase>()
     @Output() analyzePattern = new EventEmitter<Phrase>()
     displayedColumns: string[] = ['name']
     subscriptionSearchTerms: Subscription[] = []
@@ -62,7 +63,6 @@ export class PatternsLibraryComponent {
     patternStep = new FormControl()
     patternDurationInTicks = new FormControl()
     phraseType = new FormControl()
-    sacamelaSoreton = new FormControl()
 
     constructor(private router: Router) {
     }
@@ -72,12 +72,12 @@ export class PatternsLibraryComponent {
         this.subscriptionSearchTerms.push(this.bandTerm.valueChanges.subscribe(value => this.bandsTermChanged.emit(value)))
         this.subscriptionSearchTerms.push(this.songTerm.valueChanges.subscribe(value => this.songsTermChanged.emit(value)))
 
-        this.subscriptionSearchTerms.push(this.patternNumberOfNotes.valueChanges.subscribe(value => this.phrasesFilterChanged.emit({numberOfNotes: value, alca: "numberOfNotes"})))
-        this.subscriptionSearchTerms.push(this.patternRange.valueChanges.subscribe(value => this.phrasesFilterChanged.emit({range: value, alca: "range"})))
-        this.subscriptionSearchTerms.push(this.patternStep.valueChanges.subscribe(value => this.phrasesFilterChanged.emit({step: value, alca: "step"})))
-        this.subscriptionSearchTerms.push(this.patternDurationInTicks.valueChanges.subscribe(value => this.phrasesFilterChanged.emit({durationInTicks: value, alca: "duration"})))
-        this.subscriptionSearchTerms.push(this.patternTerm.valueChanges.subscribe(value => this.phrasesFilterChanged.emit({contains: value, alca: "term"})))
-        this.subscriptionSearchTerms.push(this.phraseType.valueChanges.subscribe(value => this.phrasesFilterChanged.emit({phraseType: value, alca: "type"})))
+        this.subscriptionSearchTerms.push(this.patternNumberOfNotes.valueChanges.subscribe(value => this.phrasesFilterChanged.emit({ numberOfNotes: value, alca: "numberOfNotes" })))
+        this.subscriptionSearchTerms.push(this.patternRange.valueChanges.subscribe(value => this.phrasesFilterChanged.emit({ range: value, alca: "range" })))
+        this.subscriptionSearchTerms.push(this.patternStep.valueChanges.subscribe(value => this.phrasesFilterChanged.emit({ step: value, alca: "step" })))
+        this.subscriptionSearchTerms.push(this.patternDurationInTicks.valueChanges.subscribe(value => this.phrasesFilterChanged.emit({ durationInTicks: value, alca: "duration" })))
+        this.subscriptionSearchTerms.push(this.patternTerm.valueChanges.subscribe(value => this.phrasesFilterChanged.emit({ contains: value, alca: "term" })))
+        this.subscriptionSearchTerms.push(this.phraseType.valueChanges.subscribe(value => this.phrasesFilterChanged.emit({ phraseType: value, alca: "type" })))
 
     }
 
@@ -109,8 +109,15 @@ export class PatternsLibraryComponent {
     selectSong(song: Song) {
         this.songSelectedChanged.emit(song)
     }
+    selectPhrase(phrase: Phrase) {
+        this.phraseSelectedChanged.emit(phrase)
+    }
+    playPhrase(phrase: Phrase) {
+        console.log(phrase)
+        const midiUrl = `https://localhost:8003/api/phrases/midi?asString=${phrase.asString}&phraseType=${phrase.phraseType}`
+        MIDIjs.play(midiUrl)
+    }
 
- 
 
     analyzePatternClicked(pattern: Phrase) {
         this.analyzePattern.emit(pattern)

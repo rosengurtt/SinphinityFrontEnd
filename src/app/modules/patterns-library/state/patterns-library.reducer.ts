@@ -27,7 +27,7 @@ const initialState: PatternsLibraryState = {
         totalPages: 0,
         items: []
     },
-    patternsPaginated: {
+    phrasesPaginated: {
         pageNo: 0,
         pageSize: 10,
         totalItems: 0,
@@ -130,6 +130,12 @@ export const patternsLibraryReducer = createReducer<PatternsLibraryState>(
         newState.songSelected = action.selectedSong
         return newState
     }),
+    on(PatternsLibraryPageActions.phraseSelectedChange, (state, action): PatternsLibraryState => {
+        let newState = cloneDeep(state)
+        newState.phraseSelected = action.selectedPhrase
+        return newState
+    }),
+    
     on(
         PatternsLibraryApiActions.stylesPaginationChangeSuccess,
         PatternsLibraryApiActions.filterStyleTermChangeSuccess,
@@ -170,7 +176,7 @@ export const patternsLibraryReducer = createReducer<PatternsLibraryState>(
         PatternsLibraryApiActions.filterPatternTermChangeSuccess,
         (state, action): PatternsLibraryState => {
             let newState = cloneDeep(state)
-            newState.patternsPaginated = action.patternsPaginated
+            newState.phrasesPaginated = action.patternsPaginated
             newState.errorPatterns = null
             return newState
         }),
@@ -235,7 +241,7 @@ export const patternsLibraryReducer = createReducer<PatternsLibraryState>(
         (state, action): PatternsLibraryState => {
             let newState = cloneDeep(state)
             newState.phraseSelected = null
-            newState.patternsPaginated = {
+            newState.phrasesPaginated = {
                 pageNo: 0,
                 pageSize: 10,
                 totalItems: 0,
@@ -252,7 +258,7 @@ export const patternsLibraryReducer = createReducer<PatternsLibraryState>(
         let newState = cloneDeep(state)
         newState.bandsPaginated = action.bandsPaginated
         newState.songsPaginated = action.songsPaginated
-        newState.patternsPaginated = action.patternsPaginated
+        newState.phrasesPaginated = action.patternsPaginated
         newState.bandSelected = null
         newState.songSelected = null
         return newState
@@ -282,7 +288,7 @@ export const patternsLibraryReducer = createReducer<PatternsLibraryState>(
     on(PatternsLibraryApiActions.bandSelectedSuccess, (state, action): PatternsLibraryState => {
         let newState = cloneDeep(state)
         newState.songsPaginated = action.songsPaginated
-        newState.patternsPaginated = action.patternsPaginated
+        newState.phrasesPaginated = action.patternsPaginated
         newState.songSelected = null
         return newState
     }),
@@ -302,7 +308,7 @@ export const patternsLibraryReducer = createReducer<PatternsLibraryState>(
 
     on(PatternsLibraryApiActions.songSelectedSuccess, (state, action): PatternsLibraryState => {
         let newState = cloneDeep(state)
-        newState.patternsPaginated = action.patternsPaginated
+        newState.phrasesPaginated = action.patternsPaginated
         return newState
     }),
     on(PatternsLibraryApiActions.songSelectedFailure, (state, action): PatternsLibraryState => {
