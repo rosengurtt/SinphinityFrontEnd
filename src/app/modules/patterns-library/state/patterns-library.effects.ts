@@ -63,7 +63,7 @@ export class PatternsLibraryEffects {
         ofType(PatternsLibraryPageActions.patternsPaginationChange),
         withLatestFrom(this.store$.select(getPatternsLibraryState)),
         mergeMap(([action, state]) =>
-          this.songsRepositoryService.getPatterns(state.styleSelected?.id, state.bandSelected?.id, state.songSelected?.id, { pageNo: action.paginationData.pageNo, pageSize: action.paginationData.pageSize }, state.patternsFilter)
+          this.songsRepositoryService.getPhrases(state.styleSelected?.id, state.bandSelected?.id, state.songSelected?.id, { pageNo: action.paginationData.pageNo, pageSize: action.paginationData.pageSize }, state.phrasesFilter)
             .pipe(
               map(data => PatternsLibraryApiActions.patternsPaginationChangeSuccess({ patternsPaginated: data.result })),
               catchError(error => of(PatternsLibraryApiActions.patternsPaginationChangeFailure({ error })))
@@ -79,7 +79,7 @@ export class PatternsLibraryEffects {
         ofType(PatternsLibraryPageActions.styleSelectedChange),
         withLatestFrom(this.store$.select(getPatternsLibraryState)),
         mergeMap(([action, state]) =>
-          this.songsRepositoryService.getPatterns(state.styleSelected?.id, null, null, { pageNo: 0, pageSize: state.patternsPaginated.pageSize }, state.patternsFilter)
+          this.songsRepositoryService.getPhrases(state.styleSelected?.id, null, null, { pageNo: 0, pageSize: state.patternsPaginated.pageSize }, state.phrasesFilter)
             .pipe(
               withLatestFrom(
                 this.songsRepositoryService.getSongs(action.selectedStyle.id, null, { pageNo: 0, pageSize: state.songsPaginated.pageSize }, state.songTerm),
@@ -101,7 +101,7 @@ export class PatternsLibraryEffects {
         ofType(PatternsLibraryPageActions.bandSelectedChange),
         withLatestFrom(this.store$.select(getPatternsLibraryState)),
         mergeMap(([action, state]) =>
-          this.songsRepositoryService.getPatterns(null, action.selectedBand.id, null, { pageNo: 0, pageSize: state.patternsPaginated.pageSize }, state.patternsFilter)
+          this.songsRepositoryService.getPhrases(null, action.selectedBand.id, null, { pageNo: 0, pageSize: state.patternsPaginated.pageSize }, state.phrasesFilter)
           .pipe(
               withLatestFrom( this.songsRepositoryService.getSongs(state.styleSelected?.id, action.selectedBand.id, { pageNo: 0, pageSize: state.songsPaginated.pageSize }, state.songTerm)),
               map(([patterns, songs]) =>
@@ -118,14 +118,17 @@ export class PatternsLibraryEffects {
         ofType(PatternsLibraryPageActions.songSelectedChange),
         withLatestFrom(this.store$.select(getPatternsLibraryState)),
         mergeMap(([action, state]) =>
-          this.songsRepositoryService.getPatterns(state.styleSelected?.id, state.bandSelected?.id, action.selectedSong.id, { pageNo: 0, pageSize: state.patternsPaginated.pageSize }, state.patternsFilter)
+          this.songsRepositoryService.getPhrases(state.styleSelected?.id, state.bandSelected?.id, action.selectedSong.id, { pageNo: 0, pageSize: state.patternsPaginated.pageSize }, state.phrasesFilter)
             .pipe(
               map(data => PatternsLibraryApiActions.songSelectedSuccess({ patternsPaginated: data.result })),
-              catchError(error => of(PatternsLibraryApiActions.bandSelectedFailure({ error })))
+              catchError(error => of(PatternsLibraryApiActions.songSelectedFailure({ error })))
             )
         )
       )
   })
+
+
+
 
 
   filterStyleTermChange$ = createEffect(() => {
@@ -175,11 +178,11 @@ export class PatternsLibraryEffects {
   filterPatternTermChange$ = createEffect(() => {
     return this.actions$
       .pipe(
-        ofType(PatternsLibraryPageActions.filterPatternChange),
+        ofType(PatternsLibraryPageActions.filterPhraseChange),
         withLatestFrom(this.store$.select(getPatternsLibraryState)),
         mergeMap(([action, state]) =>
         //atencion cambiar null por pattern filter
-          this.songsRepositoryService.getPatterns(state.styleSelected?.id, state.bandSelected?.id, state.songSelected?.id, { pageNo: 0, pageSize: state.patternsPaginated.pageSize }, state.patternsFilter)
+          this.songsRepositoryService.getPhrases(state.styleSelected?.id, state.bandSelected?.id, state.songSelected?.id, { pageNo: 0, pageSize: state.patternsPaginated.pageSize }, state.phrasesFilter)
             .pipe(
               map(data => PatternsLibraryApiActions.filterPatternTermChangeSuccess({ patternsPaginated: data.result })),
               catchError(error => of(PatternsLibraryApiActions.filterPatternTermChangeFailure({ error })))

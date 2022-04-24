@@ -1,3 +1,4 @@
+<div style="width:900px">
 <h1 class="pageTitle">Phrases Library</h1>
 <div class="container">
 	<div class="styles">
@@ -71,44 +72,44 @@
 		</div>
 	</div>
 	<div>
-		<div class="panel panel-info">
+		<div>
 			<h2>Patterns</h2>
 			<div class="patternFilter">	
-			<mat-form-field appearance="fill">
-				<mat-label>Phrase Type</mat-label>
-				<mat-select matNativeControl required  value="1">
-				  <mat-option value="1">Metrics</mat-option>
-				  <mat-option value="1">Pitches</mat-option>
-				  <mat-option value="2">Metrics and Pitches</mat-option>
-				  <mat-option value="3">Embellished Metrics</mat-option>
-				  <mat-option value="4">Embellished Pitches</mat-option>
-				  <mat-option value="4">Embellished Metrics and Pitches</mat-option>
-				</mat-select>
-			  </mat-form-field>	
+				<mat-form-field appearance="fill" >
+					<mat-label>Phrase Type</mat-label>
+					<mat-select matNativeControl required  value="1" [formControl]="phraseType">
+					<mat-option value="0">Metrics</mat-option>
+					<mat-option value="1">Pitches</mat-option>
+					<mat-option value="2">Metrics and Pitches</mat-option>
+					<mat-option value="3">Embellished Metrics</mat-option>
+					<mat-option value="4">Embellished Pitches</mat-option>
+					<mat-option value="5">Embellished Metrics and Pitches</mat-option>
+					</mat-select>
+				</mat-form-field>	
 
-			<mat-form-field class="patternFilterBox">
-				<input class="searchBox" matInput type="search" placeholder="Number of notes"
-				[formControl]="patternNumberOfNotes"   />
-			</mat-form-field>
-			<mat-form-field class="patternFilterBox">
-				<input class="searchBox" matInput type="search" placeholder="Range"
-				[formControl]="patternRange"   />
-			</mat-form-field>
-			<mat-form-field class="patternFilterBox">
-				<input class="searchBox" matInput type="search" placeholder="Step"
-				[formControl]="patternStep"   />
-			</mat-form-field>
-			<mat-form-field class="patternFilterBox">
-				<input class="searchBox" matInput type="search" placeholder="Duration in ticks"
-				[formControl]="patternDurationInTicks"   />
-			</mat-form-field>			
-			<mat-form-field class="patternFilterBox">
-				<mat-icon matPrefix>search</mat-icon>
-				<input class="searchBox" matInput type="search" placeholder="Search"
-				[formControl]="patternTerm"   />
-			</mat-form-field>
+				<mat-form-field>
+					<input class="searchBox" matInput type="search" placeholder="Number notes"
+					[formControl]="patternNumberOfNotes"   />
+				</mat-form-field>
+				<mat-form-field>
+					<input class="searchBox" matInput type="search" placeholder="Range"
+					[formControl]="patternRange"   />
+				</mat-form-field>
+				<mat-form-field >
+					<input class="searchBox" matInput type="search" placeholder="Step"
+					[formControl]="patternStep"   />
+				</mat-form-field>
+				<mat-form-field>
+					<input class="searchBox" matInput type="search" placeholder="Duration ticks"
+					[formControl]="patternDurationInTicks"   />
+				</mat-form-field>			
+				<mat-form-field>
+					<mat-icon matPrefix>search</mat-icon>
+					<input class="searchBox" matInput type="search" placeholder="Search"
+					[formControl]="patternTerm"   />
+				</mat-form-field>
 			</div>
-			<div class="mat-elevation-z8">
+			<div class="mat-elevation-z8" >
 				<table mat-table [dataSource]="patternsDataSource" class="mat-elevation-z8" matSort>
 					<ng-container matColumnDef="name">
 						<th mat-header-cell *matHeaderCellDef mat-sort-header>Pattern</th>
@@ -120,7 +121,7 @@
 				</table>
 				<mat-paginator #patternsPaginator [length]="totalPatterns"
 					[pageIndex]="patternsPageNo" [pageSize]="patternsPageSize"
-					[hidePageSize]="true" (page)="getSongsPage($event)" showFirstLastButtons></mat-paginator>
+					[hidePageSize]="true" (page)="getPatternsPage($event)" showFirstLastButtons></mat-paginator>
 			</div>
 		</div>
 	</div>
@@ -163,4 +164,5 @@
 			</table>
 		</div>
 	</div>
+</div>
 </div>

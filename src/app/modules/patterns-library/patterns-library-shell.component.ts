@@ -32,8 +32,8 @@ import { Song } from '../../core/models/song'
 import { PatternsLibraryPageActions } from './state/actions'
 import { State } from '../../core/state/app.state'
 import { PaginationData } from '../../core/models/pagination-data'
-import { Pattern } from '../../core/models/pattern'
-import { PatternsFilter } from 'src/app/core/models/patterns-filter'
+import { Phrase } from '../../core/models/pattern'
+import { PhrasesFilter } from 'src/app/core/models/phrases-filter'
 
 @Component({
     templateUrl: './patterns-library-shell.component.html'
@@ -43,12 +43,12 @@ export class PatternsLibraryShellComponent implements OnInit {
     stylesDatasource$: Observable<MatTableDataSource<MusicStyle>>
     bandsDatasource$: Observable<MatTableDataSource<Band>>
     songsDatasource$: Observable<MatTableDataSource<Song>>
-    patternsDatasource$: Observable<MatTableDataSource<Pattern>>
+    patternsDatasource$: Observable<MatTableDataSource<Phrase>>
 
     styleSelected$: Observable<MusicStyle>
     bandSelected$: Observable<Band>
     songSelected$: Observable<Song>
-    patternSelected$: Observable<Pattern>
+    patternSelected$: Observable<Phrase>
 
     stylesPageNo$: Observable<number>
     bandsPageNo$: Observable<number>
@@ -78,7 +78,7 @@ export class PatternsLibraryShellComponent implements OnInit {
         this.stylesDatasource$ = this.patternsLibStore.select(getStyles).pipe(map(styles => new MatTableDataSource<MusicStyle>(styles)))
         this.bandsDatasource$ = this.patternsLibStore.select(getBands).pipe(map(bands => new MatTableDataSource<Band>(bands)))
         this.songsDatasource$ = this.patternsLibStore.select(getSongs).pipe(map(songs => new MatTableDataSource<Song>(songs)))
-        this.patternsDatasource$ = this.patternsLibStore.select(getPatterns).pipe(map(patterns => new MatTableDataSource<Pattern>(patterns)))
+        this.patternsDatasource$ = this.patternsLibStore.select(getPatterns).pipe(map(patterns => new MatTableDataSource<Phrase>(patterns)))
 
         this.stylesPageNo$ = this.patternsLibStore.select(getStylesCurrentPage)
         this.bandsPageNo$ = this.patternsLibStore.select(getBandsCurrentPage)
@@ -129,8 +129,10 @@ export class PatternsLibraryShellComponent implements OnInit {
     songsTermChanged(term: string): void {
         this.patternsLibStore.dispatch(PatternsLibraryPageActions.filterSongTermChange({ songTerm: term }))
     }
-    patternsFilterChanged(filterData: PatternsFilter): void {
-        this.patternsLibStore.dispatch(PatternsLibraryPageActions.filterPatternChange({ patternFilter: filterData }))
+    phrasesFilterChanged(filterData: PhrasesFilter): void {
+        console.log(filterData)
+        if (filterData.alca)
+        this.patternsLibStore.dispatch(PatternsLibraryPageActions.filterPhraseChange({ phraseFilter: filterData }))
     }
 
     styleSelectedChange(style: MusicStyle): void {
@@ -142,10 +144,10 @@ export class PatternsLibraryShellComponent implements OnInit {
     songSelectedChange(song: Song): void {
         this.patternsLibStore.dispatch(PatternsLibraryPageActions.songSelectedChange({ selectedSong: song }))
     }
-    patternSelectedChange(pattern: Pattern): void {
-        this.patternsLibStore.dispatch(PatternsLibraryPageActions.patternSelectedChange({ selectedPattern: pattern }))
+    patternSelectedChange(pattern: Phrase): void {
+        this.patternsLibStore.dispatch(PatternsLibraryPageActions.phraseSelectedChange({ selectedPhrase: pattern }))
     }
-    analyzePattern(pattern: Pattern): void {
+    analyzePattern(pattern: Phrase): void {
         //this.mainStore.dispatch(PatternPanelPageActions.addSong({ song: song }))
     }
 }

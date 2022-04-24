@@ -5,20 +5,20 @@ import { Song } from '../../../core/models/song'
 import { MusicStylesPaginated } from '../../../core/services/songs-repository/responses-format/music-styles-paginated'
 import { BandsPaginated } from '../../../core/services/songs-repository/responses-format/bands-paginated'
 import { SongsPaginated } from '../../../core/services/songs-repository/responses-format/songs-paginated'
-import { PatternsPaginated } from '../../../core/services/songs-repository/responses-format/patterns-paginated'
-import { Pattern } from '../../../core/models/pattern'
-import { PatternsFilter } from '../../../core/models/patterns-filter'
+import { PhrasesPaginated } from '../../../core/services/songs-repository/responses-format/phrases-paginated'
+import { Phrase } from '../../../core/models/pattern'
+import { PhrasesFilter } from '../../../core/models/phrases-filter'
 import { PhraseTypeEnum } from '../../../core/models/enums/phrase-type.enum'
 
 export interface PatternsLibraryState {
     musicStylesPaginated: MusicStylesPaginated
     bandsPaginated: BandsPaginated
     songsPaginated: SongsPaginated   
-    patternsPaginated: PatternsPaginated  
+    patternsPaginated: PhrasesPaginated  
     styleTerm: string
     bandTerm: string
     songTerm: string
-    patternsFilter: PatternsFilter
+    phrasesFilter: PhrasesFilter
     stylesNewPage: number | null
     bandsNewPage: number | null
     songsNewPage: number | null
@@ -26,8 +26,7 @@ export interface PatternsLibraryState {
     styleSelected: MusicStyle
     bandSelected: Band
     songSelected: Song  
-    patternSelected: Pattern   
-    phraseTypeSelected: PhraseTypeEnum
+    phraseSelected: Phrase 
     errorStyles: string
     errorBands: string
     errorSongs: string
@@ -126,7 +125,7 @@ export const getSongSelected = createSelector(
 )
 export const getPatternSelected = createSelector(
     getPatternsLibraryFeatureState,
-    state => state.patternSelected
+    state => state.phraseSelected
 )
 
 export const getErrorStyles = createSelector(
@@ -149,10 +148,6 @@ export const getErrorPatterns = createSelector(
 
 export const getPatternsFilter = createSelector(
     getPatternsLibraryFeatureState,
-    state => state.patternsFilter
+    state => state.phrasesFilter
 )
 
-export const getPhraseTypeSelected = createSelector(
-    getPatternsLibraryFeatureState,
-    state => state.phraseTypeSelected
-)

@@ -41,12 +41,11 @@ const initialState: PatternsLibraryState = {
     styleTerm: '',
     bandTerm: '',
     songTerm: '',
-    patternsFilter: {},
+    phrasesFilter: {},
     styleSelected: null,
     bandSelected: null,
     songSelected: null,
-    patternSelected: null,
-    phraseTypeSelected: null,
+    phraseSelected: null,
     errorStyles: '',
     errorBands: '',
     errorSongs: '',
@@ -95,20 +94,22 @@ export const patternsLibraryReducer = createReducer<PatternsLibraryState>(
         return newState
     }),
 
-    on(PatternsLibraryPageActions.filterPatternChange, (state, action): PatternsLibraryState => {
+    on(PatternsLibraryPageActions.filterPhraseChange, (state, action): PatternsLibraryState => {
         let newState = cloneDeep(state)
-        if (action.patternFilter.contains != null)
-            newState.patternsFilter.contains = action.patternFilter.contains
-        if (action.patternFilter.durationInTicks != null)
-            newState.patternsFilter.durationInTicks = action.patternFilter.durationInTicks
-        if (action.patternFilter.isMonotone != null)
-            newState.patternsFilter.isMonotone = action.patternFilter.isMonotone
-        if (action.patternFilter.numberOfNotes != null)
-            newState.patternsFilter.numberOfNotes = action.patternFilter.numberOfNotes
-        if (action.patternFilter.range != null)
-            newState.patternsFilter.range = action.patternFilter.range
-        if (action.patternFilter.step != null)
-            newState.patternsFilter.step = action.patternFilter.step
+        if (action.phraseFilter.contains != null)
+            newState.phrasesFilter.contains = action.phraseFilter.contains
+        if (action.phraseFilter.durationInTicks != null)
+            newState.phrasesFilter.durationInTicks = action.phraseFilter.durationInTicks
+        if (action.phraseFilter.isMonotone != null)
+            newState.phrasesFilter.isMonotone = action.phraseFilter.isMonotone
+        if (action.phraseFilter.numberOfNotes != null)
+            newState.phrasesFilter.numberOfNotes = action.phraseFilter.numberOfNotes
+        if (action.phraseFilter.range != null)
+            newState.phrasesFilter.range = action.phraseFilter.range
+        if (action.phraseFilter.step != null)
+            newState.phrasesFilter.step = action.phraseFilter.step
+        if (action.phraseFilter.phraseType != null)
+            newState.phrasesFilter.phraseType = action.phraseFilter.phraseType
 
         return newState
     }),
@@ -138,7 +139,7 @@ export const patternsLibraryReducer = createReducer<PatternsLibraryState>(
             newState.musicStylesPaginated = action.musicStylesPaginated
             newState.bandSelected = null
             newState.songSelected = null
-            newState.patternSelected = null
+            newState.phraseSelected = null
             return newState
         }),
 
@@ -150,7 +151,7 @@ export const patternsLibraryReducer = createReducer<PatternsLibraryState>(
             newState.bandsPaginated = action.bandsPaginated
             newState.bandSelected = null
             newState.songSelected = null
-            newState.patternSelected = null
+            newState.phraseSelected = null
             newState.errorBands = null
             return newState
         }),
@@ -160,7 +161,7 @@ export const patternsLibraryReducer = createReducer<PatternsLibraryState>(
         (state, action): PatternsLibraryState => {
             let newState = cloneDeep(state)
             newState.songsPaginated = action.songsPaginated
-            newState.patternSelected = null
+            newState.phraseSelected = null
             newState.errorSongs = null
             return newState
         }),
@@ -182,7 +183,7 @@ export const patternsLibraryReducer = createReducer<PatternsLibraryState>(
             newState.styleSelected = null
             newState.bandSelected = null
             newState.songSelected = null
-            newState.patternSelected = null
+            newState.phraseSelected = null
             newState.musicStylesPaginated = {
                 pageNo: 0,
                 pageSize: 10,
@@ -200,7 +201,7 @@ export const patternsLibraryReducer = createReducer<PatternsLibraryState>(
             let newState = cloneDeep(state)
             newState.bandSelected = null
             newState.songSelected = null
-            newState.patternSelected = null
+            newState.phraseSelected = null
             newState.bandsPaginated = {
                 pageNo: 0,
                 pageSize: 10,
@@ -217,7 +218,7 @@ export const patternsLibraryReducer = createReducer<PatternsLibraryState>(
         (state, action): PatternsLibraryState => {
             let newState = cloneDeep(state)
             newState.songSelected = null
-            newState.patternSelected = null
+            newState.phraseSelected = null
             newState.songsPaginated = {
                 pageNo: 0,
                 pageSize: 10,
@@ -233,7 +234,7 @@ export const patternsLibraryReducer = createReducer<PatternsLibraryState>(
         PatternsLibraryApiActions.filterPatternTermChangeFailure,
         (state, action): PatternsLibraryState => {
             let newState = cloneDeep(state)
-            newState.patternSelected = null
+            newState.phraseSelected = null
             newState.patternsPaginated = {
                 pageNo: 0,
                 pageSize: 10,
@@ -311,14 +312,14 @@ export const patternsLibraryReducer = createReducer<PatternsLibraryState>(
         return newState
     }),
 
-    on(PatternsLibraryApiActions.patternSelectedSuccess, (state, action): PatternsLibraryState => {
+    on(PatternsLibraryApiActions.phraseSelectedSuccess, (state, action): PatternsLibraryState => {
         let newState = cloneDeep(state)
-        newState.patternSelected = action.pattern
+        newState.phraseSelected = action.pattern
         return newState
     }),
-    on(PatternsLibraryApiActions.patternSelectedFailure, (state, action): PatternsLibraryState => {
+    on(PatternsLibraryApiActions.phraseSelectedFailure, (state, action): PatternsLibraryState => {
         let newState = cloneDeep(state)
-        newState.patternSelected = null
+        newState.phraseSelected = null
         newState.errorPatterns = action.error
         return newState
     }),

@@ -6,12 +6,12 @@ import { environment } from '../../../../environments/environment';
 import { GetStylesResponse } from './responses-format/get-styles-response';
 import { GetBandsResponse } from './responses-format/get-bands-response';
 import { GetSongsResponse } from './responses-format/get-songs-response';
-import { GetPatternsResponse } from './responses-format/get-patterns-response';
+import { GetPhrasesResponse } from './responses-format/get-phrases-response';
 import { GetSongResponse } from './responses-format/get-song-response';
 import { PaginationData } from '../../models/pagination-data';
 import { MusicStyle } from '../../models/music-style';
 import { Band } from '../../models/band';
-import { PatternsFilter } from '../../models/patterns-filter';
+import { PhrasesFilter } from '../../models/phrases-filter';
 
 @Injectable({
     providedIn: 'root'
@@ -63,14 +63,14 @@ export class SongsRepositoryService {
         return this.http.get<GetSongsResponse>(url)
     }
 
-    getPatterns(styleId: string, bandId: string, songId: string, paginationData: PaginationData, patternsFilter: PatternsFilter): Observable<any> {
+    getPhrases(styleId: string, bandId: string, songId: string, paginationData: PaginationData, phrasesFilter: PhrasesFilter): Observable<any> {
         let url = this.songLibraryUrl + 'phrases'
         url = this.addParameterToUrl(url, 'styleId', styleId)
         url = this.addParameterToUrl(url, 'bandId', bandId)
         url = this.addParameterToUrl(url, 'songId', songId)
-        url = this.addPatternFilterParametersToUrl(url, patternsFilter)
+        url = this.addPatternFilterParametersToUrl(url, phrasesFilter)
         url = this.addPaginationParameters(url, paginationData)
-        return this.http.get<GetPatternsResponse>(url);
+        return this.http.get<GetPhrasesResponse>(url);
     }
 
 
@@ -99,13 +99,15 @@ export class SongsRepositoryService {
         }
         return url
     }
-    addPatternFilterParametersToUrl(url: string, filter: PatternsFilter): string {
+    addPatternFilterParametersToUrl(url: string, filter: PhrasesFilter): string {
+        console.log(filter)
         url = this.addParameterToUrl(url, 'numberOfNotes', filter?.numberOfNotes)
         url = this.addParameterToUrl(url, 'range', filter?.range)
         url = this.addParameterToUrl(url, 'step', filter?.step)
         url = this.addParameterToUrl(url, 'durationInTicks', filter?.durationInTicks)
         url = this.addParameterToUrl(url, 'contains', filter?.contains)
         url = this.addParameterToUrl(url, 'isMonotone', filter?.isMonotone)
+        url = this.addParameterToUrl(url, 'phraseType', filter?.phraseType)
         return url
     }
 

@@ -1,9 +1,9 @@
-import { Pattern } from '../../../models/pattern'
+import { Phrase } from '../../../models/pattern'
 
-export class PatternsPaginated {
+export class PhrasesPaginated {
     pageNo: number
     pageSize: number
     totalItems: number
     totalPages: number
-    items: Pattern[]
+    items: Phrase[]
 }

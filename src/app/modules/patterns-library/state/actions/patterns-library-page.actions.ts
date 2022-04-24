@@ -3,8 +3,9 @@ import { MusicStyle } from '../../../../core/models/music-style'
 import { Band } from '../../../../core/models/band'
 import { Song } from '../../../../core/models/song'
 import { PaginationData } from '../../../../core/models/pagination-data'
-import { Pattern } from '../../../../core/models/pattern'
-import { PatternsFilter } from 'src/app/core/models/patterns-filter'
+import { Phrase } from '../../../../core/models/pattern'
+import { PhrasesFilter } from 'src/app/core/models/phrases-filter'
+import { PhraseTypeEnum } from 'src/app/core/models/enums/phrase-type.enum'
 
 export const filterStyleTermChange = createAction(
   '[Patterns-Library-Page] Filter Style',
@@ -18,9 +19,9 @@ export const filterSongTermChange = createAction(
   '[Patterns-Library-Page] Filter Song',
   props<{ songTerm: string }>()
 )
-export const filterPatternChange = createAction(
-  '[Patterns-Library-Page] Filter Pattern',
-  props<{ patternFilter: PatternsFilter }>()
+export const filterPhraseChange = createAction(
+  '[Patterns-Library-Page] Filter Phrase',
+  props<{ phraseFilter: PhrasesFilter }>()
 )
 export const stylesPaginationChange = createAction(
   '[Patterns-Library-Page] Page Style',
@@ -50,7 +51,7 @@ export const songSelectedChange = createAction(
   '[Patterns-Library-Page] Song Selected Change',
   props<{ selectedSong: Song }>()
 )
-export const patternSelectedChange = createAction(
-  '[Patterns-Library-Page] Pattern Selected Change',
-  props<{ selectedPattern: Pattern }>()
+export const phraseSelectedChange = createAction(
+  '[Patterns-Library-Page] Phrase Selected Change',
+  props<{ selectedPhrase: Phrase }>()
 )

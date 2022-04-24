@@ -1,6 +1,6 @@
 import { Song } from "./song"
 
-export class Pattern {
+export class Phrase {
     id: string
     asString: string
     asStringWithoutOrnaments: string
