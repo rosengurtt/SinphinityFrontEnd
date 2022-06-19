@@ -135,7 +135,7 @@ export const patternsLibraryReducer = createReducer<PatternsLibraryState>(
         newState.phraseSelected = action.selectedPhrase
         return newState
     }),
-    
+
     on(
         PatternsLibraryApiActions.stylesPaginationChangeSuccess,
         PatternsLibraryApiActions.filterStyleTermChangeSuccess,
@@ -146,6 +146,13 @@ export const patternsLibraryReducer = createReducer<PatternsLibraryState>(
             newState.bandSelected = null
             newState.songSelected = null
             newState.phraseSelected = null
+            newState.phrasesPaginated = {
+                pageNo: 0,
+                pageSize: 10,
+                totalItems: 0,
+                totalPages: 0,
+                items: []
+            }
             return newState
         }),
 

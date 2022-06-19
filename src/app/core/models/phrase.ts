@@ -1,4 +1,5 @@
 import { PhraseTypeEnum } from "./enums/phrase-type.enum"
+import { Note } from "./note"
 import { Song } from "./song"
 
 export class Phrase {
@@ -12,12 +13,6 @@ export class Phrase {
     isMonotone: boolean
     step: number
     phraseType: PhraseTypeEnum
+    asSong: Song
 
-    get asSong(): Song{
-        let retObj =  new Song()
-
-        
-
-        return retObj
-    }
 }

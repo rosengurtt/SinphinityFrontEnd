@@ -10,8 +10,8 @@ import { Router } from '@angular/router'
 import { SongViewType } from 'src/app/core/models/enums/SongViewTypes.enum'
 import { MatIconRegistry } from '@angular/material/icon'
 import { DomSanitizer } from '@angular/platform-browser'
-import { getSupportedInputTypes } from '@angular/cdk/platform'
 import { FormControl } from '@angular/forms'
+import { environment } from '../../../environments/environment'
 
 declare var MIDIjs: any
 
@@ -55,7 +55,7 @@ export class SongPanelComponent implements OnInit, OnChanges, OnDestroy, AfterVi
   sliderHasBeenMoved = false
   songViewType: typeof SongViewType = SongViewType
   tempoBox = new FormControl()
-
+  backendUrl: string
 
   svgBoxWidth = 1200
   svgBoxHeight = 128
@@ -78,6 +78,7 @@ export class SongPanelComponent implements OnInit, OnChanges, OnDestroy, AfterVi
     const tempoInMicrosecondsPerBeat = this.song.tempoChanges[0].microsecondsPerQuarterNote
     const tempoInBeatsPerMinute = Math.round(120 * 500000 / tempoInMicrosecondsPerBeat)
     this.tempoBox.setValue(tempoInBeatsPerMinute)
+    this.backendUrl = environment.GetEnvironment().SinphinityBackend
   }
   ngAfterViewInit(): void {
     this.slider.max = this.song.midiStats.durationInSeconds
@@ -132,7 +133,7 @@ export class SongPanelComponent implements OnInit, OnChanges, OnDestroy, AfterVi
     }
     else {
       let mutedTracksParam = this.mutedTracks.length > 0 ? `&mutedTracks=${this.mutedTracks.join(",")}` : ""
-      const midiUrl = `https://localhost:8003/api/songs/${this.song.id}/midi?simplificationVersion=${this.songSimplificationVersion}&startInSeconds=${this.slider.value}${mutedTracksParam}&tempoInBeatsPerMinute=${this.tempoBox.value}`
+      const midiUrl = `${this.backendUrl}songs/${this.song.id}/midi?simplificationVersion=${this.songSimplificationVersion}&startInSeconds=${this.slider.value}${mutedTracksParam}&tempoInBeatsPerMinute=${this.tempoBox.value}`
       MIDIjs.play(midiUrl)
       MIDIjs.message_callback = this.getPlayingStatus.bind(this)
     }

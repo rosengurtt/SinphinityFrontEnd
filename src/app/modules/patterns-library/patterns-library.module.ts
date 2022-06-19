@@ -9,15 +9,18 @@ import { MaterialModule } from '../../core/material.module'
 import { PipesModule } from '../../core/pipes/pipes-module'
 import { PatternsLibraryShellComponent } from './patterns-library-shell.component'
 import { PatternsLibraryComponent } from './patterns-library.component'
+import { PatternComponent } from 'src/app/modules/patterns-library/pattern/pattern.component'
 import { patternsLibraryFeatureKey } from './state'
 import { patternsLibraryReducer } from './state/patterns-library.reducer'
 import { PatternsLibraryEffects } from './state/patterns-library.effects'
 import { PatternSearchService } from './services/pattern-search.service'
+import { DrawingMusicalNotationGlobalService } from '../../core/services/songs-display/drawing-musical-notation-global.service'
 
 @NgModule({
   declarations: [
     PatternsLibraryShellComponent,
-    PatternsLibraryComponent
+    PatternsLibraryComponent,
+    PatternComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,8 @@ import { PatternSearchService } from './services/pattern-search.service'
 
   providers: [
     SongsRepositoryService,
-    PatternSearchService
+    PatternSearchService,
+    DrawingMusicalNotationGlobalService
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

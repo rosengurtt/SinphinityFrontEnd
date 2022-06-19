@@ -39,13 +39,13 @@ input{
   display:grid;
   padding: 8px;
   align-items: center;
-  grid-template-columns: auto fit-content(100px);
+  grid-template-columns: auto fit-content(300px);
 }
 
 
 .selectedPatternBox{
   padding: 5px;
-  width: 250px;
+  width: 400px;
 }
 tr:nth-child(even) {background: #666}
 tr:nth-child(odd) {background: #444}
@@ -61,4 +61,11 @@ td {
 .phraseSection{
   display: grid;
   grid-template-columns: 300px 300px  
+}
+
+.playButtons{
+  display: grid;
+  column-gap: 10px;
+  grid-template-columns: 1fr 1fr  
+  
 }

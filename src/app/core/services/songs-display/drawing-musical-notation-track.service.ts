@@ -35,7 +35,7 @@ export class DrawingMusicalNotationTrackService {
     allNoteStarts: number[] // Represents all the ticks where there is a note starting in any of the voices
     eventsToDrawForAllVoices: Array<Array<SoundEvent>>
 
-    // We assign to each quarter, eightth, sixteenth or whatever a total of 50 px width
+    // We assign to each quarter, eigth, sixteenth or whatever a total of 50 px width
     // The height is always 50 px
     // We insert a vertical bar between compases that ocupies a total space of 50 px
     // The total length is dependent on the number of notes that have to be drawn, a song
@@ -65,8 +65,8 @@ export class DrawingMusicalNotationTrackService {
         this.bars = song.bars
 
         // Order notes by start time
-        const aux = [... this.simplification.notes]
-            .sort((i, j) => i.startSinceBeginningOfSongInTicks - j.startSinceBeginningOfSongInTicks)
+        //const aux = [... this.simplification.notes]
+        //    .sort((i, j) => i.startSinceBeginningOfSongInTicks - j.startSinceBeginningOfSongInTicks)
         // normalize start time of notes
         //this.songNotes = aux.map(n => Normalization.normalizeNoteStart(this.bars, n))
 
@@ -143,7 +143,7 @@ export class DrawingMusicalNotationTrackService {
     }
 
     // When a note is not a note of the C major scale, we need to know if it is considered a flat or a sharp to decide where we
-    // we draw it. A ntoe can also have the pitch of a C major scale note, but actually be considered a different note, like when we
+    // we draw it. A note can also have the pitch of a C major scale note, but actually be considered a different note, like when we
     // have a key signature with 6 sharps and the pitch corresponding to the F note is actually treated as an E sharp, not an F
     // We store in the variable AlterationApplied the information of what alteration is being applied to this pitch. So if we have a
     // note with a pitch of 61, and an AlterationApplied of sharp, then we draw it as a C#. If it has an alteration of flat, we draw

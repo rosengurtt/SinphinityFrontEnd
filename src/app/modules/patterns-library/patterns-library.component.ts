@@ -10,6 +10,7 @@ import { Song } from "../../core/models/song"
 import { PaginationData } from '../../core/models/pagination-data'
 import { Phrase } from "../../core/models/phrase"
 import { PhrasesFilter } from "src/app/core/models/phrases-filter"
+import { environment } from '../../../environments/environment'
 declare var MIDIjs: any
 
 @Component({
@@ -63,11 +64,18 @@ export class PatternsLibraryComponent {
     patternStep = new FormControl()
     patternDurationInTicks = new FormControl()
     phraseType = new FormControl()
+    backendUrl: string
+
+
+    svgBoxWidth = 600
+    svgBoxHeight = 100
+    svgBoxIdPrefix = "svgPattern"
 
     constructor(private router: Router) {
     }
 
     async ngOnInit(): Promise<any> {
+        this.backendUrl = environment.GetEnvironment().SinphinityBackend
         this.subscriptionSearchTerms.push(this.styleTerm.valueChanges.subscribe(value => this.stylesTermChanged.emit(value)))
         this.subscriptionSearchTerms.push(this.bandTerm.valueChanges.subscribe(value => this.bandsTermChanged.emit(value)))
         this.subscriptionSearchTerms.push(this.songTerm.valueChanges.subscribe(value => this.songsTermChanged.emit(value)))
@@ -110,14 +118,18 @@ export class PatternsLibraryComponent {
         this.songSelectedChanged.emit(song)
     }
     selectPhrase(phrase: Phrase) {
+        console.log(phrase)
         this.phraseSelectedChanged.emit(phrase)
     }
     playPhrase(phrase: Phrase) {
-        console.log(phrase)
-        const midiUrl = `https://localhost:8003/api/phrases/midi?asString=${phrase.asString}&phraseType=${phrase.phraseType}`
+        const midiUrl = `${this.backendUrl}phrases/midi?asString=${phrase.asString}&phraseType=${phrase.phraseType}`
         MIDIjs.play(midiUrl)
     }
 
+    playPhraseInSong(phrase: Phrase) {
+        const midiUrl = `${this.backendUrl}phrases/midi?asString=${phrase.asString}&phraseType=${phrase.phraseType}`
+        MIDIjs.play(midiUrl)
+    }
 
     analyzePatternClicked(pattern: Phrase) {
         this.analyzePattern.emit(pattern)

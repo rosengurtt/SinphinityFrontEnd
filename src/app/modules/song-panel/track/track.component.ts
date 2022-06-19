@@ -6,9 +6,9 @@ import { Instrument } from 'src/app/core/models/midi/midi-codes/instrument.enum'
 import { Song } from 'src/app/core/models/song'
 import { SongSimplification } from 'src/app/core/models/song-simplification'
 import { SongViewType } from 'src/app/core/models/enums/SongViewTypes.enum'
-import { DrawingPianoRollService } from '../services/drawing-piano-roll.service'
-import { DrawingMusicalNotationTrackService } from '../services/drawing-musical-notation-track.service'
-import { DrawingMusicalNotationGlobalService } from '../services/drawing-musical-notation-global.service'
+import { DrawingPianoRollService } from '../../../core/services/songs-display/drawing-piano-roll.service'
+import { DrawingMusicalNotationTrackService } from '../../../core/services/songs-display/drawing-musical-notation-track.service'
+import { DrawingMusicalNotationGlobalService } from '../../../core/services/songs-display/drawing-musical-notation-global.service'
 import { PlayingSong } from 'src/app/core/models/playing-song'
 
 

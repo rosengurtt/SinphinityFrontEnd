@@ -12,7 +12,7 @@ import { songsPanelFeatureKey } from './state'
 import { songPanelReducer } from './state/song-panel.reducer';
 import { TrackComponent } from './track/track.component'
 import { SplitCamelCasePipe } from 'src/app/core/pipes/split-camel-case.pipe'
-import { DrawingMusicalNotationGlobalService } from './services/drawing-musical-notation-global.service'
+import { DrawingMusicalNotationGlobalService } from '../../core/services/songs-display/drawing-musical-notation-global.service'
 
 @NgModule({
     declarations: [

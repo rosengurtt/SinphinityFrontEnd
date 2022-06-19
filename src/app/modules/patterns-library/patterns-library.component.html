@@ -128,7 +128,10 @@
 			<div class="selectedPatternBox" *ngIf="phraseSelected" >
 				<div class="patternStatsTitle" *ngIf="phraseSelected">
 					<h2>Pattern info</h2>
-					<div><button mat-raised-button color="primary" (click)="playPhrase(phraseSelected)">Play</button></div>
+					<div class="playButtons">
+						<button mat-raised-button color="primary" (click)="playPhrase(phraseSelected)">Play</button>
+						<button mat-raised-button color="primary" (click)="playPhrase(phraseSelected)">Play in song</button>
+					</div>
 				</div>
 				<div class="patternStatsTable">
 					<table class="patternStatsTable">				
@@ -139,6 +142,16 @@
 						<tr>
 							<td>As string</td>
 							<td>{{phraseSelected.asString | cellWidthLimit: 30}}</td>
+						</tr>
+						<tr>
+							
+							<td colspan="2">  
+								<dc-pattern [svgBoxIdPrefix]="svgBoxIdPrefix"  [song]="phraseSelected.asSong"
+								 [phraseId]="phraseSelected.id"  
+								 [svgBoxWidth]="svgBoxWidth"
+								[svgBoxHeight]="svgBoxHeight"
+						
+								[playingSong]="playingSong"></dc-pattern></td>
 						</tr>
 						<tr>
 							<td>Duration in ticks</td>
