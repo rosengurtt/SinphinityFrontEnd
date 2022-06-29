@@ -9,12 +9,15 @@ import { PhrasesPaginated } from '../../../core/services/songs-repository/respon
 import { Phrase } from '../../../core/models/phrase'
 import { PhrasesFilter } from '../../../core/models/phrases-filter'
 import { PhraseTypeEnum } from '../../../core/models/enums/phrase-type.enum'
+import { PhraseOccurrence } from 'src/app/core/models/phrase-occurrence'
+import { PhraseOccurrencesPaginated } from 'src/app/core/services/songs-repository/responses-format/phrase-occurrences-paginated'
 
 export interface PatternsLibraryState {
     musicStylesPaginated: MusicStylesPaginated
     bandsPaginated: BandsPaginated
     songsPaginated: SongsPaginated   
     phrasesPaginated: PhrasesPaginated  
+    occurrencesOfPhrasePaginated: PhraseOccurrencesPaginated
     styleTerm: string
     bandTerm: string
     songTerm: string
@@ -23,14 +26,17 @@ export interface PatternsLibraryState {
     bandsNewPage: number | null
     songsNewPage: number | null
     patternsNewPage: number | null
+    occurrencesOfPhraseNewPage: number | null
     styleSelected: MusicStyle
     bandSelected: Band
     songSelected: Song  
     phraseSelected: Phrase 
+    occurrenceSelected: PhraseOccurrence
     errorStyles: string
     errorBands: string
     errorSongs: string
     errorPatterns: string
+    errorOccurrences: string
 }
 
 export const patternsLibraryFeatureKey = 'patterns-library'
@@ -59,6 +65,10 @@ export const getPatterns = createSelector(
     getPatternsLibraryFeatureState,
     state => state.phrasesPaginated.items
 )
+export const getOccurrencesOfPhrase = createSelector(
+    getPatternsLibraryFeatureState,
+    state => state.occurrencesOfPhrasePaginated.items
+)
 
 export const getStylesCurrentPage = createSelector(
     getPatternsLibraryFeatureState,
@@ -75,6 +85,10 @@ export const getSongsCurrentPage = createSelector(
 export const getPatternsCurrentPage = createSelector(
     getPatternsLibraryFeatureState,
     state => state.phrasesPaginated.pageNo
+)
+export const getOccurrencesOfPhraseCurrentPage = createSelector(
+    getPatternsLibraryFeatureState,
+    state => state.occurrencesOfPhrasePaginated.pageNo
 )
 
 export const getStylesNewPage = createSelector(
@@ -93,6 +107,10 @@ export const getPatternsNewPage = createSelector(
     getPatternsLibraryFeatureState,
     state => state.patternsNewPage
 )
+export const getOccurrencesOfPhraseNewPage = createSelector(
+    getPatternsLibraryFeatureState,
+    state => state.occurrencesOfPhraseNewPage
+)
 
 export const getTotalStyles = createSelector(
     getPatternsLibraryFeatureState,
@@ -109,6 +127,10 @@ export const getTotalSongs = createSelector(
 export const getTotalPatterns = createSelector(
     getPatternsLibraryFeatureState,
     state => state.phrasesPaginated.totalItems
+)
+export const getTotaOccurrencesOfPhrase = createSelector(
+    getPatternsLibraryFeatureState,
+    state => state.occurrencesOfPhrasePaginated.totalItems
 )
 
 export const getStyleSelected = createSelector(
@@ -128,6 +150,10 @@ export const getPhraseSelected = createSelector(
     state => state.phraseSelected
 )
 
+export const getOccurrenceSelected = createSelector(
+    getPatternsLibraryFeatureState,
+    state => state.occurrenceSelected
+)
 export const getErrorStyles = createSelector(
     getPatternsLibraryFeatureState,
     state => state.errorStyles
@@ -144,6 +170,10 @@ export const getErrorSongs = createSelector(
 export const getErrorPatterns = createSelector(
     getPatternsLibraryFeatureState,
     state => state.errorPatterns
+)
+export const getErrorOccurrences = createSelector(
+    getPatternsLibraryFeatureState,
+    state => state.errorOccurrences
 )
 
 export const getPatternsFilter = createSelector(

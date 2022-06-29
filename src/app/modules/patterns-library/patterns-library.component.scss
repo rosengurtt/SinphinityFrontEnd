@@ -66,6 +66,12 @@ td {
 .playButtons{
   display: grid;
   column-gap: 10px;
+  grid-template-columns: 1fr 1fr    
+}
+
+.occurrenceBox{
+  display: grid;
+  column-gap: 10px;
+  justify-items: end;
   grid-template-columns: 1fr 1fr  
-  
 }

@@ -55,8 +55,8 @@ export class DrawingMusicalNotationTrackService {
         if (!this.svgBox) {
             return [-1, -1]
         }
-
         this.clearSVGbox(this.svgBox)
+
         this.voice = voice
         this.song = song
         this.simplification = new SongSimplification(song.songSimplifications[simplificationNo])
@@ -71,6 +71,7 @@ export class DrawingMusicalNotationTrackService {
         //this.songNotes = aux.map(n => Normalization.normalizeNoteStart(this.bars, n))
 
         this.voiceNotes = this.simplification.getNotesOfVoice(voice)
+
 
         if (this.isVoicePolyphonic(this.voiceNotes)) {
             BasicShapes.createText(this.svgBox, "This voice is polyphonic and can not be shown in musical notation", 50, 80, 30, "black")
@@ -108,10 +109,13 @@ export class DrawingMusicalNotationTrackService {
             this.eventsToDraw.forEach(x => Pentagram.addExtraLines(this.svgBox, x))
 
             let averageY = this.eventsToDraw.reduce((sum, current) => current.bottomY + sum, 0) / this.eventsToDraw.length + 1
-            if (voiceIsPercusion) averageY -=100
+            
+            if (voiceIsPercusion) averageY -= 100
+        
             return [x, averageY]
         }
     }
+
 
     // We can not build the music notation representation of a voice if it is polyphonic, we have to split it first in
     // monophonic voices. Because simplification 0 may have polyphonic voices, we have to check if the voice we will

@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store'
+import { PhraseOccurrencesPaginated } from 'src/app/core/services/songs-repository/responses-format/phrase-occurrences-paginated'
 import { Phrase } from '../../../../core/models/phrase'
 import { BandsPaginated } from '../../../../core/services/songs-repository/responses-format/bands-paginated'
 import { MusicStylesPaginated } from '../../../../core/services/songs-repository/responses-format/music-styles-paginated'
@@ -77,7 +78,7 @@ export const songSelectedFailure = createAction(
 
 export const phraseSelectedSuccess = createAction(
     '[PatternsLibrary API] Phrase Selected Success',
-    props<{ pattern: Phrase }>()
+    props<{ occurencesPaginated: PhraseOccurrencesPaginated }>()
 )
 
 export const phraseSelectedFailure = createAction(

@@ -12,6 +12,7 @@ import { PaginationData } from '../../models/pagination-data';
 import { MusicStyle } from '../../models/music-style';
 import { Band } from '../../models/band';
 import { PhrasesFilter } from '../../models/phrases-filter';
+import {GetPhraseOccurrencesResponse} from './responses-format/get-phrase-occurrences-response'
 
 @Injectable({
     providedIn: 'root'
@@ -73,6 +74,12 @@ export class SongsRepositoryService {
         return this.http.get<GetPhrasesResponse>(url);
     }
 
+    getOccurrencesOfPhrase(phraseId: string, songId: string, paginationData: PaginationData): Observable<any> {
+        let url = this.songLibraryUrl + 'phrases/' + phraseId + '/occurrences'
+        url = this.addParameterToUrl(url, 'songId', songId)
+        url = this.addPaginationParameters(url, paginationData)
+        return this.http.get<GetPhraseOccurrencesResponse>(url);
+    }
 
     getSongInfoById(id: string): Observable<GetSongResponse> {
         return this.http.get<GetSongResponse>(this.songLibraryUrl + 'song/' + id + '/info');

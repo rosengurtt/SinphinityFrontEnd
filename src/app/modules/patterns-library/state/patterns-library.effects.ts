@@ -127,10 +127,6 @@ export class PatternsLibraryEffects {
       )
   })
 
-
-
-
-
   filterStyleTermChange$ = createEffect(() => {
     return this.actions$
       .pipe(
@@ -186,6 +182,21 @@ export class PatternsLibraryEffects {
             .pipe(
               map(data => PatternsLibraryApiActions.filterPatternTermChangeSuccess({ patternsPaginated: data.result })),
               catchError(error => of(PatternsLibraryApiActions.filterPatternTermChangeFailure({ error })))
+            )
+        )
+      )
+  })
+
+  phraseSelected$=createEffect(() => {
+    return this.actions$
+      .pipe(
+        ofType(PatternsLibraryPageActions.phraseSelectedChange),
+        withLatestFrom(this.store$.select(getPatternsLibraryState)),
+        mergeMap(([action, state]) =>
+          this.songsRepositoryService.getOccurrencesOfPhrase(state.phraseSelected?.id, state.songSelected?.id, { pageNo: state.occurrencesOfPhrasePaginated.pageNo, pageSize: state.occurrencesOfPhrasePaginated.pageSize })
+            .pipe(
+              map(data => PatternsLibraryApiActions.phraseSelectedSuccess({ occurencesPaginated: data.result })),
+              catchError(error => of(PatternsLibraryApiActions.phraseSelectedFailure({ error })))
             )
         )
       )

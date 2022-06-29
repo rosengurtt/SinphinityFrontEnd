@@ -4,31 +4,37 @@
     [bandsDataSource] = "bandsDatasource$ | async" 
     [songsDataSource] = "songsDatasource$ | async" 
     [patternsDataSource] = "patternsDatasource$ | async" 
+    [occurrencesDataSource] = "occurrencesDataSource$ | async" 
 
     [stylesPageNo] = "stylesPageNo$ | async"
     [bandsPageNo] = "bandsPageNo$ | async"
     [songsPageNo] = "songsPageNo$ | async"
     [patternsPageNo] = "patternsPageNo$ | async"
+    [occurrencesPageNo] = "occurrencesPageNo$ | async"
     
     [totalStyles] = "totalStyles$ | async"
     [totalBands] = "totalBands$ | async"
     [totalSongs] = "totalSongs$ | async"
     [totalPatterns] = "totalPatterns$ | async"
+    [totalOccurrences] = "totalOccurrences$ | async"
 
     [stylesPageSize] = "stylesPageSize"
     [bandsPageSize] = "bandsPageSize"
     [songsPageSize] = "songsPageSize"
     [patternsPageSize] = "songsPageSize"
+    [occurrencesPageSize] = "occurrencesPageSize"
 
     [styleSelected] = "styleSelected$ | async"
     [bandSelected] = "bandSelected$ | async"
     [songSelected] = "songSelected$ | async"
     [phraseSelected] = "phraseSelected$ | async"
+    [occurrenceSelected] = "occurrenceSelected$ | async"
 
     (stylesPageChanged) = "stylesPageChanged($any($event))"
     (bandsPageChanged) = "bandsPageChanged($any($event))"
     (songsPageChanged) = "songsPageChanged($any($event))"
     (patternsPageChanged) = "patternsPageChanged($any($event))"
+    (occurrencesPageChanged) = "occurrencesPageChanged($any($event))"
 
     (stylesTermChanged) = "stylesTermChanged($any($event))"
     (bandsTermChanged) = "bandsTermChanged($any($event))"
@@ -39,6 +45,7 @@
     (bandSelectedChanged) ="bandSelectedChange($any($event))"
     (songSelectedChanged) ="songSelectedChange($any($event))"
     (phraseSelectedChanged) ="phraseSelectedChange($any($event))"
+    (occurrenceSelectedChanged) ="occurrenceSelectedChanged($any($event))"
 
     (analyzePattern) = "analyzePattern($any($event))"
 >

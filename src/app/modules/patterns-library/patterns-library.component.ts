@@ -11,6 +11,7 @@ import { PaginationData } from '../../core/models/pagination-data'
 import { Phrase } from "../../core/models/phrase"
 import { PhrasesFilter } from "src/app/core/models/phrases-filter"
 import { environment } from '../../../environments/environment'
+import { PhraseOccurrence } from "src/app/core/models/phrase-occurrence"
 declare var MIDIjs: any
 
 @Component({
@@ -24,26 +25,32 @@ export class PatternsLibraryComponent {
     @Input() bandsDataSource: MatTableDataSource<Band>
     @Input() songsDataSource: MatTableDataSource<Song>
     @Input() patternsDataSource: MatTableDataSource<Phrase>
+    @Input() occurrencesDataSource: MatTableDataSource<PhraseOccurrence>
     @Input() styleSelected: MusicStyle
     @Input() bandSelected: Band
     @Input() songSelected: Song
     @Input() phraseSelected: Phrase
+    @Input() occurrenceSelected: PhraseOccurrence
     @Input() stylesPageNo: number
     @Input() bandsPageNo: number
     @Input() songsPageNo: number
     @Input() patternsPageNo: number
+    @Input() occurrencesPageNo: number
     @Input() stylesPageSize: number
     @Input() bandsPageSize: number
     @Input() songsPageSize: number
     @Input() patternsPageSize: number
+    @Input() occurrencesPageSize: number
     @Input() totalStyles: number | null
     @Input() totalBands: number | null
     @Input() totalSongs: number | null
     @Input() totalPatterns: number | null
+    @Input() totalOccurrences: number | null
     @Output() stylesPageChanged = new EventEmitter<PaginationData>()
     @Output() bandsPageChanged = new EventEmitter<PaginationData>()
     @Output() songsPageChanged = new EventEmitter<PaginationData>()
     @Output() patternsPageChanged = new EventEmitter<PaginationData>()
+    @Output() occurrencesPageChanged = new EventEmitter<PaginationData>()
     @Output() stylesTermChanged = new EventEmitter<string>()
     @Output() bandsTermChanged = new EventEmitter<string>()
     @Output() songsTermChanged = new EventEmitter<string>()
@@ -52,6 +59,7 @@ export class PatternsLibraryComponent {
     @Output() bandSelectedChanged = new EventEmitter<Band>()
     @Output() songSelectedChanged = new EventEmitter<Song>()
     @Output() phraseSelectedChanged = new EventEmitter<Phrase>()
+    @Output() occurrenceSelectedChanged = new EventEmitter<PhraseOccurrence>()
     @Output() analyzePattern = new EventEmitter<Phrase>()
     displayedColumns: string[] = ['name']
     subscriptionSearchTerms: Subscription[] = []
@@ -67,8 +75,8 @@ export class PatternsLibraryComponent {
     backendUrl: string
 
 
-    svgBoxWidth = 600
-    svgBoxHeight = 100
+    svgBoxWidth = 400
+    svgBoxHeight = 200
     svgBoxIdPrefix = "svgPattern"
 
     constructor(private router: Router) {
@@ -107,6 +115,10 @@ export class PatternsLibraryComponent {
         if (event) this.patternsPageChanged.emit({ pageNo: event.pageIndex, pageSize: event.pageSize })
         return event
     }
+    public getOccurrencesPage(event?: PageEvent) {
+        if (event) this.occurrencesPageChanged.emit({ pageNo: event.pageIndex, pageSize: event.pageSize })
+        return event
+    }
 
     selectStyle(style: MusicStyle) {
         this.styleSelectedChanged.emit(style)
@@ -118,17 +130,19 @@ export class PatternsLibraryComponent {
         this.songSelectedChanged.emit(song)
     }
     selectPhrase(phrase: Phrase) {
-        console.log(phrase)
         this.phraseSelectedChanged.emit(phrase)
+    }
+    selectOccurrence(occurrence: PhraseOccurrence) {
+        this.occurrenceSelectedChanged.emit(occurrence)
     }
     playPhrase(phrase: Phrase) {
         const midiUrl = `${this.backendUrl}phrases/midi?asString=${phrase.asString}&phraseType=${phrase.phraseType}`
         MIDIjs.play(midiUrl)
     }
 
-    playPhraseInSong(phrase: Phrase) {
-        const midiUrl = `${this.backendUrl}phrases/midi?asString=${phrase.asString}&phraseType=${phrase.phraseType}`
-        MIDIjs.play(midiUrl)
+    playPhraseInSong(occurrence: PhraseOccurrence) {
+        // const midiUrl = `${this.backendUrl}phrases/midi?asString=${phrase.asString}&phraseType=${phrase.phraseType}`
+        // MIDIjs.play(midiUrl)
     }
 
     analyzePatternClicked(pattern: Phrase) {

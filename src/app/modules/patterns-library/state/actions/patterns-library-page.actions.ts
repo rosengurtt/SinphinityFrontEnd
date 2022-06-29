@@ -5,6 +5,7 @@ import { Song } from '../../../../core/models/song'
 import { PaginationData } from '../../../../core/models/pagination-data'
 import { Phrase } from '../../../../core/models/phrase'
 import { PhrasesFilter } from 'src/app/core/models/phrases-filter'
+import { PhraseOccurrence } from 'src/app/core/models/phrase-occurrence'
 
 export const filterStyleTermChange = createAction(
   '[Patterns-Library-Page] Filter Style',
@@ -38,6 +39,10 @@ export const patternsPaginationChange = createAction(
   '[Patterns-Library-Page] Page Pattern',
   props<{ paginationData: PaginationData }>()
 )
+export const occurrencesPaginationChange = createAction(
+  '[Patterns-Library-Page] Page Occurrences',
+  props<{ paginationData: PaginationData }>()
+)
 export const styleSelectedChange = createAction(
   '[Patterns-Library-Page] Style Selected Change',
   props<{ selectedStyle: MusicStyle }>()
@@ -53,4 +58,8 @@ export const songSelectedChange = createAction(
 export const phraseSelectedChange = createAction(
   '[Patterns-Library-Page] Phrase Selected Change',
   props<{ selectedPhrase: Phrase }>()
+)
+export const occurrenceSelectedChange = createAction(
+  '[Patterns-Library-Page] Occurrence Selected Change',
+  props<{ selectedOccurrence: PhraseOccurrence }>()
 )

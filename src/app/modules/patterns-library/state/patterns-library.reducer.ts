@@ -38,6 +38,7 @@ const initialState: PatternsLibraryState = {
     bandsNewPage: null,
     songsNewPage: null,
     patternsNewPage: null,
+    occurrencesOfPhraseNewPage: null,
     styleTerm: '',
     bandTerm: '',
     songTerm: '',
@@ -46,10 +47,19 @@ const initialState: PatternsLibraryState = {
     bandSelected: null,
     songSelected: null,
     phraseSelected: null,
+    occurrenceSelected: null,
+    occurrencesOfPhrasePaginated: {
+        pageNo: 0,
+        pageSize: 10,
+        totalItems: 0,
+        totalPages: 0,
+        items: []
+    },
     errorStyles: '',
     errorBands: '',
     errorSongs: '',
-    errorPatterns: ''
+    errorPatterns: '',
+    errorOccurrences: ''
 }
 
 
@@ -117,22 +127,101 @@ export const patternsLibraryReducer = createReducer<PatternsLibraryState>(
     on(PatternsLibraryPageActions.styleSelectedChange, (state, action): PatternsLibraryState => {
         let newState = cloneDeep(state)
         newState.styleSelected = action.selectedStyle
+        newState.bandSelected = null
+        newState.bandsPaginated = {
+            pageNo: 0,
+            pageSize: 10,
+            totalItems: 0,
+            totalPages: 0,
+            items: []
+        }
+        newState.songSelected = null
+        newState.songsPaginated = {
+            pageNo: 0,
+            pageSize: 10,
+            totalItems: 0,
+            totalPages: 0,
+            items: []
+        }
+        newState.phraseSelected = null
+        newState.phrasesPaginated = {
+            pageNo: 0,
+            pageSize: 10,
+            totalItems: 0,
+            totalPages: 0,
+            items: []
+        }
+        newState.occurrenceSelected = null
+        newState.occurrencesOfPhrasePaginated = {
+            pageNo: 0,
+            pageSize: 10,
+            totalItems: 0,
+            totalPages: 0,
+            items: []
+        }
         return newState
     }),
     on(PatternsLibraryPageActions.bandSelectedChange, (state, action): PatternsLibraryState => {
         let newState = cloneDeep(state)
         newState.bandSelected = action.selectedBand
+        newState.songSelected = null
+        newState.songsPaginated = {
+            pageNo: 0,
+            pageSize: 10,
+            totalItems: 0,
+            totalPages: 0,
+            items: []
+        }
+        newState.phraseSelected = null
+        newState.phrasesPaginated = {
+            pageNo: 0,
+            pageSize: 10,
+            totalItems: 0,
+            totalPages: 0,
+            items: []
+        }
+        newState.occurrenceSelected = null
+        newState.occurrencesOfPhrasePaginated = {
+            pageNo: 0,
+            pageSize: 10,
+            totalItems: 0,
+            totalPages: 0,
+            items: []
+        }
         return newState
     }),
 
     on(PatternsLibraryPageActions.songSelectedChange, (state, action): PatternsLibraryState => {
         let newState = cloneDeep(state)
         newState.songSelected = action.selectedSong
+        newState.occurrenceSelected = null
+        newState.occurrencesOfPhrasePaginated = {
+            pageNo: 0,
+            pageSize: 10,
+            totalItems: 0,
+            totalPages: 0,
+            items: []
+        }
         return newState
     }),
     on(PatternsLibraryPageActions.phraseSelectedChange, (state, action): PatternsLibraryState => {
         let newState = cloneDeep(state)
         newState.phraseSelected = action.selectedPhrase
+        newState.occurrenceSelected = null
+        newState.occurrencesOfPhrasePaginated = {
+            pageNo: 0,
+            pageSize: 10,
+            totalItems: 0,
+            totalPages: 0,
+            items: []
+        }
+        return newState
+    }),
+
+    on(PatternsLibraryPageActions.occurrenceSelectedChange, (state, action): PatternsLibraryState => {
+        let newState = cloneDeep(state)
+        console.log("estoy en  on(PatternsLibraryPageActions.occurrenceSelectedChange")
+        newState.occurrenceSelected = action.selectedOccurrence
         return newState
     }),
 
@@ -327,7 +416,7 @@ export const patternsLibraryReducer = createReducer<PatternsLibraryState>(
 
     on(PatternsLibraryApiActions.phraseSelectedSuccess, (state, action): PatternsLibraryState => {
         let newState = cloneDeep(state)
-        newState.phraseSelected = action.pattern
+        newState.occurrencesOfPhrasePaginated = action.occurencesPaginated
         return newState
     }),
     on(PatternsLibraryApiActions.phraseSelectedFailure, (state, action): PatternsLibraryState => {

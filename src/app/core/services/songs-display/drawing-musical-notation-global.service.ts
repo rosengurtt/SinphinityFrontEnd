@@ -22,7 +22,9 @@ export class DrawingMusicalNotationGlobalService {
         simplificationNo: number): Array<Array<SoundEvent>> {
 
         // if we haven't processed this song before, process it and save it to the cache
-        if (this.songIds.filter(x => x == song.id).length === 0) {
+        if (this.songIds.filter(x => x == song.id).length === 0 || song.id == "0") {
+            if (song.id == "0")
+                this.eventsToDraw = []
 
             const simplification = new SongSimplification(song.songSimplifications[simplificationNo])
 
@@ -30,7 +32,8 @@ export class DrawingMusicalNotationGlobalService {
             let eventsToDrawForAllVoices: Array<Array<SoundEvent>> = []
             const voicesWithNotes = simplification.getVoicesWithNotes()
             for (let v of voicesWithNotes) {
-                eventsToDrawForAllVoices.push(DrawingCalculations.getEventsToDraw(song, simplificationNo, v))
+                let sacamela = DrawingCalculations.getEventsToDraw(song, simplificationNo, v)
+                eventsToDrawForAllVoices.push(sacamela)
             }
             this.songIds.push(song.id)
             this.eventsToDraw.push(eventsToDrawForAllVoices)

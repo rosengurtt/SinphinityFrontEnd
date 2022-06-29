@@ -113,9 +113,9 @@
 			<div class="mat-elevation-z8">
 				<table mat-table [dataSource]="patternsDataSource" class="mat-elevation-z8" matSort>
 					<ng-container matColumnDef="name">
-						<th mat-header-cell *matHeaderCellDef mat-sort-header>Pattern</th>
-						<td mat-cell *matCellDef="let pattern" [class.selected]="patternSelected && song.id==phraseSelected.id"><span
-								(click)="selectPhrase(pattern)">{{pattern.asString | cellWidthLimit: 30}}</span>
+						<th mat-header-cell *matHeaderCellDef mat-sort-header>Phrase</th>
+						<td mat-cell *matCellDef="let phrase" [class.selected]="phraseSelected && phrase.id==phraseSelected.id"><span
+								(click)="selectPhrase(phrase)">{{phrase.asString | cellWidthLimit: 30}}</span>
 						</td>
 					</ng-container>
 					<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -129,8 +129,7 @@
 				<div class="patternStatsTitle" *ngIf="phraseSelected">
 					<h2>Pattern info</h2>
 					<div class="playButtons">
-						<button mat-raised-button color="primary" (click)="playPhrase(phraseSelected)">Play</button>
-						<button mat-raised-button color="primary" (click)="playPhrase(phraseSelected)">Play in song</button>
+						<button mat-raised-button color="primary" (click)="playPhrase(phraseSelected)">Play</button>				
 					</div>
 				</div>
 				<div class="patternStatsTable">
@@ -146,7 +145,7 @@
 						<tr>
 							
 							<td colspan="2">  
-								<dc-pattern [svgBoxIdPrefix]="svgBoxIdPrefix"  [song]="phraseSelected.asSong"
+								<dc-pattern  [song]="phraseSelected.asSong"
 								 [phraseId]="phraseSelected.id"  
 								 [svgBoxWidth]="svgBoxWidth"
 								[svgBoxHeight]="svgBoxHeight"
@@ -172,7 +171,32 @@
 						<tr>
 							<td>Step</td>
 							<td>{{phraseSelected.step}}</td>
-						</tr>				
+						</tr>	
+						<tr>
+							<td colspan="2">
+								<div class="mat-elevation-z8">
+									<table mat-table [dataSource]="occurrencesDataSource" class="mat-elevation-z8" matSort>
+						
+										<ng-container matColumnDef="name">
+											<th mat-header-cell *matHeaderCellDef mat-sort-header>Style</th>
+											<td mat-cell *matCellDef="let occurrence" (click)="selectOccurrence(occurrence)"
+												[class.selected]="occurrenceSelected && occurrence.id==occurrenceSelected.id">
+												<div class="occurrenceBox">
+													<span>Voice {{occurrence.voice}} Bar {{occurrence.barNumber}} Beat {{occurrence.beat}}</span>
+													<button mat-raised-button color="primary" (click)="playPhraseInSong(occurrence)">Play in song</button>
+												</div>
+											</td>
+											</ng-container>
+						
+										<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+									</table>
+						
+									<mat-paginator #stylesPaginator [length]="totalOccurrences"
+										[pageIndex]="occurrencesPageNo" [pageSize]="occurrencesPageSize"
+										[hidePageSize]="true" (page)="getOccurrencesPage($event)"></mat-paginator>
+								</div>
+							</td>
+						</tr>			
 					</table>
 				</div>
 			</div>

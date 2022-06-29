@@ -140,7 +140,6 @@ export class Normalization {
                 }
             }
         }
-        console.log("me voy de getSplictPoint sin retornar el split point. Este era el event:")
 
         console.log(e)
     }
