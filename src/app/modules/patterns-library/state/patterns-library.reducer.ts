@@ -220,7 +220,6 @@ export const patternsLibraryReducer = createReducer<PatternsLibraryState>(
 
     on(PatternsLibraryPageActions.occurrenceSelectedChange, (state, action): PatternsLibraryState => {
         let newState = cloneDeep(state)
-        console.log("estoy en  on(PatternsLibraryPageActions.occurrenceSelectedChange")
         newState.occurrenceSelected = action.selectedOccurrence
         return newState
     }),

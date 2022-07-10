@@ -140,9 +140,26 @@ export class PatternsLibraryComponent {
         MIDIjs.play(midiUrl)
     }
 
-    playPhraseInSong(occurrence: PhraseOccurrence) {
-        // const midiUrl = `${this.backendUrl}phrases/midi?asString=${phrase.asString}&phraseType=${phrase.phraseType}`
-        // MIDIjs.play(midiUrl)
+    playPhraseInSong(occurrence: PhraseOccurrence, playSingleVoice = false) {
+        console.log(occurrence)
+        let mutedTracks = ""
+        if (playSingleVoice) {
+            for (let i = 0; i < 25; i++) {
+                if (i != occurrence.voice) {
+                    mutedTracks += i + ","
+                }
+            }
+            if (mutedTracks.endsWith(","))
+                mutedTracks = mutedTracks.substring(0, mutedTracks.length - 1)
+        }
+        const midiUrl = `${this.backendUrl}songs/${occurrence.song.id}/midi?simplificationVersion=0&fromTick=${occurrence.startTick}&toTick=${occurrence.endTick}&mutedTracks=${mutedTracks}`
+        console.log(midiUrl)
+        MIDIjs.play(midiUrl)
+
+    }
+    stopPlaying() {
+        MIDIjs.stop()
+
     }
 
     analyzePatternClicked(pattern: Phrase) {
