@@ -1,5 +1,3 @@
-import { PhraseTypeEnum } from "./enums/phrase-type.enum"
-
 export class PhrasesFilter{
     numberOfNotes?: number
     range?: number
@@ -7,7 +5,6 @@ export class PhrasesFilter{
     durationInTicks?: number
     isMonotone?: boolean
     contains?: string
-    phraseType?: PhraseTypeEnum = PhraseTypeEnum.metrics 
     // the next filter is needed for a work around for a problem that happens because of spurious events in Angular
     alca?: string
 }

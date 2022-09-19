@@ -8,7 +8,6 @@ import { SongsPaginated } from '../../../core/services/songs-repository/response
 import { PhrasesPaginated } from '../../../core/services/songs-repository/responses-format/phrases-paginated'
 import { Phrase } from '../../../core/models/phrase'
 import { PhrasesFilter } from '../../../core/models/phrases-filter'
-import { PhraseTypeEnum } from '../../../core/models/enums/phrase-type.enum'
 import { PhraseOccurrence } from 'src/app/core/models/phrase-occurrence'
 import { PhraseOccurrencesPaginated } from 'src/app/core/services/songs-repository/responses-format/phrase-occurrences-paginated'
 

@@ -113,7 +113,6 @@ export class SongsRepositoryService {
         url = this.addParameterToUrl(url, 'durationInTicks', filter?.durationInTicks)
         url = this.addParameterToUrl(url, 'contains', filter?.contains)
         url = this.addParameterToUrl(url, 'isMonotone', filter?.isMonotone)
-        url = this.addParameterToUrl(url, 'phraseType', filter?.phraseType)
         return url
     }
 

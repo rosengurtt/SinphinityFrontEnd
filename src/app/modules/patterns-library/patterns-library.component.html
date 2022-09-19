@@ -74,19 +74,7 @@
 	<div>
 		<div>
 			<h2>Phrases</h2>
-			<div class="patternFilter">	
-				<mat-form-field appearance="fill" >
-					<mat-label>Phrase Type</mat-label>
-					<mat-select matNativeControl required  value="1" [formControl]="phraseType">
-					<mat-option value="0">Metrics</mat-option>
-					<mat-option value="1">Pitches</mat-option>
-					<mat-option value="2">Metrics and Pitches</mat-option>
-					<mat-option value="3">Embellished Metrics</mat-option>
-					<mat-option value="4">Embellished Pitches</mat-option>
-					<mat-option value="5">Embellished Metrics and Pitches</mat-option>
-					</mat-select>
-				</mat-form-field>	
-
+			<div class="patternFilter">					
 				<mat-form-field>
 					<input class="searchBox" matInput type="search" placeholder="Number notes"
 					[formControl]="patternNumberOfNotes"   />
@@ -115,7 +103,7 @@
 					<ng-container matColumnDef="name">
 						<th mat-header-cell *matHeaderCellDef mat-sort-header>Phrase</th>
 						<td mat-cell *matCellDef="let phrase" [class.selected]="phraseSelected && phrase.id==phraseSelected.id"><span
-								(click)="selectPhrase(phrase)">{{phrase.asString | cellWidthLimit: 30}}</span>
+								(click)="selectPhrase(phrase)">{{phrase.metricsAsString | cellWidthLimit: 20}}/{{phrase.pitchesAsString | cellWidthLimit: 20}}</span>
 						</td>
 					</ng-container>
 					<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -141,7 +129,7 @@
 						</colgroup> 
 						<tr>
 							<td>As string</td>
-							<td>{{phraseSelected.asString | cellWidthLimit: 30}}</td>
+							<td>{{phraseSelected.metricsAsString | cellWidthLimit: 15}}/{{phraseSelected.pitchesAsString | cellWidthLimit: 15}}</td>
 						</tr>
 						<tr>
 							

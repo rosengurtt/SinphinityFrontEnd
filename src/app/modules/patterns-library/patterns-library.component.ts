@@ -71,7 +71,6 @@ export class PatternsLibraryComponent {
     patternRange = new FormControl()
     patternStep = new FormControl()
     patternDurationInTicks = new FormControl()
-    phraseType = new FormControl()
     backendUrl: string
 
 
@@ -93,7 +92,6 @@ export class PatternsLibraryComponent {
         this.subscriptionSearchTerms.push(this.patternStep.valueChanges.subscribe(value => this.phrasesFilterChanged.emit({ step: value, alca: "step" })))
         this.subscriptionSearchTerms.push(this.patternDurationInTicks.valueChanges.subscribe(value => this.phrasesFilterChanged.emit({ durationInTicks: value, alca: "duration" })))
         this.subscriptionSearchTerms.push(this.patternTerm.valueChanges.subscribe(value => this.phrasesFilterChanged.emit({ contains: value, alca: "term" })))
-        this.subscriptionSearchTerms.push(this.phraseType.valueChanges.subscribe(value => this.phrasesFilterChanged.emit({ phraseType: value, alca: "type" })))
 
     }
 
@@ -136,12 +134,11 @@ export class PatternsLibraryComponent {
         this.occurrenceSelectedChanged.emit(occurrence)
     }
     playPhrase(phrase: Phrase) {
-        const midiUrl = `${this.backendUrl}phrases/midi?asString=${phrase.asString}&phraseType=${phrase.phraseType}`
+        const midiUrl = `${this.backendUrl}phrases/midi?metricsAsString=${phrase.metricsAsString}&pitchesAsString=${phrase.pitchesAsString}`
         MIDIjs.play(midiUrl)
     }
 
     playPhraseInSong(occurrence: PhraseOccurrence, playSingleVoice = false) {
-        console.log(occurrence)
         let mutedTracks = ""
         if (playSingleVoice) {
             for (let i = 0; i < 25; i++) {
@@ -153,7 +150,6 @@ export class PatternsLibraryComponent {
                 mutedTracks = mutedTracks.substring(0, mutedTracks.length - 1)
         }
         const midiUrl = `${this.backendUrl}songs/${occurrence.song.id}/midi?simplificationVersion=0&fromTick=${occurrence.startTick}&toTick=${occurrence.endTick}&mutedTracks=${mutedTracks}`
-        console.log(midiUrl)
         MIDIjs.play(midiUrl)
 
     }

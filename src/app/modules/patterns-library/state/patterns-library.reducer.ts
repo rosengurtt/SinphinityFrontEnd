@@ -118,8 +118,6 @@ export const patternsLibraryReducer = createReducer<PatternsLibraryState>(
             newState.phrasesFilter.range = action.phraseFilter.range
         if (action.phraseFilter.step != null)
             newState.phrasesFilter.step = action.phraseFilter.step
-        if (action.phraseFilter.phraseType != null)
-            newState.phrasesFilter.phraseType = action.phraseFilter.phraseType
 
         return newState
     }),
