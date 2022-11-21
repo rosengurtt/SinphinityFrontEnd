@@ -28,6 +28,8 @@ import { SongsLibraryPageActions } from './state/actions'
 import { State } from '../../core/state/app.state'
 import { SongPanelPageActions } from '../song-panel/state/actions'
 import { PaginationData } from 'src/app/core/models/pagination-data'
+import { Voice } from 'src/app/core/models/voice'
+import { getVoices } from '../patterns-library/state'
 
 @Component({
     templateUrl: './songs-library-shell.component.html'

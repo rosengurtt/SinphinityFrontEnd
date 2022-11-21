@@ -6,6 +6,7 @@ import { PaginationData } from '../../../../core/models/pagination-data'
 import { Phrase } from '../../../../core/models/phrase'
 import { PhrasesFilter } from 'src/app/core/models/phrases-filter'
 import { PhraseOccurrence } from 'src/app/core/models/phrase-occurrence'
+import { Voice } from 'src/app/core/models/voice'
 
 export const filterStyleTermChange = createAction(
   '[Patterns-Library-Page] Filter Style',
@@ -63,3 +64,8 @@ export const occurrenceSelectedChange = createAction(
   '[Patterns-Library-Page] Occurrence Selected Change',
   props<{ selectedOccurrence: PhraseOccurrence }>()
 )
+export const voiceSelectedChange = createAction(
+  '[Patterns-Library-Page] Voice Selected Change',
+  props<{ voice: number }>()
+)
+

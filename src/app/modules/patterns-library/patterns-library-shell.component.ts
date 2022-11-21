@@ -29,7 +29,8 @@ import {
     getOccurrencesOfPhraseCurrentPage,
     getTotaOccurrencesOfPhrase,
     getOccurrenceSelected,
-    getErrorOccurrences
+    getErrorOccurrences,
+    getVoices
 } from './state'
 import { MusicStyle } from '../../core/models/music-style'
 import { Band } from '../../core/models/band'
@@ -40,6 +41,7 @@ import { PaginationData } from '../../core/models/pagination-data'
 import { Phrase } from '../../core/models/phrase'
 import { PhrasesFilter } from 'src/app/core/models/phrases-filter'
 import { PhraseOccurrence } from 'src/app/core/models/phrase-occurrence'
+import { Voice } from 'src/app/core/models/voice'
 
 @Component({
     templateUrl: './patterns-library-shell.component.html'
@@ -51,6 +53,8 @@ export class PatternsLibraryShellComponent implements OnInit {
     songsDatasource$: Observable<MatTableDataSource<Song>>
     patternsDatasource$: Observable<MatTableDataSource<Phrase>>
     occurrencesDataSource$: Observable<MatTableDataSource<PhraseOccurrence>>
+
+    voices$: Observable<Voice[]>
 
     styleSelected$: Observable<MusicStyle>
     bandSelected$: Observable<Band>
@@ -92,6 +96,8 @@ export class PatternsLibraryShellComponent implements OnInit {
         this.songsDatasource$ = this.patternsLibStore.select(getSongs).pipe(map(songs => new MatTableDataSource<Song>(songs)))
         this.patternsDatasource$ = this.patternsLibStore.select(getPatterns).pipe(map(patterns => new MatTableDataSource<Phrase>(patterns)))
         this.occurrencesDataSource$ = this.patternsLibStore.select(getOccurrencesOfPhrase).pipe(map(occurrences => new MatTableDataSource<PhraseOccurrence>(occurrences)))
+
+        this.voices$ = this.patternsLibStore.select(getVoices)
 
         this.stylesPageNo$ = this.patternsLibStore.select(getStylesCurrentPage)
         this.bandsPageNo$ = this.patternsLibStore.select(getBandsCurrentPage)
@@ -172,5 +178,10 @@ export class PatternsLibraryShellComponent implements OnInit {
     }
     analyzePattern(pattern: Phrase): void {
         //this.mainStore.dispatch(PatternPanelPageActions.addSong({ song: song }))
+    }
+
+    voiceSelectedChange(voice: number): void{
+        this.patternsLibStore.dispatch(PatternsLibraryPageActions.voiceSelectedChange({ voice : voice }))
+        
     }
 }

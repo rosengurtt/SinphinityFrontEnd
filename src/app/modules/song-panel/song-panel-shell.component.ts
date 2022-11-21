@@ -14,7 +14,7 @@ import { SongViewType } from 'src/app/core/models/enums/SongViewTypes.enum'
     templateUrl: './song-panel-shell.component.html'
 })
 export class SongPanelShellComponent implements OnInit {
-    songId: string
+    songId: number
     song$: Observable<Song>
     displacement$: Observable<Coordenadas>
     scale$: Observable<number>
@@ -32,7 +32,7 @@ export class SongPanelShellComponent implements OnInit {
 
     ngOnInit(): void {
         this.activatedRoute.paramMap.subscribe(params => {
-            this.songId = params.get('songId');
+            this.songId = +params.get('songId');
 
             this.song$ = this.mainStore.select(getSongUnderAnalysisById, { id: this.songId })
             this.displacement$ = this.mainStore.select(getDisplacementBySongId, { songId: this.songId })

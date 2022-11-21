@@ -12,7 +12,6 @@ import { SortPipe } from '../../core/pipes/sort-by.pipe'
 import { TimeSignaturePipe } from '../../core/pipes/time-signature.pipe'
 import { TimeDurationPipe } from '../../core/pipes/time-duration.pipe'
 import { FileNameToSongNamePipe } from '../../core/pipes/filename2songname.pipe'
-import { InstrumentCodeToNamePipe } from '../../core/pipes/instrumentCode2Name'
 import { SongsRepositoryService } from '../../core/services/songs-repository/songs-repository.service'
 import { songsLibraryFeatureKey } from './state'
 import { songsLibraryReducer } from './state/songs-library.reducer'
@@ -27,8 +26,7 @@ import { MaterialModule } from '../../core/material.module'
     SortPipe,
     TimeSignaturePipe,
     TimeDurationPipe,
-    FileNameToSongNamePipe,
-    InstrumentCodeToNamePipe
+    FileNameToSongNamePipe
   ],
   imports: [
     BrowserModule,

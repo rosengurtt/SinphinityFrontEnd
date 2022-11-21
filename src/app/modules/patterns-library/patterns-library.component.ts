@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from "@angular/core"
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from "@angular/core"
 import { Subscription } from 'rxjs'
 import { FormControl } from '@angular/forms'
 import { Router } from '@angular/router'
@@ -12,6 +12,8 @@ import { Phrase } from "../../core/models/phrase"
 import { PhrasesFilter } from "src/app/core/models/phrases-filter"
 import { environment } from '../../../environments/environment'
 import { PhraseOccurrence } from "src/app/core/models/phrase-occurrence"
+import { Voice } from "src/app/core/models/voice"
+
 declare var MIDIjs: any
 
 @Component({
@@ -20,12 +22,13 @@ declare var MIDIjs: any
     styleUrls: ['./patterns-library.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PatternsLibraryComponent {
+export class PatternsLibraryComponent  {
     @Input() stylesDataSource: MatTableDataSource<MusicStyle>
     @Input() bandsDataSource: MatTableDataSource<Band>
     @Input() songsDataSource: MatTableDataSource<Song>
     @Input() patternsDataSource: MatTableDataSource<Phrase>
     @Input() occurrencesDataSource: MatTableDataSource<PhraseOccurrence>
+    @Input() voices: Voice[]
     @Input() styleSelected: MusicStyle
     @Input() bandSelected: Band
     @Input() songSelected: Song
@@ -60,7 +63,9 @@ export class PatternsLibraryComponent {
     @Output() songSelectedChanged = new EventEmitter<Song>()
     @Output() phraseSelectedChanged = new EventEmitter<Phrase>()
     @Output() occurrenceSelectedChanged = new EventEmitter<PhraseOccurrence>()
-    @Output() analyzePattern = new EventEmitter<Phrase>()
+    @Output() analyzePattern = new EventEmitter<Phrase>()    
+    @Output() voiceSelectedChanged = new EventEmitter<number>()
+
     displayedColumns: string[] = ['name']
     subscriptionSearchTerms: Subscription[] = []
     styleTerm = new FormControl()
@@ -80,6 +85,7 @@ export class PatternsLibraryComponent {
 
     constructor(private router: Router) {
     }
+
 
     async ngOnInit(): Promise<any> {
         this.backendUrl = environment.GetEnvironment().SinphinityBackend
@@ -161,5 +167,9 @@ export class PatternsLibraryComponent {
     analyzePatternClicked(pattern: Phrase) {
         this.analyzePattern.emit(pattern)
         this.router.navigate(["song-panel", pattern.id])
+    }
+
+    voiceSelected(voice:number){
+        this.voiceSelectedChanged.emit(voice)
     }
 }

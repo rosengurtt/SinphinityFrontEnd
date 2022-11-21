@@ -52,7 +52,6 @@ export class PatternComponent implements AfterViewInit, OnChanges {
     refreshDrawing() {
         // the variable eventsToDraw is needed by all tracks and is expensive to compute, so we use a singleton service to
         // calculate it
-
         let eventsToDraw = this.drawingMusicalNotationGlobalService.getEventsToDrawForSong(this.song, 0);
         // if the svg box hasn't been created by the browser yet, we save that fact in the variable mustRedrawSvgBox
         // and the next times onChanges run, if the value is still set and the svg box has become available, it will draw

@@ -15,12 +15,14 @@ import { patternsLibraryReducer } from './state/patterns-library.reducer'
 import { PatternsLibraryEffects } from './state/patterns-library.effects'
 import { PatternSearchService } from './services/pattern-search.service'
 import { DrawingMusicalNotationGlobalService } from '../../core/services/songs-display/drawing-musical-notation-global.service'
+import { InstrumentCodeToNamePipe } from 'src/app/core/pipes/instrumentCode2Name'
 
 @NgModule({
   declarations: [
     PatternsLibraryShellComponent,
     PatternsLibraryComponent,
-    PatternComponent
+    PatternComponent,
+    InstrumentCodeToNamePipe
   ],
   imports: [
     BrowserModule,
@@ -33,9 +35,6 @@ import { DrawingMusicalNotationGlobalService } from '../../core/services/songs-d
     StoreModule.forFeature(patternsLibraryFeatureKey, patternsLibraryReducer),
     EffectsModule.forFeature([PatternsLibraryEffects])
   ],
-
-
-
 
   providers: [
     SongsRepositoryService,

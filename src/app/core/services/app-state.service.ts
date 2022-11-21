@@ -19,7 +19,7 @@ export class AppStateServiceService {
   public getSongs(): Song[] {
     return this.songs
   }
-  public removeSong(id: string) {
+  public removeSong(id: number) {
     const indexToRemove = this.songs.findIndex(s => s.id === id)
     if (indexToRemove) this.songs.splice(indexToRemove, 1)
   }

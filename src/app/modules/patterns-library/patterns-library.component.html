@@ -75,7 +75,7 @@
 		<div>
 			<h2>Phrases</h2>
 			<div class="patternFilter">					
-				<mat-form-field>
+				<!--<mat-form-field>
 					<input class="searchBox" matInput type="search" placeholder="Number notes"
 					[formControl]="patternNumberOfNotes"   />
 				</mat-form-field>
@@ -95,7 +95,15 @@
 					<mat-icon matPrefix>search</mat-icon>
 					<input class="searchBox" matInput type="search" placeholder="Search"
 					[formControl]="patternTerm"   />
-				</mat-form-field>
+				</mat-form-field>-->
+				<mat-form-field appearance="fill">
+					<mat-label>Voices</mat-label>
+					<mat-select (selectionChange)="voiceSelected($event.value)">
+					  <mat-option *ngFor="let voice of voices" [value]="voice.voiceNumber">
+						{{voice.instrumentNumber | instrumentCodeToName}}
+					  </mat-option>
+					</mat-select>
+				  </mat-form-field>
 			</div>
 			<div  class="phraseSection">
 			<div class="mat-elevation-z8">
@@ -149,18 +157,7 @@
 							<td>Number of notes</td>
 							<td>{{phraseSelected.numberOfNotes | number}}</td>
 						</tr>
-						<tr>
-							<td>Range</td>
-							<td>{{phraseSelected.range | number}}</td>
-						</tr>
-						<tr>
-							<td>Is Monotone</td>
-							<td>{{phraseSelected.isMonotone}}</td>
-						</tr>
-						<tr>
-							<td>Step</td>
-							<td>{{phraseSelected.step}}</td>
-						</tr>	
+
 						<tr>
 							<td colspan="2">
 								<div class="mat-elevation-z8">

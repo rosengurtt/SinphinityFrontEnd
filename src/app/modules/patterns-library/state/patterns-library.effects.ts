@@ -73,20 +73,40 @@ export class PatternsLibraryEffects {
   })
 
 
+  // styleSelected$ = createEffect(() => {
+  //   return this.actions$
+  //     .pipe(
+  //       ofType(PatternsLibraryPageActions.styleSelectedChange),
+  //       withLatestFrom(this.store$.select(getPatternsLibraryState)),
+  //       mergeMap(([action, state]) =>
+  //         this.songsRepositoryService.getPhrases(state.styleSelected?.id, null, null, { pageNo: 0, pageSize: state.phrasesPaginated.pageSize }, state.phrasesFilter)
+  //           .pipe(
+  //             withLatestFrom(
+  //               this.songsRepositoryService.getSongs(action.selectedStyle.id, null, { pageNo: 0, pageSize: state.songsPaginated.pageSize }, state.songTerm),
+  //               this.songsRepositoryService.getBands(action.selectedStyle.id, { pageNo: 0, pageSize: state.bandsPaginated.pageSize }, state.bandTerm)
+  //             ),
+  //             map(([patterns, songs, bands]) =>
+  //               PatternsLibraryApiActions.styleSelectedSuccess({ bandsPaginated: bands.result, songsPaginated: songs.result, patternsPaginated: patterns.result })),
+  //             catchError(error => of(PatternsLibraryApiActions.styleSelectedFailure({ error })))
+
+  //           )
+  //       )
+  //     )
+  // })
+
   styleSelected$ = createEffect(() => {
     return this.actions$
       .pipe(
         ofType(PatternsLibraryPageActions.styleSelectedChange),
         withLatestFrom(this.store$.select(getPatternsLibraryState)),
         mergeMap(([action, state]) =>
-          this.songsRepositoryService.getPhrases(state.styleSelected?.id, null, null, { pageNo: 0, pageSize: state.phrasesPaginated.pageSize }, state.phrasesFilter)
+        this.songsRepositoryService.getSongs(action.selectedStyle.id, null, { pageNo: 0, pageSize: state.songsPaginated.pageSize }, state.songTerm)
             .pipe(
-              withLatestFrom(
-                this.songsRepositoryService.getSongs(action.selectedStyle.id, null, { pageNo: 0, pageSize: state.songsPaginated.pageSize }, state.songTerm),
+              withLatestFrom(                
                 this.songsRepositoryService.getBands(action.selectedStyle.id, { pageNo: 0, pageSize: state.bandsPaginated.pageSize }, state.bandTerm)
               ),
-              map(([patterns, songs, bands]) =>
-                PatternsLibraryApiActions.styleSelectedSuccess({ bandsPaginated: bands.result, songsPaginated: songs.result, patternsPaginated: patterns.result })),
+              map(([songs, bands]) =>
+                PatternsLibraryApiActions.styleSelectedSuccess({ bandsPaginated: bands.result, songsPaginated: songs.result})),
               catchError(error => of(PatternsLibraryApiActions.styleSelectedFailure({ error })))
 
             )
@@ -95,22 +115,52 @@ export class PatternsLibraryEffects {
   })
 
 
+  // bandSelected$ = createEffect(() => {
+  //   return this.actions$
+  //     .pipe(
+  //       ofType(PatternsLibraryPageActions.bandSelectedChange),
+  //       withLatestFrom(this.store$.select(getPatternsLibraryState)),
+  //       mergeMap(([action, state]) =>
+  //         this.songsRepositoryService.getPhrases(null, action.selectedBand.id, null, { pageNo: 0, pageSize: state.phrasesPaginated.pageSize }, state.phrasesFilter)
+  //         .pipe(
+  //             withLatestFrom( this.songsRepositoryService.getSongs(state.styleSelected?.id, action.selectedBand.id, { pageNo: 0, pageSize: state.songsPaginated.pageSize }, state.songTerm)),
+  //             map(([patterns, songs]) =>
+  //               PatternsLibraryApiActions.bandSelectedSuccess({ songsPaginated: songs.result, patternsPaginated: patterns.result })),
+  //             catchError(error => of(PatternsLibraryApiActions.bandSelectedFailure({ error })))
+  //           )
+  //       )
+  //     )
+  // })
+
+
   bandSelected$ = createEffect(() => {
     return this.actions$
       .pipe(
         ofType(PatternsLibraryPageActions.bandSelectedChange),
         withLatestFrom(this.store$.select(getPatternsLibraryState)),
         mergeMap(([action, state]) =>
-          this.songsRepositoryService.getPhrases(null, action.selectedBand.id, null, { pageNo: 0, pageSize: state.phrasesPaginated.pageSize }, state.phrasesFilter)
+        this.songsRepositoryService.getSongs(state.styleSelected?.id, action.selectedBand.id, { pageNo: 0, pageSize: state.songsPaginated.pageSize }, state.songTerm)
           .pipe(
-              withLatestFrom( this.songsRepositoryService.getSongs(state.styleSelected?.id, action.selectedBand.id, { pageNo: 0, pageSize: state.songsPaginated.pageSize }, state.songTerm)),
-              map(([patterns, songs]) =>
-                PatternsLibraryApiActions.bandSelectedSuccess({ songsPaginated: songs.result, patternsPaginated: patterns.result })),
+              map((songs) => PatternsLibraryApiActions.bandSelectedSuccess({ songsPaginated: songs.result})),
               catchError(error => of(PatternsLibraryApiActions.bandSelectedFailure({ error })))
             )
         )
       )
   })
+  // songSelected$ = createEffect(() => {
+  //   return this.actions$
+  //     .pipe(
+  //       ofType(PatternsLibraryPageActions.songSelectedChange),
+  //       withLatestFrom(this.store$.select(getPatternsLibraryState)),
+  //       mergeMap(([action, state]) =>
+  //         this.songsRepositoryService.getPhrases(state.styleSelected?.id, state.bandSelected?.id, action.selectedSong.id, { pageNo: 0, pageSize: state.phrasesPaginated.pageSize }, state.phrasesFilter)
+  //           .pipe(
+  //             map(data => PatternsLibraryApiActions.songSelectedSuccess({ patternsPaginated: data.result })),
+  //             catchError(error => of(PatternsLibraryApiActions.songSelectedFailure({ error })))
+  //           )
+  //       )
+  //     )
+  // })
 
   songSelected$ = createEffect(() => {
     return this.actions$
@@ -118,14 +168,15 @@ export class PatternsLibraryEffects {
         ofType(PatternsLibraryPageActions.songSelectedChange),
         withLatestFrom(this.store$.select(getPatternsLibraryState)),
         mergeMap(([action, state]) =>
-          this.songsRepositoryService.getPhrases(state.styleSelected?.id, state.bandSelected?.id, action.selectedSong.id, { pageNo: 0, pageSize: state.phrasesPaginated.pageSize }, state.phrasesFilter)
+          this.songsRepositoryService.getVoicesOfSong(state.songSelected?.id)
             .pipe(
-              map(data => PatternsLibraryApiActions.songSelectedSuccess({ patternsPaginated: data.result })),
+              map(data => PatternsLibraryApiActions.songSelectedSuccess({ voices: data.result })),
               catchError(error => of(PatternsLibraryApiActions.songSelectedFailure({ error })))
             )
         )
       )
   })
+
 
   filterStyleTermChange$ = createEffect(() => {
     return this.actions$
@@ -177,10 +228,23 @@ export class PatternsLibraryEffects {
         ofType(PatternsLibraryPageActions.filterPhraseChange),
         withLatestFrom(this.store$.select(getPatternsLibraryState)),
         mergeMap(([action, state]) =>
-        //atencion cambiar null por pattern filter
           this.songsRepositoryService.getPhrases(state.styleSelected?.id, state.bandSelected?.id, state.songSelected?.id, { pageNo: 0, pageSize: state.phrasesPaginated.pageSize }, state.phrasesFilter)
             .pipe(
               map(data => PatternsLibraryApiActions.filterPatternTermChangeSuccess({ patternsPaginated: data.result })),
+              catchError(error => of(PatternsLibraryApiActions.filterPatternTermChangeFailure({ error })))
+            )
+        )
+      )
+  })
+  voiceSelectedChange$ = createEffect(() => {
+    return this.actions$
+      .pipe(
+        ofType(PatternsLibraryPageActions.voiceSelectedChange),
+        withLatestFrom(this.store$.select(getPatternsLibraryState)),
+        mergeMap(([action, state]) =>
+          this.songsRepositoryService.getPhrasesOfSongAndVoice(state.songSelected.id, action.voice, { pageNo: 0, pageSize: state.phrasesPaginated.pageSize })
+            .pipe(
+              map(data => PatternsLibraryApiActions.voiceChangeSuccess({ patternsPaginated: data.result })),
               catchError(error => of(PatternsLibraryApiActions.filterPatternTermChangeFailure({ error })))
             )
         )

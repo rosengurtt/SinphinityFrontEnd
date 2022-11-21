@@ -7,7 +7,7 @@ import { TempoChange } from './tempo-change';
 
 export class Song {
     // tslint:disable-next-line: variable-name
-    id: string
+    id: number
     name: string
     band: Band
     style: MusicStyle

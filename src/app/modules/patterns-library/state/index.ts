@@ -10,12 +10,14 @@ import { Phrase } from '../../../core/models/phrase'
 import { PhrasesFilter } from '../../../core/models/phrases-filter'
 import { PhraseOccurrence } from 'src/app/core/models/phrase-occurrence'
 import { PhraseOccurrencesPaginated } from 'src/app/core/services/songs-repository/responses-format/phrase-occurrences-paginated'
+import { Voice } from 'src/app/core/models/voice'
 
 export interface PatternsLibraryState {
     musicStylesPaginated: MusicStylesPaginated
     bandsPaginated: BandsPaginated
     songsPaginated: SongsPaginated   
     phrasesPaginated: PhrasesPaginated  
+    voices: Voice[]
     occurrencesOfPhrasePaginated: PhraseOccurrencesPaginated
     styleTerm: string
     bandTerm: string
@@ -31,6 +33,7 @@ export interface PatternsLibraryState {
     songSelected: Song  
     phraseSelected: Phrase 
     occurrenceSelected: PhraseOccurrence
+    voiceSelected: number | null
     errorStyles: string
     errorBands: string
     errorSongs: string
@@ -180,3 +183,12 @@ export const getPatternsFilter = createSelector(
     state => state.phrasesFilter
 )
 
+export const getVoices = createSelector(
+    getPatternsLibraryFeatureState,
+    state => state.voices
+)
+
+export const getVoiceSelected = createSelector(
+    getPatternsLibraryFeatureState,
+    state => state.voiceSelected
+)

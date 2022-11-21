@@ -1,4 +1,5 @@
 import { createAction, props } from '@ngrx/store'
+import { Voice } from 'src/app/core/models/voice'
 import { PhraseOccurrencesPaginated } from 'src/app/core/services/songs-repository/responses-format/phrase-occurrences-paginated'
 import { Phrase } from '../../../../core/models/phrase'
 import { BandsPaginated } from '../../../../core/services/songs-repository/responses-format/bands-paginated'
@@ -48,7 +49,7 @@ export const patternsPaginationChangeFailure = createAction(
 )
 export const styleSelectedSuccess = createAction(
     '[PatternsLibrary API] Style Selected Success',
-    props<{ bandsPaginated: BandsPaginated, songsPaginated: SongsPaginated, patternsPaginated: PhrasesPaginated }>()
+    props<{ bandsPaginated: BandsPaginated, songsPaginated: SongsPaginated}>()
 )
 
 export const styleSelectedFailure = createAction(
@@ -58,7 +59,7 @@ export const styleSelectedFailure = createAction(
 
 export const bandSelectedSuccess = createAction(
     '[PatternsLibrary API] Band Selected Success',
-    props<{ songsPaginated: SongsPaginated, patternsPaginated: PhrasesPaginated }>()
+    props<{ songsPaginated: SongsPaginated}>()
 )
 
 export const bandSelectedFailure = createAction(
@@ -66,9 +67,14 @@ export const bandSelectedFailure = createAction(
     props<{ error: string }>()
 )
 
+// export const songSelectedSuccess = createAction(
+//     '[PatternsLibrary API] Song Selected Success',
+//     props<{ patternsPaginated: PhrasesPaginated }>()
+// )
+
 export const songSelectedSuccess = createAction(
     '[PatternsLibrary API] Song Selected Success',
-    props<{ patternsPaginated: PhrasesPaginated }>()
+    props<{ voices: Voice[] }>()
 )
 
 export const songSelectedFailure = createAction(
@@ -123,5 +129,15 @@ export const filterPatternTermChangeSuccess = createAction(
 
 export const filterPatternTermChangeFailure = createAction(
     '[PatternsLibrary API] Filter Patterns Term Change Fail',
+    props<{ error: string }>()
+)
+
+export const voiceChangeSuccess = createAction(
+    '[PatternsLibrary API] Voice Change Success',
+    props<{ patternsPaginated: PhrasesPaginated }>()
+)
+
+export const voiceChangeFailure = createAction(
+    '[PatternsLibrary API] Voice Change Fail',
     props<{ error: string }>()
 )

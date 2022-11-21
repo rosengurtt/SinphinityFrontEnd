@@ -6,6 +6,8 @@
     [patternsDataSource] = "patternsDatasource$ | async" 
     [occurrencesDataSource] = "occurrencesDataSource$ | async" 
 
+    [voices] = "voices$ | async"
+
     [stylesPageNo] = "stylesPageNo$ | async"
     [bandsPageNo] = "bandsPageNo$ | async"
     [songsPageNo] = "songsPageNo$ | async"
@@ -45,6 +47,7 @@
     (bandSelectedChanged) ="bandSelectedChange($any($event))"
     (songSelectedChanged) ="songSelectedChange($any($event))"
     (phraseSelectedChanged) ="phraseSelectedChange($any($event))"
+    (voiceSelectedChanged) = "voiceSelectedChange($any($event))"
     (occurrenceSelectedChanged) ="occurrenceSelectedChanged($any($event))"
 
     (analyzePattern) = "analyzePattern($any($event))"

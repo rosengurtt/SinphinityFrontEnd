@@ -7,7 +7,7 @@ import { DrawingCalculations } from './staff-utilities/drawing-calculations'
 @Injectable()
 export class DrawingMusicalNotationGlobalService {
     // We keep a cche of the songs we have processed
-    songIds: string[] = []
+    songIds: number[] = []
     eventsToDraw: Array<Array<Array<SoundEvent>>> = []
 
     // When we draw different tracks in musical notation, we want the events that happen in different tracks at the same time
@@ -20,10 +20,11 @@ export class DrawingMusicalNotationGlobalService {
     public getEventsToDrawForSong(
         song: Song,
         simplificationNo: number): Array<Array<SoundEvent>> {
+            console.log(song)
 
         // if we haven't processed this song before, process it and save it to the cache
-        if (this.songIds.filter(x => x == song.id).length === 0 || song.id == "0") {
-            if (song.id == "0")
+        if (this.songIds.filter(x => x == song.id).length === 0 || song.id == 0) {
+            if (song.id == 0)
                 this.eventsToDraw = []
 
             const simplification = new SongSimplification(song.songSimplifications[simplificationNo])
