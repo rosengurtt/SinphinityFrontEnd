@@ -19,8 +19,7 @@ export class DrawingMusicalNotationGlobalService {
     // Because we may have several songs open at the same time, it needs to keep the information it processed for each song
     public getEventsToDrawForSong(
         song: Song,
-        simplificationNo: number): Array<Array<SoundEvent>> {
-            console.log(song)
+        simplificationNo: number): Array<Array<SoundEvent>> {           
 
         // if we haven't processed this song before, process it and save it to the cache
         if (this.songIds.filter(x => x == song.id).length === 0 || song.id == 0) {

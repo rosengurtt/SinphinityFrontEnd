@@ -65,11 +65,12 @@ export class SongsRepositoryService {
         return this.http.get<GetSongsResponse>(url)
     }
 
-    getPhrases(styleId: number, bandId: number, songId: number, paginationData: PaginationData, phrasesFilter: PhrasesFilter): Observable<GetPhrasesResponse> {
+    getPhrases(styleId: number, bandId: number, songId: number, voiceId: number, paginationData: PaginationData, phrasesFilter: PhrasesFilter): Observable<GetPhrasesResponse> {
         let url = this.songLibraryUrl + 'phrases'
         url = this.addParameterToUrl(url, 'styleId', styleId)
         url = this.addParameterToUrl(url, 'bandId', bandId)
         url = this.addParameterToUrl(url, 'songId', songId)
+        url = this.addParameterToUrl(url, 'voiceId', voiceId)
         url = this.addPatternFilterParametersToUrl(url, phrasesFilter)
         url = this.addPaginationParameters(url, paginationData)
         return this.http.get<GetPhrasesResponse>(url)
@@ -80,12 +81,12 @@ export class SongsRepositoryService {
         return this.http.get<GetVoicesResponse>(url)
     }
 
-    getPhrasesOfSongAndVoice(songId: number, voiceId: number, paginationData: PaginationData): Observable<GetPhrasesResponse> {
-        let url = this.songLibraryUrl + `phrases?songId=${songId}&voiceId=${voiceId}`
-        url = this.addPaginationParameters(url, paginationData)
-        return this.http.get<GetPhrasesResponse>(url)
+    // getPhrasesOfSongAndVoice(songId: number, voiceId: number, paginationData: PaginationData): Observable<GetPhrasesResponse> {
+    //     let url = this.songLibraryUrl + `phrases?songId=${songId}&voiceId=${voiceId}`
+    //     url = this.addPaginationParameters(url, paginationData)
+    //     return this.http.get<GetPhrasesResponse>(url)
 
-    }
+    // }
 
     getOccurrencesOfPhrase(phraseId: string, songId: number, paginationData: PaginationData): Observable<GetPhraseOccurrencesResponse> {
         let url = this.songLibraryUrl + 'phrases/' + phraseId + '/occurrences'

@@ -413,6 +413,13 @@ export const patternsLibraryReducer = createReducer<PatternsLibraryState>(
     on(PatternsLibraryApiActions.songSelectedSuccess, (state, action): PatternsLibraryState => {
         let newState = cloneDeep(state)
         newState.voices = action.voices
+        newState.phrasesPaginated = {
+            pageNo: 0,
+            pageSize: 10,
+            totalItems: 0,
+            totalPages: 0,
+            items: []
+        }
         return newState
     }),
 

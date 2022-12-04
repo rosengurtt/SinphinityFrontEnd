@@ -100,7 +100,7 @@
 					<mat-label>Voices</mat-label>
 					<mat-select (selectionChange)="voiceSelected($event.value)">
 					  <mat-option *ngFor="let voice of voices" [value]="voice.voiceNumber">
-						{{voice.instrumentNumber | instrumentCodeToName}}
+						{{voice.voiceNumber}}-{{voice.instrumentNumber | instrumentCodeToName}}
 					  </mat-option>
 					</mat-select>
 				  </mat-form-field>
@@ -170,7 +170,9 @@
 												<div class="occurrenceBox" >
 													<div>Voice {{occurrence.voice}}
 														Bar {{occurrence.barNumber}}
-														Beat {{occurrence.beat}}</div>
+														Beat {{occurrence.beat}}
+													({{occurrence.startTick}}-{{occurrence.endTick}})
+													</div>
 													<button mat-raised-button color="primary" (click)="playPhraseInSong(occurrence, true)">Play solo</button>
 													<button mat-raised-button color="primary" (click)="playPhraseInSong(occurrence, false)">Play all instr</button>
 												
